@@ -1,0 +1,90 @@
+#signIn{
+display:flex;
+flex-direction:column;
+margin-left:32vw;
+width:35vw;
+margin-top:3vw;
+}
+
+.inputs{
+margin-bottom:2vw;
+}
+form#signIn p {
+  color: red;
+}
+
+.inputs input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+
+/* Form container styling */
+#payment-form {
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+
+/* All input fields: first name, last name, email, phone */
+#payment-form input[type="text"],
+#payment-form input[type="email"],
+#payment-form input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Stripe or payment element container */
+#card-container {
+  width: 100%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* Make sure the embedded iframe fits cleanly */
+#card-container iframe {
+  width: 100% !important;
+  border-radius: 6px;
+  box-sizing: border-box;
+  border: none;
+}
+
+/* Payment button styling */
+#card-button {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+#card-button:hover {
+  background-color: #0056b3;
+}
+
+/* Status message area */
+#payment-status {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+

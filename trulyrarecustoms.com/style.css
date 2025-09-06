@@ -1,0 +1,118 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.blackback{
+    background-color: black;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+
+}
+#nav a{
+    color:white;
+    text-decoration: none;
+    
+}
+#nav{
+    display: flex;
+    font-size: 2vw;
+    gap:1.5vw;
+
+}
+#HbMenu{
+    display:none;
+    
+}
+#usrOps{
+    display: flex;
+    gap:2.5vw;
+    margin-left: 85vw;
+}
+#usrOps a{
+color:white;
+text-decoration: none;
+}
+#socials{
+    display: flex;
+    gap:2.5vw;
+    padding-top: 1vw;
+}
+nav{
+    display:flex;
+    justify-content: center;
+}
+#homeLogo{
+    display: flex;
+    justify-content: center;
+}
+#logo1{
+    width:10vw;
+    height:10vw;
+}
+#icons{
+    display:flex;
+    justify-content: center;
+}
+#footerNav a{
+    text-decoration: none;
+
+    padding-bottom: 2vw;
+   
+}
+h1{
+    color: palevioletred;
+}
+
+#footerNav{
+    display: flex;
+    gap: 2.5vw;
+
+}
+#footerNav a{
+        color:white;
+}
+#botLogo{
+        display:flex;
+    justify-content: center;
+}
+#logo2{
+width:25vw;
+height:20vw;
+}
+
+@media (max-width: 767px) {
+  /* Styles for phones and small devices */
+#HbMenu{
+    display:block;
+    color:white;
+    text-decoration: none;
+    padding-left: 2vw;
+    z-index:10;
+}
+#nav{
+ display: none;
+ flex-direction: column;
+ padding-left: 45vw;
+}
+#logo1{
+    width:20vw;
+    height:20vw;
+}
+#logo2{
+width:25vw;
+height:20vw;
+}
+#usrOps{
+    padding-right:8vw;
+}
+}
+.productImages {
+  width: 30vw !important;
+  height: auto !important;
+}
+.product{
+ display:flex;
+ flex-direction:row;
+}

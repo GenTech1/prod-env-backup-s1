@@ -1,0 +1,71 @@
+
+<?php
+$host = getenv('DATABASE_HOST');
+$user = getenv('AD_USER');
+$pass = getenv('AD_PASS');
+$productsdb = getenv('Products_DB');
+$usersdb = getenv('Users_DB');
+$ordersdb = getenv('Orders_DB');
+$messagesdb = getenv('Messages_DB');
+
+
+
+$section = $_POST['section'] ?? '';
+
+switch ($section) {
+  case 'products':
+	$conn = new mysqli($host, $user, $pass, $productsdb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+    $sql = "SELECT * FROM Products";
+    break;
+  case 'users':
+	$conn = new mysqli($host, $user, $pass, $usersdb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+    $sql = "SELECT * FROM internal_users";
+    break;
+  case 'orders':
+	$conn = new mysqli($host, $user, $pass, $ordersdb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+    $sql = "SELECT * FROM orders";
+    break;
+  case 'messages':
+	$conn = new mysqli($host, $user, $pass, $messagesdb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+   $sql = "Select * FROM contact";
+	break;
+  case 'messages':
+        $conn = new mysqli($host, $user, $pass, $messagesdb);
+        if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+        }
+   $sql = "Select * FROM customs";
+        break;
+  default:
+    echo "Invalid section.";
+    exit;
+}
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    foreach ($row as $key => $value) {
+      echo $key . ": " . $value . "/n";
+    }
+    echo "</pre><hr>"; // separate rows
+  }
+} else {
+  echo "No data found.";
+}
+
+$conn->close();
+?>
+
