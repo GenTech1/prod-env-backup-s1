@@ -61,8 +61,9 @@ if (event.target.classList.contains("edit-button")) {
 <div id="promptText">
   <h1>Edit</h1>
 
-  <form action="/user_page.php" method="POST">
+  <form action="/adminChanges.php" method="POST">
 <p>id: '${data.id}'</p>
+ <input type="hidden" name="id" value='${data.id}'>
     <input type="tel" name="name" placeholder="name" value='${data.name}'><br/><br/>
  <input type="tel" name="description" placeholder="description" value='${data.description}'><br/><br/>
  <input type="tel" name="image" placeholder="image" value='${data.image}'><br/><br/>
@@ -77,8 +78,9 @@ if (event.target.classList.contains("edit-button")) {
 <option value="yes">Yes</option>
 <option value="no">No</option>
 </select><br/><br/>
-    <button type="button" id="smsCancel">Cancel</button>
-    <button type="submit">Submit</button>
+    <button type="button" class="catEditDelete">Delete</button><br/>
+    <button type="button" class="catEditCancel">Cancel</button>
+    <button class="catEditSubmit" type="submit">Submit</button>
   </form>
 </div>
 </div>  
@@ -101,8 +103,8 @@ if (event.target.classList.contains("edit-button")) {
     meeting_date: recordDiv.dataset.meeting_date,
     meeting_time: recordDiv.dataset.meeting_time,
     design_info: recordDiv.dataset.design_info,
-    submitted_at: recordDiv.dataset.submitted_at
-  }
+    submitted_at: recordDiv.dataset.submitted_at  
+}
 
   if (itemId.startsWith("messages_")) {
     el.insertAdjacentHTML("afterbegin", `
@@ -130,13 +132,33 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button type="button" id="smsCancel">Cancel</button>
-<button type="submit">Submit</button>
+<button type="button" class="catEditCancel">Cancel</button>
+<button class="classEditSubmit" type="submit">Submit</button>
         </form>
 </div>
       </div>  
     `);
   }
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+let catEditDelete = document.getElementsByClassName("catEditDelete");
+//logic for buttons on pop up
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
+
+for(i=0;i<catEditDelete.length;i++){
+catEditDelete[i].addEventListener("click", ()=>{
+alert("Delete");
+});
+}
+
+
 }
 if (event.target.classList.contains("edit-button")) {
   const itemId = event.target.id;
@@ -180,13 +202,24 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button type="button" id="smsCancel">Cancel</button>
-<button type="submit">Submit</button>
+<button type="button" class="catEditDelete">Delete</button><br/>
+<button type="button" class="catEditCancel">Cancel</button>
+<button class="catEditSubmit" type="submit">Submit</button>
         </form>
 	</div>
       </div>  
     `);
   }
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
 }
 if (event.target.classList.contains("edit-button")) {
   const itemId = event.target.id;
@@ -264,13 +297,25 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button type="button" id="smsCancel">Cancel</button>
-<button type="submit">Submit</button>
+<button type="button" class="catEditCancel">Cancel</button>
+<button class="catEditSubmit" type="submit">Submit</button>
         </form>
 	</div>
       </div>  
     `);
   }
 }
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
 }
 });
+
+
