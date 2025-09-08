@@ -1,0 +1,65 @@
+h2{
+  text-align:left;
+}
+h1{
+  text-align: center;
+}
+#bottom{
+  display: flex;
+
+  flex-direction: column;
+  font-size: 1.5vw;
+  margin: 13vw;
+}
+.text-banner {
+  width: 100vw;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: black;
+  color: palevioletred;
+  padding: 1em 0;
+  position: relative;
+}
+
+.text-banner p {
+  display: inline-block;
+  padding-left: 0%;
+  animation: scrollText 15s linear infinite;
+  font-size: 1.5em;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-15%);
+  }
+}
+.svg-banner {
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+  padding: 1vw 0;
+}
+
+.svg-track {
+  display: flex;
+  gap: 2vw;
+  animation: scrollSVGs 20s linear infinite;
+}
+
+.square {
+  width: 20vw;
+  height: 20vw;
+  flex-shrink: 0;
+}
+  
+@keyframes scrollSVGs {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
