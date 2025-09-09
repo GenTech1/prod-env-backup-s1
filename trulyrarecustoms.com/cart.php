@@ -23,7 +23,7 @@
 <a href="events.php">Events</a>
     </nav>
     <nav id="usrOps">
-    <a href="#" class="fa fa-search"></a>
+    <a id="searchButton" href="#" class="fa fa-search"></a>
     <a href="signIn.php" class="fa fa-user"></a>
     <a href="#" class="fa fa-shopping-cart"></a>
     </nav>
