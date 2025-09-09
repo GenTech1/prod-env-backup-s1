@@ -10,16 +10,31 @@ body, html {
     padding: 0;
 
 }
-#nav a{
-    color:white;
-    text-decoration: none;
-    
+#nav a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  z-index: 1;
 }
 #nav{
     display: flex;
     font-size: 2vw;
     gap:1.5vw;
 
+}
+#nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #ee0653;
+  transition: all 0.5s;
+  z-index: -1;
+}
+#nav a:hover::before {
+  width: 100%;
 }
 #HbMenu{
     display:none;
@@ -115,4 +130,70 @@ height:20vw;
 .product{
  display:flex;
  flex-direction:row;
+}
+
+#socials {
+  display: flex;
+  gap: 20px;
+}
+
+#socials a{
+  background-color: white;
+  padding: 1em;
+  border-radius: 50%;
+  height: 64px;
+  width: 64px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  place-item: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+
+#socials a svg{
+  height: 32px;
+}
+
+#socials a::before {
+  content: attr(data-social);
+  position: absolute;
+  left: 50%;
+  background-color: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  transform: translate(-50%, -30px) rotate(25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(.42,0,.44,1.68);
+  white-space: nowrap;
+}
+
+#socials a:hover{
+  background-color: var(--accent-color);
+  fill: white;
+}
+
+#socials a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--accent-color);
+  transform: translate(-50%, 0) rotate(25deg);
+  opacity: 0;
+  transition: 200ms cubic-bezier(.42,0,.44,1.68);
+}
+
+#socials a:hover::before {
+  transform: translate(-50%, -65px) rotate(0);
+  opacity: 1;
+}
+
+#socials a:hover::after {
+  transform: translate(-50%, -42px) rotate(0);
+  opacity: 1;
 }

@@ -90,9 +90,6 @@ flex-direction: row;
   font-size: clamp(14px, 2vw, 18px);
 }
 
-
-
-
 @media (max-width: 767px) {
 #reviews {
 display: flex;
