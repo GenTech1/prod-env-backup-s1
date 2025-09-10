@@ -1,6 +1,7 @@
 html{
   overflow-x:auto;
 }
+
 #reviews {
   display: flex;
   justify-content: center;
