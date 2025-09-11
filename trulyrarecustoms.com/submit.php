@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 			
                         $stmt = $pdo->prepare("Insert Into customs (first_name, last_name,file_path, email, phone, services_requested, service_count, meeting_date, meeting_time, design_info, submitted_at)Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");  
                         $stmt->execute([$first_name, $last_name, $file_path, $email, $phone, $services, $items, $date, $time, $details, $submitted_at]);
-header("Location:https://zaxtest.xyz/customize.php");			                
+header("Location: /customize.php");			                
 }
 
 
@@ -72,6 +72,6 @@ header("Location:https://zaxtest.xyz/customize.php");
 			$stmt->execute([$first_name, $last_name, $email, $phone, $message, $submitted_at]);
 
 }
-header("Location: https://zaxtest.xyz/contact.php");
+header("Location: /contact.php");
 }
 ?>
