@@ -28,8 +28,9 @@ try {
     $stmt = $pdo ->query("UPDATE Products SET image ='" . str_replace('\\', '\\\\', $_POST['image']) . "' WHERE id ='" . $_POST['id'] . "'");
     $stmt = $pdo ->query("UPDATE Products SET tags ='" . $_POST['tags'] . "' WHERE id ='" . $_POST['id'] . "'");
     $stmt = $pdo ->query("UPDATE Products SET stock ='" . $_POST['stock'] . "' WHERE id ='" . $_POST['id'] . "'");
-        $stmt = $pdo ->query("UPDATE Products SET `visible/not visible` ='" . $_POST['visible'] . "' WHERE id ='" . $_POST['id'] . "'");
-}   
+    $stmt = $pdo ->query("UPDATE Products SET `visible/not visible` ='" . $_POST['visible'] . "' WHERE id ='" . $_POST['id'] . "'");
+    header("Location: user_page.php");                     
+    }   
 }
 
 } catch (PDOException $e) {

@@ -67,7 +67,7 @@ $pass = getenv('Site_PASS');
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "<div id='Cartcontents'>" . $product['name'] . "<div id='Cartbuttons'> <button onclick='buySingleFromCart(". json_encode($sku) . ")'>Buy</button><button  onclick='removeSingleFromCart(". json_encode($sku) . ")'>Remove</button></div></div>";
+    echo "<div id='Cartcontents'>" . $product['name'] . " " .$product['price'] . "<div id='Cartbuttons'> <button onclick='buySingleFromCart(". json_encode($sku) . ")'>Buy</button><button  onclick='removeSingleFromCart(". json_encode($sku) . ")'>Remove</button></div></div>";
     echo '<hr>';
 }
 if($_COOKIE){

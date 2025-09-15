@@ -74,7 +74,6 @@ if (event.target.classList.contains("edit-button")) {
  <p>sku: '${data.sku}'</p>
 <p>visible?</p>
  <select type="tel" name="visible">
-<option value="please answer">Please Answer</option>
 <option value="yes">Yes</option>
 <option value="no">No</option>
 </select><br/><br/>
