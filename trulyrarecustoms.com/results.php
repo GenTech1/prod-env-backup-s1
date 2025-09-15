@@ -22,7 +22,7 @@
 <a href="events.php">Events</a>
     </nav>
     <nav id="usrOps">
-    <a href="#" class="fa fa-search"></a>
+    <a href="#" id="searchButton" class="fa fa-search"></a>
     <a href="signIn.php" class="fa fa-user"></a>
     <a href="cart.php" class="fa fa-shopping-cart"></a>
     </nav>
@@ -56,7 +56,7 @@ if (isset($_GET['word'])) {
         if ($results) {
             foreach ($results as $row) {
 
-                echo "<hr/><br>" . htmlspecialchars($row['name']) ."&nbsp;&nbsp;<img style='height:5vw' src='".htmlspecialchars($row['image'])."'/>". "<br>";
+                echo "<hr/><br>" ."&nbsp;&nbsp;<a href='product.php?sku=".htmlspecialchars($row['sku'])."'><img style='height:5vw' src='".htmlspecialchars($row['image'])."'/></a>". htmlspecialchars($row['name']) . "<br>";
                 // Add other fields as needed
             }
         } else {

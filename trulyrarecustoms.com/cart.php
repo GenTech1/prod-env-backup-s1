@@ -36,7 +36,6 @@
     <hr/>
     </div>
   </head>
-  <script src="script.js"></script>
   <body>
     <!--Caroucel-->
     <main>
@@ -71,7 +70,7 @@ $pass = getenv('Site_PASS');
     echo '<hr>';
 }
 if($_COOKIE){
-echo "<div id=checkoutButton><button onclick='checkout()'>Checkout</button></div>";
+echo "<div id='checkoutButton'><button id='checkoutBtn'>Checkout</button></div>";
 }else{
 echo "nothing here, get to shopping!";
 }
@@ -115,6 +114,7 @@ location.reload();
 
 
     </main>
+      <script src="script.js"></script>
   </body>
   <footer>
     <div class="blackback"

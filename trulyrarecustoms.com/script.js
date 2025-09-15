@@ -4,6 +4,11 @@ let usrOps = document.getElementById("usrOps");
 let hLogo = document.getElementById("homeLogo");
 let searchSwitch = 0;
 let searchButton = document.getElementById("searchButton")
+let checkoutButton = document.getElementById("checkoutBtn");
+
+checkoutButton.addEventListener("click", ()=>{
+    window.location.href = "checkout.php";
+})
 hLogo.addEventListener("click", function (){
     window.location.href = "index.php";
 

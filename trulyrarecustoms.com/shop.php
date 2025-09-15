@@ -64,8 +64,16 @@ try {
 }
 
 try {
-    $stmt = $pdo->query("SELECT * FROM Products");
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
+    $stmt->execute(['%Off The Rack%']);
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
+try {
+    $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
+    $stmt->execute(['%Custom%']);
+      $productCustom = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
@@ -90,7 +98,7 @@ try {
 <div class="storeCaroucel">
 <h1>Custom Designs</h1>
 <div class="product">
-    <?php foreach ($products as $product): ?>
+    <?php foreach ($productCustom as $product): ?>
       <div class="productSetup">
         <a href="product.php?sku=<?php echo urlencode($product['sku']); ?>">
           <img class="productImages" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
