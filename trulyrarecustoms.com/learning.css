@@ -1,0 +1,21 @@
+body{
+    background-color: brown;
+}
+a{
+    font-size: 30px;
+}
+#firstlink{
+    /* color: green; */
+}
+.P{
+    color: Gray;
+}
+#Jd{
+    font-style: italic;
+}
+#J{
+    color: blue;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
