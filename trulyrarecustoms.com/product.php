@@ -131,7 +131,7 @@ $sizes = json_decode($product['stock'], true);
 if ($sizes && is_array($sizes)) {
     foreach ($sizes as $size => $quantity) {
         if ($quantity > 0) {
-            echo '<button type="button">' . htmlspecialchars($size) . '</button>';
+            echo '<button class="t"type="button">' . htmlspecialchars($size) . '</button>';
         }
     }
 } else {
@@ -141,13 +141,15 @@ if ($sizes && is_array($sizes)) {
    </div>
 
 <div id="purchaseButtons">
-<form id="cart">
-  <input type="submit" value="Add to Cart" />
-</form>
 
-<form id="buy">
-  <input type="submit" value="Buy Now" />
-</form>  
+  <form id="cart">
+    <input class="t"type="submit" value="Add to Cart" />
+  </form>
+
+  <form id="buy">
+    <input class="t"type="submit" value="Buy Now" />
+  </form>  
+
 </div>
 </div>
 

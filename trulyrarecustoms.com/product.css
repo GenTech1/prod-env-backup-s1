@@ -3,7 +3,17 @@ display:flex;
 justify-content:center;
 }
 #purchaseButtons{
-display:flex;
+  display: block;
+  margin: 0 auto; /* center horizontally */
+  padding: 0.75em 2em; /* space inside button */
+  background-color: white;
+  color: black;
+  font-size: 1.2em;
+  margin-bottom:5vw; 
+  border-radius: 999px; /* makes it pill/oval shape */
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
 flex-direction:row;
 gap:3vw;
 }
@@ -21,3 +31,15 @@ gap:3vw;
   gap: 10px; /* optional: add space between elements */
 }
 
+.t{
+display: inline-block;
+  margin: 0 auto; /* center horizontally */
+  padding: 0.75em 2em; /* space inside button */
+  background-color: white;
+  color: black;
+  font-size: 1.2em;
+  margin-bottom:5vw; 
+  border-radius: 999px; /* makes it pill/oval shape */
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
