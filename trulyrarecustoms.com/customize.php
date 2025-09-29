@@ -1,3 +1,7 @@
+<?php
+$appId = getenv('SQUARE_APP_ID');
+$locId = getenv('SQUARE_LOCATION_ID');
+?>
 <!DOCTYPE html>
 <html>
   <!--header-->
@@ -6,6 +10,7 @@
 
     <div class="blackback">
     <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="signIn.css">
         <link rel="stylesheet" href="customize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div id="homeLogo">
@@ -64,11 +69,104 @@
 <input type="file" name="file2">
 <input type="file" name="file3">
 <input type="file" name="file4"><br><br>
-  <input class="input" type="submit" placeholder="Submit" value="Submit"/>
+  <input class="input" onclick="pay()" type="button" placeholder="Submit" value="Pay"/>
 <p style="font-size:1.5vw;">*$10 submission fee applies*</p>
+</form>
+ <svg style="display:none" width="30%" height="50%" id="prompt" viewBox="0 0 60 50" style="border:1px solid black">
+    <rect width="100%" height="100%" fill="white"></rect>
+  </svg>
+
+  <div id="popupPay" style="display:none">
+<h1>Buy Now</h1>
+
+<form id="payment-form">
+  <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+  <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+  <input type="email" id="email" name="email" placeholder="Email" required>
+  <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+
+  <div id="card-container"></div>
+
+  <button onsubmitid="card-button">Pay Now</button>
+  <div id="payment-status"></div>
 </form>
 
 
+<p></p>
+
+
+
+
+
+
+
+    </main>
+<script type="text/javascript" src="https://web.squarecdn.com/v1/square.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const applicationId = "<?php echo htmlspecialchars($appId);?>";
+    const locationId = "<?php echo htmlspecialchars($locId);?>";
+
+    async function initializeCard(payments) {
+      const card = await payments.card();
+      await card.attach('#card-container');
+      return card;
+    }
+
+    async function tokenize(paymentMethod) {
+      const result = await paymentMethod.tokenize();
+      if (result.status === 'OK') {
+        return result.token;
+      } else {
+        throw new Error(result.errors ? result.errors[0].message : 'Tokenization failed');
+      }
+    }
+
+    async function main() {
+      const payments = Square.payments(applicationId, locationId);
+      const card = await initializeCard(payments);
+
+      const cardButton = document.getElementById('card-button');
+      cardButton.addEventListener('click', async function () {
+        try {
+          const token = await tokenize(card);
+          const response = await fetch('charge.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nonce: token, sku: getSkuFromURL() })
+          });
+
+          const result = await response.json();
+          document.getElementById('payment-status').textContent = result.success
+            ? 'Payment successful!'
+            : 'Payment failed: ' + result.message;
+        } catch (err) {
+          document.getElementById('payment-status').textContent = 'Error: ' + err.message;
+        }
+      });
+    }
+
+    function getSkuFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('sku');
+    }
+
+    main();
+  });
+</script>
+ </div>
+</div>
+<script>
+  promptText = document.getElementById("popupPay");
+  let prompt = document.getElementById("prompt");
+  function pay() {
+  prompt.style.display="block"
+  promptText.style.display="block"
+document.getElementById("popupPay").addEventListener("click", ()=>{
+  document.getElementById("prompt").style.display = "none";
+})
+  }
+  </script>
 
 
 <p></p>

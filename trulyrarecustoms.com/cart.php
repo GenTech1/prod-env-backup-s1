@@ -29,7 +29,7 @@
 <a href="events.php">Events</a>
     </nav>
     <nav id="usrOps">
-    <a id="searchButton" href="#" class="fa fa-search"></a>
+    <a id="searchButton" href="" class="fa fa-search"></a>
     <a href="signIn.php" class="fa fa-user"></a>
     <a href="cart.php" class="fa fa-shopping-cart"></a>
     </nav>
@@ -66,17 +66,22 @@ $pass = getenv('Site_PASS');
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "<div id='Cartcontents'>" . $product['name'] . " " .$product['price'] . "<div id='Cartbuttons'> <button onclick='buySingleFromCart(". json_encode($sku) . ")'>Buy</button><button  onclick='removeSingleFromCart(". json_encode($sku) . ")'>Remove</button></div></div>";
+    echo "<div id='Cartcontents'>" . $product['name'] . " " .$product['price'] . "<div id='Cartbuttons'> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button><button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
     echo '<hr>';
 }
 if($_COOKIE){
-echo "<div id='checkoutButton'><button id='checkoutBtn'>Checkout</button></div>";
+echo "<div id='checkoutButton'><button id='checkoutBtn' onclick='buyAllCart(".json_encode($cartSkus).")'>Checkout</button></div>";
 }else{
 echo "nothing here, get to shopping!";
 }
 ?>
 
 <script>
+  //buy all from cart
+function buyAllCart(cartSkus){
+console.log("cart skus: " + cartSkus);
+window.location.href=`checkout.php?cartSkus=${cartSkus.join(',')}`;
+}
 //buy single from cart
 function buySingleFromCart(sku){
 window.location.href=`checkout.php?sku=${sku}`;
@@ -102,7 +107,7 @@ location.reload();
 }
 }
 }
-//buy all from cart
+
 </script>
 
 <p></p>

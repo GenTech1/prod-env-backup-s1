@@ -3,13 +3,13 @@
   Header set Pragma "no-cache"
   Header set Expires 0
 </FilesMatch>
-SetEnv KLAVIYO_API_KEY pk_302aaff67d7fb0442d5ba0ab0a6dc18222
+SetEnv KLAVIYO_API_KEY pk_fa6ec88980d6d041219e9fdea4078120b5
 
 SetEnv KLAVIYO_LIST_ID_CONTACT your_contact_list_id_here
 SetEnv KLAVIYO_LIST_ID_CUSTOMIZE your_customize_list_id_here
 
 SetEnv KLAVIYO_LIST_ID_EMAIL your_email_list_id_here
-SetEnv KLAVIYO_LIST_ID_SMS your_sms_list_id_here
+SetEnv KLAVIYO_LIST_ID_SMS TwjcvE
 	
 SetEnv CLIENT_NOTIFICATION_EMAIL trulyrarecustoms@gmail.com
 

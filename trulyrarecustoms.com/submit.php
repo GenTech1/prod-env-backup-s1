@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $table = $_POST['table'] ?? '';
 
                 if ($table === "1w4") {
+                        
                         $first_name = $_POST['first_name'] ?? '';
                         $last_name = $_POST['last_name'] ?? '';
                         $email = $_POST['email'] ?? '';
@@ -71,7 +72,8 @@ header("Location: /customize.php");
 			$stmt = $pdo->prepare("Insert Into contact (first_name, last_name, email, phone, message, submitted_at) Values(?, ?, ?, ?, ?, ?)");
 			$stmt->execute([$first_name, $last_name, $email, $phone, $message, $submitted_at]);
 
-}
 header("Location: /contact.php");
+                }
+
 }
 ?>

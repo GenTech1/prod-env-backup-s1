@@ -1,8 +1,34 @@
 <?php
 $sku = $_GET['sku'] ?? null;
 if (!$sku) {
-	die("Missing SKU");
+$skus = $_GET['cartSkus'] ?? null;
+try {
+
+  
+$host = getenv('DATABASE_HOST');
+$dbname = getenv('Products_DB');
+$user = getenv('Site_USER');
+$pass = getenv('Site_PASS');
+$appId = getenv('SQUARE_APP_ID');
+$locId = getenv('SQUARE_LOCATION_ID');
+$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $e){
+die("Connection failed " .$e->getMessage());
 }
+foreach(explode(',', $skus) as $sku){
+    $stmt = $pdo->prepare("SELECT name, price FROM Products WHERE sku = ?");
+    $stmt->execute([$sku]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+    if (!$product) {
+        echo "Product not found.";
+        exit;
+    }
+  }
+}else{
 
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Products_DB');
@@ -28,6 +54,7 @@ die("Connection failed " .$e->getMessage());
         echo "Product not found.";
         exit;
     }
+  }
 
 ?>
 
