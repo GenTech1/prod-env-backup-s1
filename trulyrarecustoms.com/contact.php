@@ -36,7 +36,6 @@
     <hr/>
     </div>
   </head>
-  <script src="script.js"></script>
   <body>
     <!--Caroucel-->
     <main>
@@ -50,19 +49,19 @@
   <!--Name-->
   <div id="namesdiv">
     <div class="nameSeparators">
-      <input id="names" class="input" type="text" name="first_name" placeholder="First Name *"/>
+      <input id="names" class="input" type="text" name="first_name" placeholder="First Name*" required/>
     </div> 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="nameSeparators">
-      <input id="names" class="input" type="text" name="last_name" placeholder="Last Name *"/>
+      <input id="names" class="input" type="text" name="last_name" placeholder="Last Name*"required/>
     </div><br/>
   </div>
 
   <input type="hidden" name="table" value="6l7">
-  <input class="input" type="email" name="email" placeholder="Email*"/><br/>
-  <input class="input" type="tel" name="phone" placeholder="Phone Number *"/>
-  <input class="input" id="message" type="text" name="message" placeholder="Message"/><br/>
-  <input class="input" type="Submit"  value="Submit"/>
+  <input class="input" type="email" name="email" placeholder="Email*" required/><br/>
+  <input class="input" type="tel" name="phone" placeholder="Phone Number*" required/>
+  <input class="input" id="message" type="text" name="message" placeholder="Message*"required/><br/>
+  <input class="input" type="Submit" name="submit" value="Submit"/>
 </form>
 
 
@@ -94,6 +93,7 @@ You have the option to ship directly to you or pick up in store and avoid shippi
 
 
     </main>
+    <script src="contact.js"></script>
   </body>
   <footer>
     <div class="blackback"
@@ -118,10 +118,15 @@ You have the option to ship directly to you or pick up in store and avoid shippi
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-    <form id="marketingForm">
-      <input type="email" placeholder="Email"/>
-      <input type="submit" Placeholder="Sign Up"/>
+   <form id="marketingForm" action="/subscribe_email.php" method="POST">
+      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input id="emailSubmit" type="submit" value="Sign Up"/>
+    </br>
+    </br>
+    </br>
+    </br>
     </form>
   </div>
+    <script src="script.js?v=0.6"></script>
   </footer>
 </html>

@@ -35,7 +35,6 @@ $locId = getenv('SQUARE_LOCATION_ID');
     <hr/>
     </div>
   </head>
-  <script src="script.js"></script>
   <body>
     <!--Caroucel-->
     <main>
@@ -69,13 +68,13 @@ $locId = getenv('SQUARE_LOCATION_ID');
 <input type="file" name="file2">
 <input type="file" name="file3">
 <input type="file" name="file4"><br><br>
-  <input class="input" onclick="pay()" type="button" placeholder="Submit" value="Pay"/>
+  <input class="input" onclick="pay()" type="button" placeholder="Submit" name="submit" value="Pay"/>
 <p style="font-size:1.5vw;">*$10 submission fee applies*</p>
 </form>
  <svg style="display:none" width="30%" height="50%" id="prompt" viewBox="0 0 60 50" style="border:1px solid black">
     <rect width="100%" height="100%" fill="white"></rect>
   </svg>
-
+<div id="popupScrollWrapper">
   <div id="popupPay" style="display:none">
 <h1>Buy Now</h1>
 
@@ -156,17 +155,6 @@ $locId = getenv('SQUARE_LOCATION_ID');
 </script>
  </div>
 </div>
-<script>
-  promptText = document.getElementById("popupPay");
-  let prompt = document.getElementById("prompt");
-  function pay() {
-  prompt.style.display="block"
-  promptText.style.display="block"
-document.getElementById("popupPay").addEventListener("click", ()=>{
-  document.getElementById("prompt").style.display = "none";
-})
-  }
-  </script>
 
 
 <p></p>
@@ -179,7 +167,7 @@ document.getElementById("popupPay").addEventListener("click", ()=>{
 
     </main>
  
-
+<script src="customize.js?v=0.6"></script>
   </body>
   <footer>
     <div class="blackback"
@@ -204,10 +192,15 @@ document.getElementById("popupPay").addEventListener("click", ()=>{
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-    <form id="marketingForm">
-      <input type="email" placeholder="Email"/>
-      <input type="submit" Placeholder="Sign Up"/>
+       <form id="marketingForm" action="/subscribe_email.php" method="POST">
+      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input id="emailSubmit" type="submit" value="Sign Up"/>
+    </br>
+    </br>
+    </br>
+    </br>
     </form>
   </div>
+    <script src="script.js?v=0.6"></script>
   </footer>
 </html>

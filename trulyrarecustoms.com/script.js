@@ -5,6 +5,14 @@ let hLogo = document.getElementById("homeLogo");
 let searchSwitch = 0;
 let searchButton = document.getElementById("searchButton")
 let checkoutButton = document.getElementById("checkoutBtn");
+let emailSubmit = document.getElementById("emailSubmit");
+// emailSubmit.addEventListener("click", function (event){
+//   let emailInput = document.getElementById("emailInput").value.trim();
+//     if(!emailInput.includes("@") || !emailInput.includes(".") || emailInput.length < 5){
+//         event.preventDefault();
+//         alert("'" + emailInput + "'" + " is not a valid email address. Please enter a valid email address."  );
+//     }
+// });
 
 hLogo.addEventListener("click", function (){
     window.location.href = "index.php";
@@ -36,7 +44,12 @@ document.addEventListener("keydown", (event) =>{
 const searchBar = document.getElementById("searchBar");
 
 if(searchBar && document.activeElement === searchBar && event.key === "Enter"){
-let word = searchBar.value
+let word = searchBar.
+value.trim();
+if(word.length < 1 || word.length > 50 || !/^[a-zA-Z]+$/.test(word)){
+    alert("Please enter a search term with between 1-50 letters.");
+    return;
+}
 window.location.href = "results.php?word=" + encodeURIComponent(word);
 }
 })

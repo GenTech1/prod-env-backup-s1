@@ -36,7 +36,7 @@
     <hr/>
     </div>
   </head>
-  <script src="script.js?v=0.6"></script>
+
   <body>
 
       <svg style="display:none" width="30%" height="50%" id="prompt" viewBox="0 0 60 50" style="border:1px solid black">
@@ -50,9 +50,9 @@
   <h1>Subscribe Now</h1>
 
   <form action="/subscribe_phone.php" method="POST">
-    <input type="tel" name="phone" placeholder="Phone" required><br/><br/>
+    <input type="tel" id="phoneInput" name="phone" placeholder="Phone" required><br/><br/>
     <button type="button" id="smsCancel">Cancel</button>
-    <button type="submit">Submit</button>
+    <button id="smsSubmit" type="submit">Submit</button>
   </form>
 </div>
 
@@ -166,9 +166,26 @@ try {
 
     </main>
     <script src="index.js"></script>
+      
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      let smsSubmit = document.getElementById("smsSubmit");
+      if (smsSubmit) {
+        smsSubmit.addEventListener("click", (event) => {
+          let phoneRaw = document.getElementById("phoneInput").value.trim();
+          let digits = phoneRaw.replace(/\D/g, "");
+          // require exactly 10 digits (change to 11 if you expect country code)
+          if (digits.length !== 10) {
+            event.preventDefault();
+            alert("'" + phoneRaw + "' is not a valid phone number. Please enter a valid 10-digit phone number.");
+          }
+        });
+      }
+      });
+      </script>
   </body>
   <footer>
-    <div class="blackback"
+    <div class="blackback">
     <hr/>
     <div id="icons">
 
@@ -191,10 +208,15 @@ try {
       <a href="about.php">About</a>
     </nav>
     <form id="marketingForm" action="/subscribe_email.php" method="POST">
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="submit" value="Sign Up">
-</form>
-
+      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input id="emailSubmit" type="submit" value="Sign Up"/>
+    </br>
+    </br>
+    </br>
+    </br>
+    </form>
+    </div>
   </div>
+  <script src="script.js?v=0.6"></script>
   </footer>
 </html>

@@ -1,5 +1,6 @@
 <?php
 $sku = $_GET['sku'] ?? null;
+
 if (!$sku) {
 $skus = $_GET['cartSkus'] ?? null;
 try {
@@ -45,6 +46,7 @@ die("Connection failed " .$e->getMessage());
 }
 
     $stmt = $pdo->prepare("SELECT name, price FROM Products WHERE sku = ?");
+    $sku = trim($sku, "\"' "); // removes quotes and spaces
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
