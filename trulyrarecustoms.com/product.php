@@ -131,7 +131,7 @@ $sizes = json_decode($product['stock'], true);
 if ($sizes && is_array($sizes)) {
     foreach ($sizes as $size => $quantity) {
         if ($quantity > 0) {
-            echo '<button class="t"type="button">' . htmlspecialchars($size) . '</button>';
+            echo '<button class="size" type="button" data-name="'. htmlspecialchars($size) .'">' . htmlspecialchars($size) . '</button>';
         }
     }
 } else {

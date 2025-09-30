@@ -31,7 +31,7 @@ gap:3vw;
   gap: 10px; /* optional: add space between elements */
 }
 
-.t{
+.size, .t{
 display: inline-block;
   margin: 0 auto; /* center horizontally */
   padding: 0.75em 2em; /* space inside button */
