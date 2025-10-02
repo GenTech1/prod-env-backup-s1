@@ -45,7 +45,12 @@ $cartSkus = [];
 
 foreach ($_COOKIE as $name => $value){
 	if(strpos($name, 'CART_')===0){
+    $break = explode("-", $sku);
+    $take = array_pop($break);
+    $newSku = implode("-", $break)
+
 		$sku = $value;
+
 		$cartSkus[] = $sku;
 		}
 	}
