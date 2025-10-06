@@ -38,8 +38,8 @@
 <form id="signIn" action="signIn_submit.php" method="POST">
 <h1>Sign In</h1>
 <p>Email or Password was incorrect</p>
-<input name="sgnemail" class="inputs"placeholder="email" type="email"/>
-<input name="sgnpass" class="inputs" placeholder="password" type="password"/>
+<input name="sgnemail" class="inputs"placeholder="email" type="email" required/>
+<input name="sgnpass" class="inputs" placeholder="password" type="password" required/>
 <input class="inputs" type="submit"/>
 </form>
 
@@ -52,6 +52,7 @@
 
 
     </main>
+    <script src="signIn.js"></script>
   </body>
   <footer>
     <div class="blackback"

@@ -7,7 +7,6 @@ let items = document.getElementsByName("items")[0];
 let deadline = document.getElementsByName("deadline")[0];
 let consultation_time = document.getElementsByName("consultation_time")[0];
 let details = document.getElementsByName("details")[0];
-let message = document.getElementsByName("message")[0];
 let submit = document.getElementsByName("submit")[0];
 
 submit.addEventListener("click", function(event) {
@@ -22,22 +21,20 @@ submit.addEventListener("click", function(event) {
    }else if(last.value.trim().length < 3 || last.value.trim().length > 50 || !/^[a-zA-Z]+$/.test(last.value.trim())){
         event.preventDefault();
         alert("Please enter a valid last name (3-50 alphabetic characters).");
-   }else if(message.value.trim().length < 10 || message.value.trim().length > 1000){
-        event.preventDefault();
-        alert("Please enter a message between 10 and 1000 characters.");
    }else if(services.value.trim().length < 3 || services.value.trim().length > 1000){
         event.preventDefault();
         alert("Please enter a service between 3 and 1000 characters.");
    }else if(items.value.trim().length < 1 || items.value.trim().length > 6 || !/^\d+$/.test(items.value.trim()) || parseInt(items.value.trim()) < 1 || parseInt(items.value.trim()) > 999999){
         event.preventDefault();
-        alert("The number of items must be between 1 and 999,999.");
+        alert("The number of items must be between 1 and 999,999.(no commas)");
+   }else if(details.value.trim().length < 10 || details.value.trim().length > 1000){
+        event.preventDefault();
+        alert("Please enter a detail message between 10 and 1000 characters.");
    }else{
-     let promptText = document.getElementById("popupPay");
+let promptText = document.getElementById("popupPay");
   let scroller = document.getElementById("popupScrollWrapper");
-  function pay() {
   promptText.style.display="block"
   scroller.style.display="block"
 
   }
-   }
 }); 
