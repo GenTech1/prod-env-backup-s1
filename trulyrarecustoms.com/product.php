@@ -123,7 +123,7 @@ $colors = array_unique($colors);
 <div id="sizes">
   <?php
 
-$product['stock'] = '{"XS":0,"S":2,"M":5,"L":0,"XL":0,"2XL":0,"3XL":0}';
+$product['stock'] = '{"XS":0,"S":2,"M":5,"L":0,"XL":1,"2XL":0,"3XL":0}';
 	 
 	// Decode the JSON stock string into an associative array
 $sizes = json_decode($product['stock'], true);
@@ -131,7 +131,7 @@ $sizes = json_decode($product['stock'], true);
 if ($sizes && is_array($sizes)) {
     foreach ($sizes as $size => $quantity) {
         if ($quantity > 0) {
-            echo '<button class="size" type="button" data-name="'. htmlspecialchars($size) .'">' . htmlspecialchars($size) . '</button>';
+            echo '<button class="size" id="btnsize" type="button" data-name="'. htmlspecialchars($size) .'">' . htmlspecialchars($size) . '</button>';
         }
     }
 } else {
@@ -143,7 +143,7 @@ if ($sizes && is_array($sizes)) {
 <div id="purchaseButtons">
 
   <form id="cart">
-    <input class="t"type="submit" value="Add to Cart" />
+    <input class="t"type="submit" id="cartBtn" value="Add to Cart" />
   </form>
 
   <form id="buy">
