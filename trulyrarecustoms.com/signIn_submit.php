@@ -26,7 +26,7 @@ $expires_at = date('Y-m-d H:i:s', time() + 900);
 $ip = $_SERVER['REMOTE_ADDR'];
 
 
-if(filter_var($email, FILTER_VALIDATE_EMAIL) === true || strlen($pass) <= 8 || strlen($pass) > 64 || $email === '' || $pass === ''){
+if(filter_var($email, FILTER_VALIDATE_EMAIL) === true || strlen($pass) >= 8 || strlen($pass) < 64 || $email !== '' || $pass !== ''){
 
     //check credentials
 try {
@@ -63,5 +63,7 @@ echo 'DB error: ' . $e->getMessage();
 }else{
 header('Location: signInFailed.php');
 }
+}else{
+header('Location: signInFailed.php');
 }
 ?>

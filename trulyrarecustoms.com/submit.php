@@ -31,8 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $details = $_POST['details'] ?? '';
                         $submitted_at = date('Y-m-d H:i:s');
 			$file_paths = [];
-			
-			for ($i = 0; $i < 5; $i++) {
+        
+			if ($first_name === '' || $last_name === '' || $email === '' || $phone === '' || $services === '' || $items === '' || $date === '' || $time === '' || $details === '' || $submitted_at === '') {
+                        die("Error: All required fields must be filled out.");
+                        }        
+
+                        for ($i = 0; $i < 5; $i++) {
     if (isset($_FILES["file$i"]) && $_FILES["file$i"]['error'] === UPLOAD_ERR_OK) {
         $original_name = $_FILES["file$i"]['name'];
 	$tmp_name = $_FILES["file$i"]['tmp_name'];
@@ -58,10 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $stmt = $pdo->prepare("Insert Into customs (first_name, last_name,file_path, email, phone, services_requested, service_count, meeting_date, meeting_time, design_info, submitted_at)Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");  
                         $stmt->execute([$first_name, $last_name, $file_path, $email, $phone, $services, $items, $date, $time, $details, $submitted_at]);
 header("Location: /customize.php");			                
-}
-
-
-		       if ($table === "6l7") {
+}elseif ($table === "6l7") {
 			$first_name = $_POST['first_name'] ?? '';
                         $last_name = $_POST['last_name'] ?? '';
                         $email = $_POST['email'] ?? '';
@@ -69,10 +70,16 @@ header("Location: /customize.php");
 			$message = $_POST['message'] ?? '';
 			$submitted_at = date('Y-m-d H:i:s');
 
+
+                        if ($first_name === '' || $last_name === '' || $email === '' || $phone === '' || $message === '' || $submitted_at === '') {
+                        die("Error: All required fields must be filled out.");
+                        }
 			$stmt = $pdo->prepare("Insert Into contact (first_name, last_name, email, phone, message, submitted_at) Values(?, ?, ?, ?, ?, ?)");
 			$stmt->execute([$first_name, $last_name, $email, $phone, $message, $submitted_at]);
 
 header("Location: /contact.php");
+                }else{
+                        header("Location: /404.php");
                 }
 
 }
