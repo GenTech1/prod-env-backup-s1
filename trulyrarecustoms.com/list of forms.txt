@@ -1,5 +1,5 @@
 email signup form on all pages   front: Done back: injection:
-customize.php                    front: back: injection:
+customize.php                    front: Done back: injection:
 contact.php                      front: Done back: injection:
 search button on all pages       front: Done back: injection:
 sign in page                     front: Done back: injection:

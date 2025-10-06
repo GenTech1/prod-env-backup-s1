@@ -24,6 +24,11 @@ $mode = 'timed';
 $created_at = date('Y-m-d H:i:s');
 $expires_at = date('Y-m-d H:i:s', time() + 900);
 $ip = $_SERVER['REMOTE_ADDR'];
+
+
+if(filter_var($email, FILTER_VALIDATE_EMAIL) === true || strlen($pass) <= 8 || strlen($pass) > 64 || $email === '' || $pass === ''){
+
+    //check credentials
 try {
 	$stmt = $pdo->prepare("Select * from internal_users Where email = ?");
 	$stmt->execute([$email]);
@@ -55,6 +60,8 @@ exit;
 }catch(PDOException $e){
 echo 'DB error: ' . $e->getMessage();
 }
+}else{
+header('Location: signInFailed.php');
 }
-
+}
 ?>

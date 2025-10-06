@@ -68,7 +68,7 @@ $locId = getenv('SQUARE_LOCATION_ID');
 <input type="file" name="file2">
 <input type="file" name="file3">
 <input type="file" name="file4"><br><br>
-  <input class="input" onclick="pay()" type="button" placeholder="Submit" name="submit" value="Pay"/>
+  <input class="input" type="button" placeholder="Submit" name="submit" value="Pay"/>
 <p style="font-size:1.5vw;">*$10 submission fee applies*</p>
 </form>
  <svg style="display:none" width="30%" height="50%" id="prompt" viewBox="0 0 60 50" style="border:1px solid black">
