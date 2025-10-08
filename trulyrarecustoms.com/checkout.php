@@ -106,7 +106,7 @@ die("Connection failed " .$e->getMessage());
 
   <div id="card-container"></div>
 
-  <button id="card-button">Pay Now</button>
+  <button type="button" id="card-button">Pay Now</button>
   <div id="payment-status"></div>
 </form>
 
@@ -120,8 +120,9 @@ die("Connection failed " .$e->getMessage());
 
 
     </main>
-<script type="text/javascript" src="https://web.squarecdn.com/v1/square.js"></script>
+<script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 <script>
+  const payment_form = document.getElementById("payment-form");
   document.addEventListener("DOMContentLoaded", async () => {
     const applicationId = "<?php echo htmlspecialchars($appId);?>";
     const locationId = "<?php echo htmlspecialchars($locId);?>";
@@ -172,6 +173,12 @@ die("Connection failed " .$e->getMessage());
 
     main();
   });
+  
+  if (!window.Square) {
+    console.error("❌ Square JS SDK not loaded.");
+    document.getElementById("payment-status").textContent = "Error: Square SDK not loaded.";
+
+  }
 </script>
 
 </body>
