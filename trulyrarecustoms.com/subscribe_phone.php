@@ -14,15 +14,7 @@ $payload = [
   "data" => [
     "type" => "profile",
     "attributes" => [
-      "phone_number" => $phone,
-        "sms" => [
-          "marketing" => [
-            "consent" => "SUBSCRIBED",
-               "timestamp" => gmdate('Y-m-d\TH:i:s\Z'),
-               "method" => "WEB_FORM",
-               "method_detail" => "Phone Subscription Form"
-          ]
-      ]
+      "phone_number" => $phone
     ]
   ]
 ];
@@ -42,71 +34,134 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
 $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
-echo $response;
 }catch(Exception $e){
     http_response_code(500);
     echo json_encode(['error' => 'Internal Server Error']);
     exit;
 }
 
+
+
 //if profile creation is successful, consent for sms marketing
 
 //add profile to master list
-// try{
+try{
 
 
-// $ch = curl_init();
-// curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/profiles?filter=equals(phone_number,'$phone')");
-// curl_setopt($ch, CURLOPT_HTTPHEADER, [
-//   'Authorization: Klaviyo-API-Key ' . $api_key,
-//   'Revision: 2023-10-01',
-//   'Accept: application/vnd.api+json',
-// ]);
-// curl_setopt($ch, CURLOPT_POST, false);
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/profiles?filter=equals(phone_number,'$phone')");
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  'Authorization: Klaviyo-API-Key ' . $api_key,
+  'Revision: 2023-10-01',
+  'Accept: application/vnd.api+json',
+]);
+curl_setopt($ch, CURLOPT_POST, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-// $response = curl_exec($ch);
-// $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-// curl_close($ch);
-// }catch(Exception $e){
-//     http_response_code(500);
-//     echo json_encode(['error' => 'Internal Server Error']);
-//     exit;
-// }
-// if ($code >= 200 && $code < 300) {
-//   echo "signed up";
-//   $payload = [
-//     "data" => [
-//       [
-//         "type" => "profile",
-//         "id" => json_decode($response, true)['data'][0]['id']
+$response = curl_exec($ch);
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+}catch(Exception $e){
+    http_response_code(500);
+    echo json_encode(['error' => 'Internal Server Error']);
+    exit;
+}
+if ($code >= 200 && $code < 300) {
+  echo "signed up";
+  $profileId = json_decode($response, true)['data'][0]['id'];
+  $payload = [
+    "data" => [
+      [
+        "type" => "profile",
+        "id" => $profileId
         
-//       ]
-//     ]
-//   ];
-//   try{
+      ]
+    ]
+  ];
+  try{
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/lists/$list_id/relationships/profiles");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Klaviyo-API-Key ' . $api_key,
+    'Revision: 2025-07-15',
+    'Accept: application/vnd.api+json',
+    "Content-Type: application/json"
+]);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+if($response = NULL){
+    echo 'cURL error: ' . curl_error($ch);
+}else{
+    echo 'profile added to list';
+$response = curl_exec($ch);
+echo $response;
+}
+}catch(Exception $e){
+    echo json_encode(['error' => 'Internal Server Error']);
+    exit;
+}
+} else {
+    http_response_code($code);
+    echo $response;
+}
+//Subscribing user to SMS marketing list
+try{
+$payload = [
+    "data" => [
+        "type" => "subscription",
+        "attributes" => [
+            "profile" => [
+                "data" => [
+                    "type" => "profile",
+                    "id" => $profileId
+                ]
+            ],
+            "subscriptions" => [
+                "sms_marketing" => [
+                    "consent" => "SUBSCRIBED"
+                ]
+            ]
+        ],
+        "relationships" => [
+            "list" => [
+                "data" => [
+                    "type" => "list",
+                    "id" => $list_id
+                ]
+            ]
+        ]
+    ]
+];
 
-//     $ch = curl_init();
-//     curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/lists/$list_id/relationships/profiles");
-//     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-//     'Authorization: Klaviyo-API-Key ' . $api_key,
-//     'Revision: 2023-10-01',
-//     'Accept: application/vnd.api+json',
-//     "Content-Type: application/json"
-// ]);
-// curl_setopt($ch, CURLOPT_POST, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// $response = curl_exec($ch);
-// echo $response;
-// }catch(Exception $e){
-//     echo json_encode(['error' => 'Internal Server Error']);
-//     exit;
-// }
-// } else {
-//     http_response_code($code);
-//     echo $response;
-// }
+
+
+
+
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/client/subscriptions?company_id=WsETZW");
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  'Authorization: Klaviyo-API-Key ' . $api_key,
+  'Revision: 2023-10-01',
+   'Accept: application/vnd.api+json',
+  "Content-Type: application/json"
+]);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+echo "profile subscribed to sms marketing";
+echo $response;
+curl_close($ch);
+}catch(Exception $e){
+    http_response_code(500);
+    echo json_encode(['error' => 'Internal Server Error']);
+    exit;
+}
 
 ?>
 
