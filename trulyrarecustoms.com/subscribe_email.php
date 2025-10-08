@@ -1,19 +1,40 @@
 <?php
+$email = $_POST['email'] ?? '';
 
-// //Step 1 Build data as PHP associative array
-// $data = [
-// 	"data" => [
-// 		"type" => "profile",
-// 		"attributes" => [
-// 			"email" => "quintontaylor29@gmail.com"
-// ]
-// ]
-// ];
-	
-// //Step 2 Convert PHP array to JSON
-// $jsonData = json_encode($data);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	die("Invalid Email");
+}
 
-// //Step 3 Initialize cURL
-// $ch = curl_init('https://a.klaviyo.com/'
+$api_key = getenv('WAFFLE');
+$list_id = getenv('WAFFLE_KINGDOM');
+
+$payload = [
+	"profiles" => [
+		['email' => $email]
+	]
+];
+
+// $endpoint = "https://a.klaviyo.com/api/v2/list/{$list_id}/subscribe?api_key={$api_key}";
+
+$ch = curl_init($endpoint);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+	"Content-Type: application/json"
+]);
+
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+echo $response
+
+if ($httpCode === 200) {
+	echo "HI World";
+} else {
+	echo "It didn't work go back!!!";
+}
 ?>
 
