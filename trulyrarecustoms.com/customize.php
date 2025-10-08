@@ -86,7 +86,7 @@ $locId = getenv('SQUARE_LOCATION_ID');
 
   <div id="card-container"></div>
 
-  <button onsubmitid="card-button">Pay Now</button>
+  <button type="button" id="card-button">Pay Now</button>
   <div id="payment-status"></div>
 </form>
 
@@ -100,7 +100,7 @@ $locId = getenv('SQUARE_LOCATION_ID');
 
 
     </main>
-<script type="text/javascript" src="https://web.squarecdn.com/v1/square.js"></script>
+<script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
     const applicationId = "<?php echo htmlspecialchars($appId);?>";
@@ -152,6 +152,12 @@ $locId = getenv('SQUARE_LOCATION_ID');
 
     main();
   });
+  
+  if (!window.Square) {
+    console.error("❌ Square JS SDK not loaded.");
+    document.getElementById("payment-status").textContent = "Error: Square SDK not loaded.";
+
+  }
 </script>
  </div>
 </div>
