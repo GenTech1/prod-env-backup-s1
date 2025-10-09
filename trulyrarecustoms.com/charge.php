@@ -1,7 +1,7 @@
 <?php
 try{
 header('Content-Type: application/json');
-$first_name = $_POST['first-name'] ?? '';
+
 
 if(1==200){
 echo json_encode([

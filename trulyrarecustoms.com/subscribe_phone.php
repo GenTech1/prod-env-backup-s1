@@ -84,7 +84,7 @@ if ($code >= 200 && $code < 300) {
     curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/lists/$list_id/relationships/profiles");
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Authorization: Klaviyo-API-Key ' . $api_key,
-    'Revision: 2025-07-15',
+    'Revision: 2023-10-01',
     'Accept: application/vnd.api+json',
     "Content-Type: application/json"
 ]);
@@ -109,42 +109,51 @@ echo $response;
 //Subscribing user to SMS marketing list
 try{
 $payload = [
-    "data" => [
-        "type" => "subscription",
-        "attributes" => [
-            "profile" => [
-                "data" => [
-                    "type" => "profile",
-                    "id" => $profileId
-                ]
-            ],
-            "subscriptions" => [
-                "sms_marketing" => [
-                    "consent" => "SUBSCRIBED"
-                ]
-            ]
+    "data"=>[
+    "type"=> "profile-subscription-bulk-create-job",
+    "attributes"=>[
+      "profiles"=>[
+        "data"=> [
+          [
+            "type"=> "profile",
+            "attributes"=>[
+              "phone_number"=> "$phone",
+              "subscriptions"=>[
+                "sms"=>[
+                  "marketing"=>[
+                    "consent"=> "SUBSCRIBED"
         ],
-        "relationships" => [
-            "list" => [
-                "data" => [
-                    "type" => "list",
-                    "id" => $list_id
-                ]
-            ]
+                  "transactional"=>[
+                    "consent"=> "SUBSCRIBED"
         ]
-    ]
-];
-
-
-
-
+        ],
+              
+        ]
+        ],
+            "id"=> "$profileId"
+        ]
+        ]
+        ],
+      "historical_import"=> false
+],
+    "relationships"=> [
+      "list"=> [
+        "data"=> [
+          "type"=> "list",
+          "id"=> "$list_id"
+]
+]
+]
+]
+        ];
+        
 
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/client/subscriptions?company_id=WsETZW");
+curl_setopt($ch, CURLOPT_URL, "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs");
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
   'Authorization: Klaviyo-API-Key ' . $api_key,
-  'Revision: 2023-10-01',
+  'Revision: 2025-07-15',
    'Accept: application/vnd.api+json',
   "Content-Type: application/json"
 ]);
