@@ -102,6 +102,8 @@ $locId = getenv('SQUARE_LOCATION_ID');
     </main>
 <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 <script>
+  const sku = "custom-order-001"; // Fixed SKU for customization fee
+  const payment_form = document.getElementById("payment-form");
   document.addEventListener("DOMContentLoaded", async () => {
     const applicationId = "<?php echo htmlspecialchars($appId);?>";
     const locationId = "<?php echo htmlspecialchars($locId);?>";
@@ -128,11 +130,13 @@ $locId = getenv('SQUARE_LOCATION_ID');
       const cardButton = document.getElementById('card-button');
       cardButton.addEventListener('click', async function () {
         try {
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
           const token = await tokenize(card);
           const response = await fetch('charge.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, sku: getSkuFromURL() })
+            body: JSON.stringify({ nonce: token, sku: sku, email: email, phone: phone })
           });
 
           const result = await response.json();

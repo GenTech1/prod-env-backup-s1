@@ -84,8 +84,8 @@ echo "nothing here, get to shopping!";
 <script>
   //buy all from cart
 function buyAllCart(cartSkus){
-console.log("cart skus: " + cartSkus);
-window.location.href=`checkout.php?cartSkus=${cartSkus.join(',')}`;
+  for(let key in cookieObj){}
+
 }
 //buy single from cart
 function buySingleFromCart(sku){
@@ -94,8 +94,10 @@ window.location.href=`checkout.php?sku=${sku}`;
 //remove single from cart
 function removeSingleFromCart(sku){
 //separates each cookie
+
 const cookies = document.cookie.split(';');
 const cookieObj = {};
+
 
 cookies.forEach(cookie =>{
 	const [name, ...valueParts] = cookie.split('=');
@@ -105,7 +107,9 @@ cookies.forEach(cookie =>{
 console.log(cookieObj);
 //iterate through all separate cookies and remove the specified item
 for(let key in cookieObj){
-if(cookieObj[key]==sku){
+sku = sku.replace(/^"(.*)"$/, '$1');
+if (cookieObj[key] === sku || cookieObj[key].startsWith(sku + '-')) {
+
 document.cookie = `${key}=;path=/;expires=Thu, 01 Jan 197000:00:00 UTC`;
 document.cookie= `${key}=;Max-Age=0; path=/`;
 location.reload();

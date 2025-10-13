@@ -30,8 +30,8 @@ size[i].addEventListener("click", function (e) {
     let fullNameSize = this.dataset.name;
     sizePicked = "-" + fullNameSize.split("-").pop();
 
-    alert("The size you have picked was " + sizePicked);
-    console.log ("The size you have picked was", sizePicked);
+    // alert("The size you have picked was " + sizePicked);
+    // console.log ("The size you have picked was", sizePicked);
 });
 }
 

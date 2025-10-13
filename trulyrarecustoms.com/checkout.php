@@ -149,11 +149,13 @@ die("Connection failed " .$e->getMessage());
       const cardButton = document.getElementById('card-button');
       cardButton.addEventListener('click', async function () {
         try {
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
           const token = await tokenize(card);
           const response = await fetch('charge.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, sku: getSkuFromURL() })
+            body: JSON.stringify({ nonce: token, sku: getSkuFromURL(), email: email, phone: phone })
           });
 
           const result = await response.json();
