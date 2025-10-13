@@ -42,7 +42,6 @@ curl_close($ch);
 
 
 
-//if profile creation is successful, consent for sms marketing
 
 //add profile to master list
 try{
@@ -120,12 +119,12 @@ $payload = [
               "phone_number"=> "$phone",
               "subscriptions"=>[
                 "sms"=>[
-                  "marketing"=>[
-                    "consent"=> "SUBSCRIBED"
-        ],
                   "transactional"=>[
                     "consent"=> "SUBSCRIBED"
-        ]
+                  ],
+                  "marketing"=>[
+                    "consent"=> "SUBSCRIBED"
+                  ]
         ],
               
         ]
