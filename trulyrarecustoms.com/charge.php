@@ -63,7 +63,7 @@ curl_close($ch);
 if($code>=200 && $code<300){
 echo json_encode([
   "success" => true,
-  "message" => "",
+  "message" => "$price",
 ]);
 }else{
   echo json_encode([

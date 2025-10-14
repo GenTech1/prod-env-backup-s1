@@ -1,11 +1,13 @@
 <?php
 $sku = $_GET['sku'] ?? null;
+$price = null;
 
 if (!$sku) {
 $skus = $_GET['cartSkus'] ?? null;
 try {
 
   
+
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Products_DB');
 $user = getenv('Site_USER');
@@ -18,11 +20,12 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 die("Connection failed " .$e->getMessage());
 }
 foreach(explode(',', $skus) as $sku){
+    $sku = trim($sku, '[""]' ); // removes quotes and spaces
+  
     $stmt = $pdo->prepare("SELECT name, price FROM Products WHERE sku = ?");
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
+    $price += (float)$product['price'];
 
     if (!$product) {
         echo "Product not found.";
@@ -155,7 +158,7 @@ die("Connection failed " .$e->getMessage());
           const response = await fetch('charge.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, sku: getSkuFromURL(), email: email, phone: phone })
+            body: JSON.stringify({ nonce: token, sku: getSkuFromURL(), email: email, phone: phone, price: <?php echo json_encode($price); ?> })
           });
 
           const result = await response.json();

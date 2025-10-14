@@ -75,7 +75,7 @@ $pass = getenv('Site_PASS');
     echo '<hr>';
 }
 if($_COOKIE){
-echo "<div id='checkoutButton'><button id='checkoutBtn' onclick='buyAllCart(".json_encode($cartSkus).")'>Checkout</button></div>";
+echo "<div id='checkoutButton'><button id='checkoutBtn'data-cart='". json_encode($cartSkus) . "'>Checkout</button></div>";
 }else{
 echo "nothing here, get to shopping!";
 }
@@ -83,10 +83,9 @@ echo "nothing here, get to shopping!";
 
 <script>
   //buy all from cart
-function buyAllCart(cartSkus){
-  for(let key in cookieObj){}
-
-}
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+window.location.href=`checkout.php?cartSkus=${encodeURIComponent(document.getElementById('checkoutBtn').getAttribute('data-cart'))}`;
+});
 //buy single from cart
 function buySingleFromCart(sku){
 window.location.href=`checkout.php?sku=${sku}`;
