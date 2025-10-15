@@ -152,9 +152,13 @@ location.reload();
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-    <form id="marketingForm">
-      <input type="email" placeholder="Email"/>
-      <input type="submit" Placeholder="Sign Up"/>
+   <form id="marketingForm" action="/subscribe_email.php" method="POST">
+      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input id="emailSubmit" type="submit" value="Sign Up"/>
+    </br>
+    </br>
+    </br>
+    </br>
     </form>
   </div>
   </footer>

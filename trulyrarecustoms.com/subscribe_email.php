@@ -5,8 +5,8 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 	die("Invalid Email");
 }
 
-$api_key = getenv('WAFFLE');
-$list_id = getenv('WAFFLE_KINGDOM');
+$api_key = getenv('KLAVIYO_API_KEY');
+$list_id = getenv('KLAVIYO_LIST_ID_SMS');
 
 try{
 	$payload = [
