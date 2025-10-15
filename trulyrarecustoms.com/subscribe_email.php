@@ -117,8 +117,10 @@ try {
 						"attributes"=> [
 							"email"=> "$email",
 							"subscriptions"=> [
-								"email"=> [
-									"consent"=> "SUBSCRIBE"
+								"email"=>[
+								"marketing"=> [
+									"consent"=> "SUBSCRIBED"
+									]
 								],
 							]
 						],
