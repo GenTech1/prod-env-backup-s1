@@ -71,7 +71,8 @@ $pass = getenv('Site_PASS');
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button><button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
+    echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <div id='numCount'> <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> </div> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button><button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
+    // What I(Nathan) has add: <div id='numCount'> <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> </div>
     echo '<hr>';
 }
 if($_COOKIE){
@@ -82,6 +83,66 @@ echo "nothing here, get to shopping!";
 ?>
 
 <script>
+  let params = new URLSearchParams(window.location.search);
+  let sku = params.get('sku');
+
+  // Cookie info
+  function setcookie(name, value, date) {
+    // const date = new date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60* 1000));
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()} path=/`;
+  }
+
+  function getCookie(name) {
+    const match =  document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  // Add number to cookie on page load
+  window.addEventListener("DOMContentLoadad", () => {
+    const saved = getCookie($sku);
+    if (saved) {
+      const parts = saved.split("-");
+      const quantity = parseInt(parts[parts.length - 1], 10);
+      num.forEach(n => n.innerText = quantity < 10 ? "0" + quantity : quantity);
+    }
+  });
+
+  // number counter
+const plus = document.querySelectorAll(".plus"),
+minus = document.querySelectorAll(".minus"),
+num = document.querySelectorAll(".num");
+
+plus.forEach((btn, index) => {
+  btn.addEventListener("click", ()=> {
+    let a = parseInt(num[index].innerText, 10);
+  if(a < 10) {
+  a++;
+  num[index].innerText = a < 10  ? "0" + a : a;
+
+  const cookieValue = '${$sku}-${a}';
+  setcookie($sku, cookieValue, 3650); // set coolie for 10 years
+
+  location.reload();
+  }
+  });
+});
+
+minus.forEach((btn, index) => {
+  btn.addEventListener("click", ()=> {
+    let a = parseInt(num[index].innerText, 10);
+    if(a > 1){
+  a--;
+  num[index].innerText = a < 10 ? "0" + a : a;
+
+  const cookieValue = '${$sku}-${a}';
+  setcookie($sku, cookieValue, 3650);
+
+  location.reload();
+  }
+  });
+});
+
   //buy all from cart
 document.getElementById('checkoutBtn').addEventListener('click', () => {
 window.location.href=`checkout.php?cartSkus=${encodeURIComponent(document.getElementById('checkoutBtn').getAttribute('data-cart'))}`;
