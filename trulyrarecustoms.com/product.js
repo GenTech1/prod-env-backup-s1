@@ -18,7 +18,6 @@ window.location.assign(checkoutURL);
 document.getElementById("cartBtn").addEventListener("click", function (e){
     if (!sizePicked) {
         e.preventDefault();
-    // alert("The size you have picked was " + sizePicked);
     alert("No size was picked!");
     }
 });
@@ -29,9 +28,6 @@ size[i].addEventListener("click", function (e) {
 
     let fullNameSize = this.dataset.name;
     sizePicked = "-" + fullNameSize.split("-").pop();
-
-    // alert("The size you have picked was " + sizePicked);
-    // console.log ("The size you have picked was", sizePicked);
 });
 }
 
@@ -41,4 +37,3 @@ date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
 let expires = "expires=" +date.toUTCString();
 document.cookie = ` CART_${encodedSKU}=${encodedSKU}${sizePicked}; ${expires}; path =/`;
 });
-// document.cookie = ` CART_${encodedSKU}=${encodedSKU}${sizePicked}; ${expires}; path =/`;
