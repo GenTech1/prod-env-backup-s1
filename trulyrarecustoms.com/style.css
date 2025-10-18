@@ -155,7 +155,7 @@ height:20vw;
   width: 64px;
   box-sizing: border-box;
   flex-shrink: 0;
-  place-item: center;
+  place-items: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
