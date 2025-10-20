@@ -154,6 +154,8 @@ die("Connection failed " .$e->getMessage());
         try {
           const email = document.getElementById('email').value;
           const phone = document.getElementById('phone').value;
+          const fname = document.getElementById('first-name').value;
+          const lname = document.getElementById('last-name').value;
           const token = await tokenize(card);
           const response = await fetch('charge.php', {
             method: 'POST',
@@ -161,10 +163,20 @@ die("Connection failed " .$e->getMessage());
             body: JSON.stringify({ nonce: token, sku: getSkuFromURL(), email: email, phone: phone, price: <?php echo json_encode($price); ?> })
           });
 
-          const result = await response.json();
-          document.getElementById('payment-status').textContent = result.success
-            ? 'Payment successful!'
-            : 'Payment failed: ' + result.message;
+          let result = await response.json();
+          if(result.success){
+            document.getElementById('payment-status').textContent ='Payment successful!'
+             const res = await fetch('orders.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({fname: fname, lname:lname, cartSkus: getcartSkuFromURL(), sku: getSkuFromURL(), email: email, phone: phone, price: <?php echo json_encode($price); ?> })
+          }).then(window.location.href = 'thankYou.php');
+          result = await res.json();
+          // console.log(result);
+          }else{
+            document.getElementById('payment-status').textContent = 'Payment failed: ' + result.message;
+          }
+
         } catch (err) {
           document.getElementById('payment-status').textContent = 'Error: ' + err.message;
         }
@@ -174,6 +186,10 @@ die("Connection failed " .$e->getMessage());
     function getSkuFromURL() {
       const params = new URLSearchParams(window.location.search);
       return params.get('sku');
+    }
+    function getcartSkuFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('cartSkus');
     }
 
     main();

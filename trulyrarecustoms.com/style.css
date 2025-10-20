@@ -3,7 +3,11 @@ h1 {
   font-weight: 400;
   font-style: normal;
 }
-
+#thankyou{
+    display: flex;
+    justify-content: center;
+    padding-top: 5vw;
+}
 body, html {
     margin: 0;
     padding: 0;
