@@ -71,8 +71,10 @@ $pass = getenv('Site_PASS');
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <div id='numCount'> <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> </div> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button><button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-    // What I(Nathan) has add: <div id='numCount'> <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> </div>
+    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
+     echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name=' . htmlspecialchars($sku) . '>-</button><span class="num">01</span><button class="plus" data-name=' . htmlspecialchars($sku) . '>+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
+    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:" . $take . " " . $product['price'] . "<div id='Cartbuttons'><button class='minus' data-name='" . htmlspecialchars($sku) . "'>-</button><span class='num'>01</span><button class='plus' data-name='" . htmlspecialchars($sku) . "'>+</button><button onclick='buySingleFromCart(" . json_encode($sku) . ")'>Buy</button><button onclick='removeSingleFromCart(" . json_encode($sku) . ")'>Remove</button></div></div>";
+    // What I(Nathan) has add: <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> -----
     echo '<hr>';
 }
 if($_COOKIE){
@@ -83,14 +85,14 @@ echo "nothing here, get to shopping!";
 ?>
 
 <script>
-  let params = new URLSearchParams(window.location.search);
-  let sku = params.get('sku');
-
+  // const itemID = btn.dataset.name;
   // Cookie info
-  function setcookie(name, value, date) {
-    // const date = new date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60* 1000));
-    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()} path=/`;
+  function setcookie(name, value, days) {
+    const expiryDate = new Date();
+    expiryDate.setTime(expiryDate.getTime() + (days * 24 * 60 * 60* 1000));
+    const expires = "expires=" + expiryDate.toUTCString();
+    document.cookie = name + "=" + encodeURIComponent(value) + "; " + expires + "; path=/";
+    // document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()} path=/`;
   }
 
   function getCookie(name) {
@@ -100,7 +102,7 @@ echo "nothing here, get to shopping!";
 
   // Add number to cookie on page load
   window.addEventListener("DOMContentLoadad", () => {
-    const saved = getCookie($sku);
+    const saved = getCookie(itemID);
     if (saved) {
       const parts = saved.split("-");
       const quantity = parseInt(parts[parts.length - 1], 10);
@@ -115,13 +117,16 @@ num = document.querySelectorAll(".num");
 
 plus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
+    itemID = btn.dataset.name;
     let a = parseInt(num[index].innerText, 10);
   if(a < 10) {
   a++;
   num[index].innerText = a < 10  ? "0" + a : a;
 
-  const cookieValue = '${$sku}-${a}';
-  setcookie($sku, cookieValue, 3650); // set coolie for 10 years
+  setcookie(itemID, `${itemID}-${a}`, 3650);
+
+  // const cookieValue = '${itemID}-${a}';
+  // setcookie(itemID, cookieValue, 3650); // set coolie for 10 years
 
   location.reload();
   }
@@ -130,13 +135,17 @@ plus.forEach((btn, index) => {
 
 minus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
+    itemID = btn.dataset.name;
     let a = parseInt(num[index].innerText, 10);
     if(a > 1){
   a--;
+  // echo console.log(itemID);
   num[index].innerText = a < 10 ? "0" + a : a;
 
-  const cookieValue = '${$sku}-${a}';
-  setcookie($sku, cookieValue, 3650);
+  setcookie(itemID, `${itemID}-${a}`, 3650);
+
+  // const cookieValue = '${itemID}-${a}';
+  // setcookie(itemID, cookieValue, 3650);
 
   location.reload();
   }
@@ -213,9 +222,9 @@ location.reload();
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-   <form id="marketingForm" action="/subscribe_email.php" method="POST">
-      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
-      <input id="emailSubmit" type="submit" value="Sign Up"/>
+   <form class="em" id="marketingForm" action="/subscribe_email.php" method="POST">
+      <input class="emb" id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input class="emsb" id="emailSubmit" type="submit" value="Sign Up"/>
     </br>
     </br>
     </br>

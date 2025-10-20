@@ -159,7 +159,7 @@ height:20vw;
   width: 64px;
   box-sizing: border-box;
   flex-shrink: 0;
-  place-item: center;
+  place-items: center;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -210,4 +210,33 @@ height:20vw;
 #socials a:hover::after {
   transform: translate(-50%, -42px) rotate(0);
   opacity: 1;
+}
+
+.em{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 12px 13px;
+  font-size: 14px;
+  color: #333;
+    transition: border .3s ease, background-color .3s ease;
+}
+
+.emb{
+padding: 8px 20px;
+border-radius: 5px;
+border: 2px solid palevioletred;
+font-size: 14px;
+color: #333;
+transition: border .3s ease, background-color .3s ease;
+}
+.emsb{
+padding: 8px 20px;
+border-radius: 5px;
+border: 2px solid palevioletred;
+font-size: 14px;
+background-color: palevioletred;
+transition: border .3s ease, background-color .3s ease;
 }

@@ -118,9 +118,9 @@ You have the option to ship directly to you or pick up in store and avoid shippi
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-   <form id="marketingForm" action="/subscribe_email.php" method="POST">
-      <input id="emailInput" type="email" name="email" placeholder="Email*" required/>
-      <input id="emailSubmit" type="submit" value="Sign Up"/>
+   <form class="em" id="marketingForm" action="/subscribe_email.php" method="POST">
+      <input class="emb" id="emailInput" type="email" name="email" placeholder="Email*" required/>
+      <input class="emsb" id="emailSubmit" type="submit" value="Sign Up"/>
     </br>
     </br>
     </br>
