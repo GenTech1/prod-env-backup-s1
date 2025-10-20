@@ -50,9 +50,9 @@
   <h1>Subscribe Now</h1>
 
   <form action="/subscribe_phone.php" method="POST">
-    <input type="tel" id="phoneInput" name="phone" placeholder="Phone" required><br/><br/>
-    <button type="button" id="smsCancel">Cancel</button>
-    <button id="smsSubmit" type="submit">Submit</button>
+    <input class="emb" type="tel" id="phoneInput" name="phone" placeholder="Phone" required><br/><br/>
+    <button class="emb" type="button" id="smsCancel">Cancel</button>
+    <button class="emsb" id="smsSubmit" type="submit">Submit</button>
   </form>
 </div>
 
