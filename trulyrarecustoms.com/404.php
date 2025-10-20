@@ -76,9 +76,9 @@
       <a href="contact.php">Contact us</a>
       <a href="about.php">About</a>
     </nav>
-    <form id="marketingForm">
-      <input type="email" placeholder="Email"/>
-      <input type="submit" Placeholder="Sign Up"/>
+    <form class="em" id="marketingForm">
+      <input class="emb" type="email" placeholder="Email"/>
+      <input class="emsb" type="submit" Placeholder="Sign Up"/>
     </form>
   </div>
   </footer>
