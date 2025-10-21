@@ -62,9 +62,25 @@
 
 <div class="full-banner-wrapper">
   <div class="full-banner-track" id="bannerTrack">
-    <svg class="full-slide"><rect width="100%" height="100%" fill="palevioletred"/></svg>
-    <svg class="full-slide"><rect width="100%" height="100%" fill="lightblue"/></svg>
-    <svg class="full-slide"><rect width="100%" height="100%" fill="palegreen"/></svg>
+     <svg class="full-slide" width="100%" height="100%">
+      
+
+    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
+    <image href="assets/p.jpg" width="100%" height="100%" />
+  </svg>
+     <svg class="full-slide" width="100%" height="100%">
+      
+
+    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
+    <image href="assets/j.jpg" width="100%" height="100%" />
+  </svg>
+</svg>
+     <svg class="full-slide" width="100%" height="100%">
+      
+
+    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
+    <image href="assets/k.jpg" width="100%" height="100%" />
+  </svg>
   </div>
 </div>
 
@@ -110,9 +126,11 @@ try {
 <h1>Truly Rareland Collection</h1>
 <div class="product">
     <?php foreach ($products as $product): ?>
+        <?php $images = array_values(json_decode($product['image'], true));
+?>
       <div class="productSetup">
         <a href="product.php?sku=<?php echo urlencode($product['sku']); ?>">
-          <img class="productImages" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+          <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
         <p><?php echo htmlspecialchars($product['description']); ?></p>
@@ -131,9 +149,11 @@ try {
 <h1>Events</h1>
 <div class="product">
     <?php foreach ($productsEvents as $product): ?>
+        <?php $images = array_values(json_decode($product['image'], true));
+?>
       <div class="productSetup">
         <a href="product.php?sku=<?php echo urlencode($product['sku']); ?>">
-          <img class="productImages" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+          <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
         <p><?php echo htmlspecialchars($product['description']); ?></p>

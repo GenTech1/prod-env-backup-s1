@@ -98,11 +98,16 @@ $colors = array_unique($colors);
 
 	<div class="productDisplay">
   <h1><?php echo htmlspecialchars($product['name']); ?></h1>
-
-  <img class="productImage" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="max-width:300px;border:1px solid #ccc;" />
+<?php $images = array_values(json_decode($product['image'], true));
+?>
+  <img class="productImage" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="max-width:300px;border:1px solid #ccc;" />
   <div id="productData">
   <p><?php echo htmlspecialchars($product['description']); ?></p>
-
+  <div style="display:inline;">
+  <?php for($i=0; $i<count($images); $i++) {?>
+   <img class="miniPic" src="<?php echo htmlspecialchars($images[$i]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="max-width:30px;border:1px solid #ccc;" />
+   <?php } ?>
+     </div>
   <p><strong>Price:</strong> <?php echo htmlspecialchars($product['price']) . ' ' . htmlspecialchars($product['currency']); ?></p>
  <div id="colors">
   <?php if (!empty($colors)): ?>
@@ -158,6 +163,7 @@ if ($sizes && is_array($sizes)) {
 
     </main>
 <script src="product.js"></script>
+<script src="script.js"></script>
   </body>
   <footer>
     <div class="blackback"
