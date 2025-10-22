@@ -47,9 +47,10 @@ foreach ($_COOKIE as $name => $value){
 	if(strpos($name, 'CART_')===0){
     $sku = $value;
 
-    $parts = explode("-", $sku);
-    $take = array_pop($parts);
-    $sku = implode("-", $parts);
+    $break = explode("-", $sku);
+    $take = array_pop($break);
+    $takeTwo = array_pop($break);
+    $sku = implode("-", $break);
 		
 		$cartSkus[] = $sku;
 		}

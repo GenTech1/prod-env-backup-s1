@@ -4,12 +4,20 @@ let cartBtn = document.getElementById("cartBtn");
 let size = document.querySelectorAll(".size");
 let params = new URLSearchParams(window.location.search);
 let sku = params.get('sku');
+let miniPics = document.querySelectorAll(".miniPic");
+let mainImage = document.querySelector(".productImage");
 let checkoutURL = 'checkout.php?sku=' + encodeURIComponent(sku);
 encodedSKU = encodeURIComponent(sku);
 const date = new Date();
 let sizePicked = '';
 
-
+miniPics.forEach(pic => {
+pic.addEventListener("click", function(e) {
+    e.preventDefault();
+    let imgSrc = this.src;
+    mainImage.src = imgSrc;
+});
+});
 buy.addEventListener("submit", (e) =>{
 e.preventDefault();
 window.location.assign(checkoutURL);
@@ -35,5 +43,5 @@ cart.addEventListener("submit", (e) =>{
 e.preventDefault();
 date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
 let expires = "expires=" +date.toUTCString();
-document.cookie = ` CART_${encodedSKU}=${encodedSKU}${sizePicked}; ${expires}; path =/`;
+document.cookie = ` CART_${encodedSKU}=${encodedSKU}${sizePicked}-1; ${expires}; path =/`;
 });

@@ -81,9 +81,11 @@ try {
 <div class="productContainer">
 <div class="product">
     <?php foreach ($products as $product): ?>
+        <?php $images = array_values(json_decode($product['image'], true));
+?>
       <div class="productSetup">
         <a href="product.php?sku=<?php echo urlencode($product['sku']); ?>">
-          <img class="productImages" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+          <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
         <p><?php echo htmlspecialchars($product['description']); ?></p>
@@ -98,10 +100,13 @@ try {
 <div class="storeCaroucel">
 <h1>Custom Designs</h1>
 <div class="product">
+
     <?php foreach ($productCustom as $product): ?>
+  <?php $images = array_values(json_decode($product['image'], true));
+?>
       <div class="productSetup">
         <a href="product.php?sku=<?php echo urlencode($product['sku']); ?>">
-          <img class="productImages" src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+          <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
         <p><?php echo htmlspecialchars($product['description']); ?></p>

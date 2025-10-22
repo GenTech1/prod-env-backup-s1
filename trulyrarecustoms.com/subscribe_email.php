@@ -157,6 +157,7 @@ $response = curl_exec($ch);
 $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 echo $response;
 curl_close($ch);
+header('Location: /tyfss.php');
 } catch(Exception $e){
     http_response_code(500);
     echo json_encode(['error' => 'Internal Server Error']);

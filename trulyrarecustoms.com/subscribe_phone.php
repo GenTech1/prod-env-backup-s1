@@ -165,6 +165,7 @@ $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 echo "profile subscribed to sms marketing";
 echo $response;
 curl_close($ch);
+header('Location: /tyfss.php');
 }catch(Exception $e){
     http_response_code(500);
     echo json_encode(['error' => 'Internal Server Error']);
