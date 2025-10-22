@@ -119,17 +119,22 @@ plus.forEach((btn, index) => {
 
     let value = getCookie(cookieName);
 
+    let baseID = itemID;
+
     let qty = 1;
 
   if (value) {
     const parts = value.split("-");
     const lastPart = parts.pop();
-     if (!isNaN(lastPart)) qty = parseInt(lastPart);
+    if  (!isNaN(lastPart)) {
+      qty = parseInt(lastPart);
+      baseID = parts.join("-");
+    }
   }
 
   if(qty < 10) {
   qty++;
-  const newValue = `${itemID}-${qty}`;
+  const newValue = `${baseID}-${String(qty).padStart(2, "0")}`;
 
   setCookie(cookieName, newValue, 365 * 3);
   location.reload();
@@ -144,21 +149,24 @@ minus.forEach((btn, index) => {
      const cookieName = "CART_" + itemID;
 
     let value = getCookie(cookieName);
-
+    let baseID = itemID;
     let qty = 1;
 
     if (value) {
     const parts = value.split("-");
     const lastPart = parts.pop();
-     if (!isNaN(lastPart)) qty = parseInt(lastPart);
+      if  (!isNaN(lastPart)) {
+      qty = parseInt(lastPart);
+      baseID = parts.join("-");
+    }
   }
 
-    if (qty > 1) {
+    if(qty > 1) {
   qty--;
-  const newValue = `${itemID}-${qty}`;
+  const newValue = `${baseID}-${String(qty).padStart(2, "0")}`;
 
   setCookie(cookieName, newValue, 365 * 3);
-   location.reload();
+  location.reload();
   }
   });
 });
