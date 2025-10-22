@@ -100,7 +100,7 @@ Heat Press & Screen Printing
     </main>
   </body>
   <footer>
-    <div class="blackback"
+    <div class="blackback">
     <hr />
     <div id="icons">
  
