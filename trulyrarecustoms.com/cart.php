@@ -73,9 +73,18 @@ $pass = getenv('Site_PASS');
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-     echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name=' . htmlspecialchars($sku) . '>-</button><span class="num">01</span><button class="plus" data-name=' . htmlspecialchars($sku) . '>+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
-    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:" . $take . " " . $product['price'] . "<div id='Cartbuttons'><button class='minus' data-name='" . htmlspecialchars($sku) . "'>-</button><span class='num'>01</span><button class='plus' data-name='" . htmlspecialchars($sku) . "'>+</button><button onclick='buySingleFromCart(" . json_encode($sku) . ")'>Buy</button><button onclick='removeSingleFromCart(" . json_encode($sku) . ")'>Remove</button></div></div>";
-    // What I(Nathan) has add: <button class='minus'>-</button> <span class='num'>01</span> <button class='plus'>+</button> -----
+    // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name=' . htmlspecialchars($sku) . '>-</button><span class="num" data-name=' . htmlspecialchars($take) . '>' . htmlspecialchars($take) . '</span><button class="plus" data-name=' . htmlspecialchars($sku) . '>+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
+    // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
+//     echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] .
+// '<div id="Cartbuttons">
+//   <button class="minus" data-name="' . htmlspecialchars($sku . '-' . $take) . '">-</button>
+//   <span class="num">' . $quantity . '</span>
+//   <button class="plus" data-name="' . htmlspecialchars($sku . '-' . $take) . '">+</button>
+//   <button onclick="buySingleFromCart(\'' . htmlspecialchars($sku . '-' . $take) . '\')">Buy</button>
+//   <button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku . '-' . $take) . '\')">Remove</button>
+// </div></div>';
+    echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button></div></div>';
+
     echo '<hr>';
 }
 if($_COOKIE){
@@ -86,30 +95,17 @@ echo "nothing here, get to shopping!";
 ?>
 
 <script>
-  // const itemID = btn.dataset.name;
   // Cookie info
-  function setcookie(name, value, days) {
+  function setCookie(name, value, days) {
     const expiryDate = new Date();
     expiryDate.setTime(expiryDate.getTime() + (days * 24 * 60 * 60* 1000));
-    const expires = "expires=" + expiryDate.toUTCString();
-    document.cookie = name + "=" + encodeURIComponent(value) + "; " + expires + "; path=/";
-    // document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()} path=/`;
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expiryDate.toUTCString()}; path=/`;
   }
 
   function getCookie(name) {
     const match =  document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     return match ? decodeURIComponent(match[2]) : null;
   }
-
-  // Add number to cookie on page load
-  window.addEventListener("DOMContentLoadad", () => {
-    const saved = getCookie(itemID);
-    if (saved) {
-      const parts = saved.split("-");
-      const quantity = parseInt(parts[parts.length - 1], 10);
-      num.forEach(n => n.innerText = quantity < 10 ? "0" + quantity : quantity);
-    }
-  });
 
   // number counter
 const plus = document.querySelectorAll(".plus"),
@@ -118,17 +114,25 @@ num = document.querySelectorAll(".num");
 
 plus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
-    itemID = btn.dataset.name;
-    let a = parseInt(num[index].innerText, 10);
-  if(a < 10) {
-  a++;
-  num[index].innerText = a < 10  ? "0" + a : a;
+     const itemID = btn.dataset.name;
 
-  setcookie(itemID, `${itemID}-${a}`, 3650);
+     const cookieName = "CART_" + itemID;
 
-  // const cookieValue = '${itemID}-${a}';
-  // setcookie(itemID, cookieValue, 3650); // set coolie for 10 years
+    let value = getCookie(cookieName);
 
+    let qty = 1;
+
+  if (value) {
+    const parts = value.split("-");
+    const lastPart = parts.pop();
+     if (!isNaN(lastPart)) qty = parseInt(lastPart);
+  }
+
+  if(qty < 10) {
+  qty++;
+  const newValue = `${itemID}-${qty}`;
+
+  setCookie(cookieName, newValue, 365 * 3);
   location.reload();
   }
   });
@@ -136,19 +140,26 @@ plus.forEach((btn, index) => {
 
 minus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
-    itemID = btn.dataset.name;
-    let a = parseInt(num[index].innerText, 10);
-    if(a > 1){
-  a--;
-  // echo console.log(itemID);
-  num[index].innerText = a < 10 ? "0" + a : a;
+    const itemID = btn.dataset.name;
 
-  setcookie(itemID, `${itemID}-${a}`, 3650);
+     const cookieName = "CART_" + itemID;
 
-  // const cookieValue = '${itemID}-${a}';
-  // setcookie(itemID, cookieValue, 3650);
+    let value = getCookie(cookieName);
 
-  location.reload();
+    let qty = 1;
+
+    if (value) {
+    const parts = value.split("-");
+    const lastPart = parts.pop();
+     if (!isNaN(lastPart)) qty = parseInt(lastPart);
+  }
+
+    if (qty > 1) {
+  qty--;
+  const newValue = `${itemID}-${qty}`;
+
+  setCookie(cookieName, newValue, 365 * 3);
+   location.reload();
   }
   });
 });

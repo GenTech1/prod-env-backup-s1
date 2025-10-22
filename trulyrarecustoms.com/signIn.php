@@ -36,9 +36,12 @@
     <main>
 <form id="signIn" action="signIn_submit.php" method="POST">
 <h1>Sign In</h1>
-<input name="sgnemail" class="inputs"placeholder="email" type="email" required/>
-<input name="sgnpass" class="inputs" placeholder="password" type="password" required/>
-<input class="inputs" type="submit"/>
+<input class="emb" name="sgnemail" class="inputs"placeholder="email" type="email" required/>
+<br/>
+<input class="emb" name="sgnpass" class="inputs" placeholder="password" type="password" required/>
+<br/>
+<br/>
+<input class="emsb" class="inputs" type="submit"/>
 </form>
 
 
