@@ -75,14 +75,7 @@ $pass = getenv('Site_PASS');
     // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
     // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name=' . htmlspecialchars($sku) . '>-</button><span class="num" data-name=' . htmlspecialchars($take) . '>' . htmlspecialchars($take) . '</span><button class="plus" data-name=' . htmlspecialchars($sku) . '>+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
     // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
-//     echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] .
-// '<div id="Cartbuttons">
-//   <button class="minus" data-name="' . htmlspecialchars($sku . '-' . $take) . '">-</button>
-//   <span class="num">' . $quantity . '</span>
-//   <button class="plus" data-name="' . htmlspecialchars($sku . '-' . $take) . '">+</button>
-//   <button onclick="buySingleFromCart(\'' . htmlspecialchars($sku . '-' . $take) . '\')">Buy</button>
-//   <button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku . '-' . $take) . '\')">Remove</button>
-// </div></div>';
+
     echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button></div></div>';
 
     echo '<hr>';
