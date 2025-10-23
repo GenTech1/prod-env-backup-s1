@@ -42,18 +42,27 @@
 
 <?php
 $cartSkus = [];
-
+$i=0;
 foreach ($_COOKIE as $name => $value){
 	if(strpos($name, 'CART_')===0){
     $sku = $value;
-
     $break = explode("-", $sku);
     $take = array_pop($break);
     $takeTwo = array_pop($break);
     $sku = implode("-", $break);
-		
+
+
+
 		$cartSkus[] = $sku;
+
+    // New Code
+		// $cartSkus[] = [
+    //   'sku' => $sku,
+    //   'size' => $takeTwo,
+    //   'qty' => $take
+    // ];
 		}
+    $i++;
 	}
 foreach ($cartSkus as $sku){
 
@@ -69,19 +78,50 @@ $pass = getenv('Site_PASS');
 
     // Load main product
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE sku = ?");
-    $stmt->execute([$sku]);
+    $stmt->execute([$sku]); // Old code
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-    // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name=' . htmlspecialchars($sku) . '>-</button><span class="num" data-name=' . htmlspecialchars($take) . '>' . htmlspecialchars($take) . '</span><button class="plus" data-name=' . htmlspecialchars($sku) . '>+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
-    // echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button> <button onclick=buySingleFromCart(`'. json_encode($sku) . '`)>Buy</button> <button onclick=removeSingleFromCart(`' . json_encode($sku) . '`)>Remove</button></div></div>';
+    // foreach is new code
+    // foreach ($cartSkus as $item) {
+    // $stmt->execute([$item['sku']]); // New Code
+    // $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
 
-    echo '<div id="Cartcontents">' . $product['name'] . ' Size:' . $take . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button></div></div>';
+    // New code
+    // $skuBase = $item['sku'];
+    // if (str_ends_with($skuBase, '-XS') || str_ends_with($skuBase, '-S') || str_ends_with($skuBase, '-M') || str_ends_with($skuBase, '-L') || str_ends_with($skuBase, '-XL') || str_ends_with($skuBase, '-2XL') || str_ends_with($skuBase, '-3XL')) {
+    //   $skuBase = substr($skuBase, 0, strrpos($skuBase, '-'));
+    // }
+    // $stmt->execute([$skuBase]);
+
+    // New Code
+    // foreach ($cartSkus as $item) {
+    //   $sku = htmlspecialchars($item['sku']);
+    //   $takeTwo = htmlspecialchars($item['size']);
+    //   $take = (int)$item['qty'];
+    // }
+
+    // New Code
+    // if (!$product) {
+    //   echo "Product not found for SKU: " . htmlspecialchars($sku) . "<br>";
+    //   continue;
+    // }
+
+    // New Code
+    // var_dump($sku, $takeTwo, $take);
+
+    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
+    echo '<div id="Cartcontents">' . $product['name'] .'Size:'  . $takeTwo . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
+
+    // New Echo
+    // echo '<div id="Cartcontents">' . htmlspecialchars($product['name']) .'Size:'  . htmlspecialchars($item['size']) . ' ' . htmlspecialchars($product['price']) . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">-</button><span class="num">' . str_pad((int)$item['qty'], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
 
     echo '<hr>';
 }
+
 if($_COOKIE){
 echo "<div id='checkoutButton'><button id='checkoutBtn'data-cart='". json_encode($cartSkus) . "'>Checkout</button></div>";
+ 
 }else{
 echo "nothing here, get to shopping!";
 }
@@ -103,34 +143,39 @@ echo "nothing here, get to shopping!";
   // number counter
 const plus = document.querySelectorAll(".plus"),
 minus = document.querySelectorAll(".minus"),
-num = document.querySelectorAll(".num");
+num = document.querySelectorAll(".num"),
+p = document.querySelectorAll(".globalSize");
+
 
 plus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
      const itemID = btn.dataset.name;
+     const takeTwo = p[0].dataset.name;
+     const take = p[1].dataset.name;
 
      const cookieName = "CART_" + itemID;
-
+    alert(itemID)
     let value = getCookie(cookieName);
 
     let baseID = itemID;
 
-    let qty = 1;
+    let qty = take;
 
-  if (value) {
-    const parts = value.split("-");
-    const lastPart = parts.pop();
-    if  (!isNaN(lastPart)) {
-      qty = parseInt(lastPart);
-      baseID = parts.join("-");
-    }
-  }
+  // if (value) {
+  //   const parts = value.split("-");
+  //   const lastPart = parts.pop();
+  //   if  (!isNaN(lastPart)) {
+  //     qty = parseInt(lastPart);
+  //     baseID = parts.join("-");
+  //   }
+  // }
 
   if(qty < 10) {
   qty++;
-  const newValue = `${baseID}-${String(qty).padStart(2, "0")}`;
+  const newValue = `${baseID}-${takeTwo}-${String(qty).padStart(2, "0")}`;
 
   setCookie(cookieName, newValue, 365 * 3);
+
   location.reload();
   }
   });
@@ -139,25 +184,27 @@ plus.forEach((btn, index) => {
 minus.forEach((btn, index) => {
   btn.addEventListener("click", ()=> {
     const itemID = btn.dataset.name;
+    const takeTwo = p[0].dataset.name;
+    const take = p[1].dataset.name;
 
      const cookieName = "CART_" + itemID;
 
     let value = getCookie(cookieName);
     let baseID = itemID;
-    let qty = 1;
+    let qty = take;
 
-    if (value) {
-    const parts = value.split("-");
-    const lastPart = parts.pop();
-      if  (!isNaN(lastPart)) {
-      qty = parseInt(lastPart);
-      baseID = parts.join("-");
-    }
-  }
+  //   if (value) {
+  //   const parts = value.split("-");
+  //   const lastPart = parts.pop();
+  //     if  (!isNaN(lastPart)) {
+  //     qty = parseInt(lastPart);
+  //     baseID = parts.join("-");
+  //   }
+  // }
 
     if(qty > 1) {
   qty--;
-  const newValue = `${baseID}-${String(qty).padStart(2, "0")}`;
+  const newValue = `${baseID}-${takeTwo}-${String(qty).padStart(2, "0")}`;
 
   setCookie(cookieName, newValue, 365 * 3);
   location.reload();
