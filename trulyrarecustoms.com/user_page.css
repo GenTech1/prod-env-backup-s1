@@ -66,3 +66,13 @@ gap:10vw;
   box-sizing: border-box;
   background: palevioletred;
 }
+
+.popupContentWords{
+
+  color: black;
+  font-style: oblique;
+  font-variant: small-caps;
+
+
+} 
+  
