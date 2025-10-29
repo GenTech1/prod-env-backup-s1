@@ -54,16 +54,19 @@ foreach ($_COOKIE as $name => $value){
 
 
 		$cartSkus[] = $sku;
+    $cartTakeTwos[] = $takeTwo;
 
     // New Code
-		// $cartSkus[] = [
-    //   'sku' => $sku,
-    //   'size' => $takeTwo,
-    //   'qty' => $take
-    // ];
+		$skuObject[] = [
+      'sku' => $sku,
+      'size' => $takeTwo,
+      'qty' => $take
+    ];
+    echo $skuObject[$i]['sku'] . " Size:" . $skuObject[$i]['size'] . " Qty:" . $skuObject[$i]['qty'] . "<br>";  
 		}
     $i++;
 	}
+  $j=0;
 foreach ($cartSkus as $sku){
 
 // Load database credentials from environment
@@ -111,8 +114,8 @@ $pass = getenv('Site_PASS');
     // var_dump($sku, $takeTwo, $take);
 
     // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-    echo '<div id="Cartcontents">' . $product['name'] .'Size:'  . $takeTwo . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
-
+    echo '<div id="Cartcontents">' . $product['name'] .'Size:'  . $cartTakeTwos[$j] . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
+    $j++;
     // New Echo
     // echo '<div id="Cartcontents">' . htmlspecialchars($product['name']) .'Size:'  . htmlspecialchars($item['size']) . ' ' . htmlspecialchars($product['price']) . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">-</button><span class="num">' . str_pad((int)$item['qty'], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
 
@@ -153,8 +156,9 @@ plus.forEach((btn, index) => {
      const takeTwo = p[0].dataset.name;
      const take = p[1].dataset.name;
 
+    alert(takeTwo);
      const cookieName = "CART_" + itemID;
-    alert(itemID)
+
     let value = getCookie(cookieName);
 
     let baseID = itemID;
