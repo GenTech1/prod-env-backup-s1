@@ -53,17 +53,14 @@ foreach ($_COOKIE as $name => $value){
 
 
 
-		$cartSkus[] = $sku;
+		//$cartSkus[] = $sku;
 
     // New Code
-		// $cartSkus[] = [
-    //   'sku' => $sku,
-    //   'size' => $takeTwo,
-    //   'qty' => $take
-    // ];
+		$cartSkus[] = [$sku,$takeTwo,$take];
 		}
     $i++;
 	}
+
 foreach ($cartSkus as $sku){
 
 // Load database credentials from environment
@@ -78,7 +75,7 @@ $pass = getenv('Site_PASS');
 
     // Load main product
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE sku = ?");
-    $stmt->execute([$sku]); // Old code
+    $stmt->execute([$sku[0]]); // Old code
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // foreach is new code
@@ -111,8 +108,8 @@ $pass = getenv('Site_PASS');
     // var_dump($sku, $takeTwo, $take);
 
     // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-    echo '<div id="Cartcontents">' . $product['name'] .'Size:'  . $takeTwo . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
-
+    //echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $takeTwo . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
+    echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $sku[1] . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku[0]) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku[0]) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($sku[1]).'><p><p class="globalSize" data-name='.htmlspecialchars($sku[2]).'><p></div></div>';
     // New Echo
     // echo '<div id="Cartcontents">' . htmlspecialchars($product['name']) .'Size:'  . htmlspecialchars($item['size']) . ' ' . htmlspecialchars($product['price']) . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">-</button><span class="num">' . str_pad((int)$item['qty'], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
 
