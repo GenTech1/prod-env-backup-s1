@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <h1>Shirt Editor</h1>
       <p>Nathan was here</p>
+      <p>Nathan was here</p>
     </div>
   );
 }
