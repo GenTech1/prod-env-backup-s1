@@ -22,10 +22,20 @@ die("Connection failed " .$e->getMessage());
 foreach(explode(',', $skus) as $sku){
     $sku = trim($sku, '[""]' ); // removes quotes and spaces
   
+    //look up price from database
     $stmt = $pdo->prepare("SELECT name, price FROM Products WHERE sku = ?");
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
     $price += (float)$product['price'];
+
+    //remove sku from cookies/cart after purchase
+
+foreach ($_COOKIE as $name => $value) {
+    if ($value === $sku) {
+        setcookie($name, '', time() - 3600, '/'); // expire it
+    }
+}
+
 
     if (!$product) {
         echo "Product not found.";
@@ -47,11 +57,17 @@ try {
 }catch(PDOException $e){
 die("Connection failed " .$e->getMessage());
 }
-
+    //look up price from database
     $stmt = $pdo->prepare("SELECT name, price FROM Products WHERE sku = ?");
     $sku = trim($sku, "\"' "); // removes quotes and spaces
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    //remove sku from cookies/cart after purchase
+foreach ($_COOKIE as $name => $value) {
+    if ($value === $sku) {
+        setcookie($name, '', time() - 3600, '/'); // expire it
+    } 
 
 
 

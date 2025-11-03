@@ -53,10 +53,6 @@ foreach ($_COOKIE as $name => $value){
     $sku = implode("-", $break);
 
 
-
-		//$cartSkus[] = $sku;
-
-    // New Code
 		$cartSkus[] = [$sku,$takeTwo,$take];
 		}
     $i++;
@@ -78,42 +74,8 @@ $pass = getenv('Site_PASS');
     $stmt->execute([$sku[0]]); // Old code
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // foreach is new code
-    // foreach ($cartSkus as $item) {
-    // $stmt->execute([$item['sku']]); // New Code
-    // $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
-
-    // New code
-    // $skuBase = $item['sku'];
-    // if (str_ends_with($skuBase, '-XS') || str_ends_with($skuBase, '-S') || str_ends_with($skuBase, '-M') || str_ends_with($skuBase, '-L') || str_ends_with($skuBase, '-XL') || str_ends_with($skuBase, '-2XL') || str_ends_with($skuBase, '-3XL')) {
-    //   $skuBase = substr($skuBase, 0, strrpos($skuBase, '-'));
-    // }
-    // $stmt->execute([$skuBase]);
-
-    // New Code
-    // foreach ($cartSkus as $item) {
-    //   $sku = htmlspecialchars($item['sku']);
-    //   $takeTwo = htmlspecialchars($item['size']);
-    //   $take = (int)$item['qty'];
-    // }
-
-    // New Code
-    // if (!$product) {
-    //   echo "Product not found for SKU: " . htmlspecialchars($sku) . "<br>";
-    //   continue;
-    // }
-
-    // New Code
-    // var_dump($sku, $takeTwo, $take);
-
-    // echo "<div id='Cartcontents'>" . $product['name'] . " Size:$take " .$product['price'] . "<div id='Cartbuttons'> <button class='minus' data-name="' . htmlspecialchars($sku) . '">-</button> <span class='num'>01</span> <button class='plus'>+</button> <button onclick='buySingleFromCart(`". json_encode($sku) . "`)'>Buy</button> <button  onclick='removeSingleFromCart(`". json_encode($sku) . "`)'>Remove</button></div></div>";
-    //echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $takeTwo . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku) . '">-</button><span class="num">' . str_pad($take, 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
-    echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $sku[1] . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku[0]) . '">-</button><span class="num">' . str_pad($sku[2], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku[0]) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($sku[1]).'><p><p class="globalCount" data-name='.htmlspecialchars($sku[2]).'><p></div></div>';
+ echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $sku[1] . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku[0]) . '">-</button><span class="num">' . str_pad($sku[2], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku[0]) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($sku[1]).'><p><p class="globalCount" data-name='.htmlspecialchars($sku[2]).'><p></div></div>';
     $total = $total + $take * $product['price'];
-
-    // New Echo
-    // echo '<div id="Cartcontents">' . htmlspecialchars($product['name']) .'Size:'  . htmlspecialchars($item['size']) . ' ' . htmlspecialchars($product['price']) . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">-</button><span class="num">' . str_pad((int)$item['qty'], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($item['sku'] . '-' . $item['size']) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($takeTwo).'><p><p class="globalSize" data-name='.htmlspecialchars($take).'><p></div></div>';
 
     echo '<hr>';
 }
@@ -197,7 +159,7 @@ minus.forEach((btn, index) => {
     let qty = take;
     qty = Number(qty);
 
-  if(qty < 10) {
+  if(qty > 1) {
   qty--;
   const newValue = `${baseID}-${takeTwo}-${String(qty).padStart(2, "0")}`;
 

@@ -240,3 +240,17 @@ font-size: 14px;
 background-color: palevioletred;
 transition: border .3s ease, background-color .3s ease;
 }
+.emsb:hover{
+    background-color: white;
+    color: palevioletred;
+    cursor: pointer;
+} 
+.emb:hover{
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+}
+a:hover{
+    color: palevioletred !important;
+    cursor: pointer;
+}

@@ -63,6 +63,10 @@ text-align: left;
   animation: scrollText 15s linear infinite;
   font-size: 1.5em;
 }
+.ctaButton:hover {
+  background-color: palevioletred;
+  color: white;
+}
 
 @keyframes scrollText {
   0% {
