@@ -120,7 +120,7 @@ echo '</div>';
 <div id="content">
        
 Welcome back!
-</div>
+</div> 
 
 
 
