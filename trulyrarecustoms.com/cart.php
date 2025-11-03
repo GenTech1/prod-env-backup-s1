@@ -118,10 +118,12 @@ $pass = getenv('Site_PASS');
     echo '<hr>';
 }
 $shipping= 5.99; // Flat rate shipping
-$tax= $total * 0.07; // 7% tax
+$tax= $total * 100 * 0.07; // 7% tax
+$tax= $tax / 100;
 $tax= number_format((float)$tax, 2, '.', '');
 $total= $total + $tax;
 $total= number_format((float)$total, 2, '.', '');
+$total= $total + $shipping;
 if($_COOKIE){
 echo "<div id='checkoutHeader'>";
 echo "<div id='checkoutButton'><button id='checkoutBtn'data-cart='". json_encode($cartSkus) . "'>Checkout</button></div>";
