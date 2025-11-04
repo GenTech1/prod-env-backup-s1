@@ -77,8 +77,8 @@ if (event.target.classList.contains("edit-button")) {
 <option value="yes">Yes</option>
 <option value="no">No</option>
 </select><br/><br/>
-    <button class="emsb" type="button" class="catEditDelete">Delete</button>
-    <button class="emb" type="button" class="catEditCancel">Cancel</button>
+    <button type="button" class="catEditDelete">Delete</button>
+    <button type="button" class="catEditCancel">Cancel</button>
     <button class="emsb" class="catEditSubmit" type="submit">Submit</button>
   </form>
 </div>
@@ -131,7 +131,7 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button class="emb" type="button" class="catEditCancel">Cancel</button>
+<button  type="button" class="catEditCancel">Cancel</button>
 <button class="emsb"class="classEditSubmit" type="submit">Submit</button>
         </form>
 </div>
@@ -201,8 +201,8 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button class="emsb" type="button" class="catEditDelete">Delete</button>
-<button class="emb" type="button" class="catEditCancel">Cancel</button>
+<button type="button" class="catEditDelete">Delete</button>
+<button type="button" class="catEditCancel">Cancel</button>
 <button class="emsb"class="catEditSubmit" type="submit">Submit</button>
         </form>
 	</div>
@@ -296,7 +296,7 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button class="emb" type="button" class="catEditCancel">Cancel</button>
+<button type="button" class="catEditCancel">Cancel</button>
 <button class="emsb" class="catEditSubmit" type="submit">Submit</button>
         </form>
 	</div>
