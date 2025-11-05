@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="css/development.css">
-    <title>Zax|Development</title>
+    <title>Zax | Development</title>
 </head>
 <body> 
     <section class="top-section">
@@ -16,11 +16,12 @@
 
         <div class="overlay-content">
             <nav>
+            <nav>
                 <ul class="navbar">
-                    <li><a href="index.php">Home Page</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="development.php">Development</a></li>
-                    <li><a href="#">Gaming</a></li>
-                    <li><a href="#">Workstations</a></li>
+                    <li><a href="gaming.php">Gaming</a></li>
+                    <li><a href="workstations.php">Workstations</a></li>
                 </ul>
             </nav>
     

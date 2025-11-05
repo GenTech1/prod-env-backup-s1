@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/book.css">
-    <title>Zax|Book A Consultation</title>
+    <title>Zax | Book A Consultation</title>
 </head>
 <body>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="development.php">Development</a></li>
+                    <li><a href="gaming.php">Gaming</a></li>
+                    <li><a href="workstations.php">Workstations</a></li>
+                </ul>
+            </nav>
     <form>
         <h1>Book A Consultation</h1>
         <input type="text" placeholder="Name" id="name" name="name" required>
