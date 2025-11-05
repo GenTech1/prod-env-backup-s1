@@ -7,6 +7,14 @@
     <title>Zax</title>
 </head>
 <body>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="development.php">Development</a></li>
+                    <li><a href="gaming.php">Gaming</a></li>
+                    <li><a href="workstations.php">Workstations</a></li>
+                </ul>
+            </nav>
 <svg height="100vh" width="100vw">
     <rect height="100vh" width="100vw" fill="#002a49" opacity="60%" />
 </svg>

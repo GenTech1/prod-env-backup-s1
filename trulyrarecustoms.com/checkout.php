@@ -76,7 +76,7 @@ foreach ($_COOKIE as $name => $value) {
         exit;
     }
   }
-
+}
 ?>
 
 <!DOCTYPE html>
