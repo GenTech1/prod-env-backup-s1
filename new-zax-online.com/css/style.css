@@ -1,0 +1,56 @@
+#HbMenu{
+    display:none;
+    
+}
+/*navigation bar*/
+#nav {
+    display:flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 100;
+}
+
+.navbar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #c0e5ff;
+}
+@media(max-width: 767px){
+#HbMenu{
+    display:block;
+    position: relative;
+    color: #fff;
+    padding-left: 2vw;
+    text-decoration: none;
+    font-size: 6vw;
+    z-index:100 
+}
+#nav{
+display: none;
+position: absolute;
+ flex-direction: column;
+ justify-content: center;
+align-items: center;
+right: 38vw;
+background-color: black;
+
+}
+svg{
+    z-index:1;
+}
+}

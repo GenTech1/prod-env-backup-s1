@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="css/development.css">
     <title>Zax | Development</title>
@@ -15,15 +17,17 @@
         </video>
 
         <div class="overlay-content">
-            <nav>
-            <nav>
-                <ul class="navbar">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="development.php">Development</a></li>
-                    <li><a href="gaming.php">Gaming</a></li>
-                    <li><a href="workstations.php">Workstations</a></li>
-                </ul>
+       <body>
+            <a href="#" class="fa fa-bars" id="HbMenu"></a>
+                      <nav class="navbar" id="nav">
+             
+                    <a href="index.php">Home</a>
+                    <a href="development.php">Development</a>
+                    <a href="gaming.php">Gaming</a>
+                    <a href="workstations.php">Workstations</a>
+                
             </nav>
+
     
             <div class="content"> <!-- content is hero-text -->
                 <div class="content-left">
@@ -75,5 +79,6 @@
             </div>
         </div>
     </section>
+<script src="js/script.js"></script>
 </body>
 </html>
