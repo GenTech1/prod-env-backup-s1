@@ -1,0 +1,9 @@
+SetEnv Site_USER Zax_site
+SetEnv Site_PASS .RKBvA]U[NF2jAjJ
+SetEnv AD_USER Trc_pm
+SetEnv AD_PASS	8Yoz41kY1POxex8u
+SetEnv DATABASE_HOST localhost
+SetEnv Products_DB zax_products
+SetEnv research_reports_DB zax_research_reports
+SetEnv Messages_DB zax_messages
+SetEnv Users_DB Trc_Users

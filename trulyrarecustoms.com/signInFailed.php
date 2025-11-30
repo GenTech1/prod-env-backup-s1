@@ -52,7 +52,6 @@
 
 
     </main>
-    <script src="signIn.js"></script>
   </body>
   <footer>
     <div class="blackback"

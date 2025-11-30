@@ -9,13 +9,13 @@
     <title>Zax</title>
 </head>
 <body>
-            <a href="#" class="fa fa-bars" id="HbMenu"></a>
+            <!-- <a href="#" class="fa fa-bars" id="HbMenu"></a>
                       <nav class="navbar" id="nav">
              
                     <a href="index.php">Home</a>
                     <a href="development.php">Development</a>
                     <a href="gaming.php">Gaming</a>
-                    <a href="workstations.php">Workstations</a>
+                    <a href="workstations.php">Workstations</a> -->
                 
             </nav>
 <svg id="svg"height="100vh" width="100vw">
@@ -26,7 +26,7 @@
 <div id="mainText">
 <h1 id="yellowH">Grow Your</h1>
 <h1 id="whiteH">Business</h1>
-<button>Book Your Consultation</button>
+<button id="book" onclick="book()">Book Your Consultation</button>
 </div>
 <script src="js/script.js"></script>
 </body>

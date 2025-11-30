@@ -20,7 +20,12 @@ pic.addEventListener("click", function(e) {
 });
 buy.addEventListener("submit", (e) =>{
 e.preventDefault();
+    if (!sizePicked) {
+        e.preventDefault();
+        alert("No size was picked!");
+    }else{
 window.location.assign(checkoutURL);
+    }
 });
 
 document.getElementById("cartBtn").addEventListener("click", function (e){

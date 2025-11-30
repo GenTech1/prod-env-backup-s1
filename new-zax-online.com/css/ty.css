@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #002a49;
+    color: white;
+    overflow: hidden;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#mainText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+}
+
+#yellowH {
+    color: #FFD700; /* Bright yellow */
+    font-size: 3em;
+    margin: 0.2em 0;
+}
+
+#whiteH {
+    font-size: 1.5em;
+    margin: 0.5em 0 2em 0;
+}
+
+#homeBtn {
+    background-color: #FFD700;
+    border: none;
+    color: #002a49;
+    font-size: 1em;
+    padding: 0.8em 2em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#homeBtn:hover {
+    background-color: #FFC107;
+}

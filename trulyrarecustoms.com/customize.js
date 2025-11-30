@@ -7,7 +7,7 @@ let items = document.getElementsByName("items")[0];
 let deadline = document.getElementsByName("deadline")[0];
 let consultation_time = document.getElementsByName("consultation_time")[0];
 let details = document.getElementsByName("details")[0];
-let submit = document.getElementsByName("submit")[0];
+let submit = document.getElementsByName("submitNoOne")[0];
 
 submit.addEventListener("click", function(event) {
     let phone = document.getElementsByName("phone")[0].value.trim();

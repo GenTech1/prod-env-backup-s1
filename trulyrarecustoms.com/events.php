@@ -42,6 +42,13 @@
       <div class="text-banner">
   <p>✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨✨ FOLLOW US TO STAY IN THE LOOP✨</p>
 </div>
+
+<div id="Subscribe">
+  <h1>Become a rare human</h1>
+  <form  id="marketingForm" action="/membership.php" method="POST">
+      <input class="emsb" id="emailSubmit" type="submit" value="Subscribe"/>
+    </form>
+</div>
 <div class="svg-banner">
   <div class="svg-track">
     <svg class="square"><rect width="100vw" height="100vw" fill="palevioletred"/></svg>
@@ -75,7 +82,8 @@ The alcohol included with these events are 100% optional, making these creative 
 
 <h1>Private Sip & Create Events</h1>
 <h2>Open to the public...</h2>
-Wa nt to experience a privtae Sop & Create session The alcohol included with these events are 100% optional, making these creative pow wows all age friendly!
+Want to experience a privtae Sop & Create session The alcohol included with these events are 100% optional, making these creative pow wows all age friendly!
+
 
 </div>
 <div class="text-banner">

@@ -144,6 +144,7 @@ height:20vw;
 .product{
  display:flex;
  flex-direction:row;
+ gap:5vw;
 }
 
 #socials {
@@ -210,6 +211,14 @@ height:20vw;
 #socials a:hover::after {
   transform: translate(-50%, -42px) rotate(0);
   opacity: 1;
+}
+#Subscribe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
 }
 
 .em{

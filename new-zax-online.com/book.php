@@ -15,7 +15,8 @@
                     <li><a href="workstations.php">Workstations</a></li>
                 </ul>
             </nav>
-    <form>
+
+    <form action="submit_booking.php" method="POST">
         <h1>Book A Consultation</h1>
         <input type="text" placeholder="Name" id="name" name="name" required>
         <label for ="name">Name</label>
@@ -23,11 +24,12 @@
         <label for="email">Email</label>
         <input type="tel" id="phone" placeholder="Phone" name="phone" required>
         <label for="phone">Phone</label>
-        <input type="date" id="date" placeholder="Date" required>
+        <p for="date">Info about consultation:</p>
+        <input type="date" id="date" placeholder="Date" name="date" required>
 
-        <input type="time" id="time" name="time" required>
+        <input type="time" id="time" name="time" name="time" required>
 
-        <select id="service" name="service" required>
+        <select id="service" name="service" name="service" required>
             <option value="" disabled selected>Select Service</option>
             <option value="Development">Development</option>
             <option value="Gaming">Gaming</option>
@@ -35,5 +37,6 @@
         </select>
 
         <button id="submit" type="submit">Submit</button>
+    </form>
 </body>
 </html>

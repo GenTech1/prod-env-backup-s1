@@ -10,6 +10,7 @@ SetEnv KLAVIYO_LIST_ID_CUSTOMIZE your_customize_list_id_here
 
 SetEnv KLAVIYO_LIST_ID_EMAIL your_email_list_id_here
 SetEnv KLAVIYO_LIST_ID_SMS TwjcvE
+SetEnv KLAVIYO_MEMBER_LIST Rpz9qS
 	
 SetEnv CLIENT_NOTIFICATION_EMAIL trulyrarecustoms@gmail.com
 
@@ -20,6 +21,8 @@ SetEnv AD_PASS	8Yoz41kY1POxex8u
 SetEnv DATABASE_HOST localhost
 SetEnv Products_DB Trc_Products
 SetEnv Messages_DB Trc_messages
+SetEnv Memberships_DB Trc_memberships
+SetEnv Categories_DB Trc_site
 SetEnv Users_DB Trc_Users
 
 SetEnv SQUARE_APP_ID sandbox-sq0idb-zKy30zInLQNZYxAuWIIvSA

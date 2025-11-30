@@ -55,6 +55,7 @@ try {
 	exit;
 }else{
 header('Location: signInFailed.php');
+
 exit;
 }
 }catch(PDOException $e){

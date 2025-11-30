@@ -6,6 +6,7 @@ $pass = getenv('AD_PASS');
 $productsdb = getenv('Products_DB');
 $usersdb = getenv('Users_DB');
 $messagesdb = getenv('Messages_DB');
+$sitedb = getenv('Categories_DB');
 
 
 
@@ -40,6 +41,13 @@ switch ($section) {
 	}
    $sql = "Select * FROM customs UNION Select * FROM contact";
 	break;
+    case 'site':
+	$conn = new mysqli($host, $user, $pass, $sitedb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+   $sql = "SELECT * FROM headers";
+	break;
   default:
     echo "Invalid section.";
     exit;
@@ -48,7 +56,11 @@ switch ($section) {
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+  echo "<div class='record'>";
+      echo "<button class='edit-button' id='add_" . $section . "' >Add New " . ucfirst($section) . "</button>";
+      echo "</div>";
   while ($row = $result->fetch_assoc()) {
+
 
     // Start record div with data attributes
     echo "<div class='record' id='product_{$row['id']}'";
@@ -63,7 +75,13 @@ if ($result->num_rows > 0) {
 
     // Visible output
     foreach ($row as $key => $value) {
-      echo "<div><strong>$key:</strong> $value</div>";
+      if ($key === 'password_hash') {
+        // For security, do not display password hashes
+        echo "<div><strong>$key:</strong> ********</div>";
+     
+      }else {
+         echo "<div><strong>$key:</strong> $value</div>";
+      }
     }
 
     // Add edit button

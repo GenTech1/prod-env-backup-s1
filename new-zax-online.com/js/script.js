@@ -13,3 +13,10 @@ if(nav.style.display === "flex"){
 
 }
 });
+
+function book(){
+    window.location.href = "book.php";
+}
+function shop(){
+    window.location.href = "shop.php";
+}

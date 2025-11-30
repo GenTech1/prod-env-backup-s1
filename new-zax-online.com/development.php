@@ -11,6 +11,7 @@
     <title>Zax | Development</title>
 </head>
 <body> 
+    
     <section class="top-section">
         <video autoplay muted loop id="bg-video">
             <source src="../images/spaceEarth.mp4" type="video/mp4">
@@ -44,39 +45,46 @@
     </section>
 
     <section class="bottom-section">
+        
         <div class="card-container d-flex justify-content-center gap-4 flex-wrap">
-            <div class="card text-bg-dark custom-card">
-                <img src="../images/computerSet.jpg" class="card-img" alt="Computer set">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Research Report </h5>
-                            <div class="card-hover-text">
-                                <p class="card-text">Hi world</p>
-                                <p class="card-text">The peanuts crew was here</p>
-                            </div>
-                    </div>
-            </div>
+        <?php
 
-            <div class="card text-bg-dark custom-card">
-                <img src="../images/computerSet.jpg" class="card-img" alt="Computer set">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Research Report </h5>
-                            <div class="card-hover-text">
-                                <p class="card-text">Hi world</p>
-                                <p class="card-text">The peanuts crew was here</p>
-                            </div>
-                    </div>
-            </div>
+$host = getenv('DATABASE_HOST');
+$dbname = getenv('research_reports_DB');
+$user = getenv('Site_USER');
+$pass = getenv('Site_PASS');
 
-            <div class="card text-bg-dark custom-card">
-                <img src="../images/computerSet.jpg" class="card-img" alt="Computer set">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title">Research Report </h5>
-                            <div class="card-hover-text">
-                                <p class="card-text">Hi world</p>
-                                <p class="card-text">The peanuts crew was here</p>
-                            </div>
-                    </div>
-            </div>
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+try {
+    // Using query() since we’re selecting everything
+    $stmt = $pdo->query("SELECT * FROM reports");
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
+
+foreach ($products as $product):
+    echo '<div class="card text-bg-dark custom-card">';
+        echo '<img src="../images/computerSet.jpg" class="card-img" alt="Computer set">';
+            echo '<div class="card-img-overlay">';
+                echo '<h5 class="card-title">Research Report</h5>';
+                    echo '<div class="card-hover-text">';
+                        echo '<p class="card-text">'.$product["Name"].'</p>';
+                        echo '<p class="card-text">'.$product["Preview"].'</p>';
+                    echo '</div>';
+            echo '</div>';
+    echo '</div>';
+endforeach;
+?>
+
+
+
         </div>
     </section>
 <script src="js/script.js"></script>
