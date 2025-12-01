@@ -26,30 +26,34 @@
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <div className="all">
-    <div className="section contact-section">
+    <div class="all">
+    <div class="section contact-section">
       <h1>Contact</h1>
 
-      <div className="contact-content">
+      <div class="contact-content">
 
-        <div className="contact-info">
-          <p className="placeholder-line"></p>
-          <p className="placeholder-line"></p>
-          <p className="placeholder-line short"></p>
-          <p className="placeholder-line"></p>
-          <p className="placeholder-line"></p>
+        <div class="contact-info">
+          <p class="placeholder-line">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ullamcorper ante vestibulum erat bibendum tincidunt. Suspendisse condimentum urna magna, nec hendrerit risus maximus et. Duis sed tempor risus. Praesent non sapien elementum, mattis leo eu, feugiat arcu. Etiam eu leo commodo, suscipit felis convallis, porttitor risus. Vivamus auctor dui hendrerit neque tempor mattis. Sed tristique nibh id tincidunt facilisis. Phasellus et ultrices est. In blandit erat nec orci aliquet, ut feugiat sapien mollis. Nulla felis sem, efficitur a enim in, rhoncus efficitur massa.
+          </p>
+          <p class="placeholder-line">hi</p>
+          <p class="placeholder-line short">Hello</p>
+          <p class="placeholder-line">Welcome</p>
+          <p class="placeholder-line">Hi World</p>
         </div>
 
-        <div className="contact-image-placeholder"></div>
+        <div class="contact-image-placeholder">
+          <img src="" alt="Mug Icon" />
+        </div>
       </div>
 
 
-      <form className="contact-form">
-        <input type="text" placeholder="Your Name" className="form-input" />
-        <input type="email" placeholder="Your Email" className="form-input" />
-        <textarea placeholder="Your Message" className="form-textarea"></textarea>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" class="form-input" />
+        <input type="email" placeholder="Your Email" class="form-input" />
+        <textarea placeholder="Your Message" class="form-textarea"></textarea>
 
-        <button className="primary-btn">Submit</button>
+        <button class="primary-btn">Submit</button>
       </form>
     </div>
     </div>
