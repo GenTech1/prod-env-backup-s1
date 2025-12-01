@@ -4,3 +4,22 @@
     flex-direction: column;
     gap: 1vw;
 }
+
+.contact-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+/* img box */
+.contact-image-placeholder {
+    display: flex;
+    justify-self: flex-end;
+    width: 170vw;
+    height: 30vw;
+    border: 2px solid #d98b8f;
+    border-radius: 4px;
+}
+
+/* button layout */
