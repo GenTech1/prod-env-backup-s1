@@ -10,9 +10,9 @@
       content="Web site created using create-react-app"
     />
  
-          <title>Coffee Cups & Mugs</title>
+          <title>Omni Essentials</title>
     <link rel="stylesheet" href="public/css/App.css" />
-    <link rel="stylesheet" href="public/css/index.css" />
+    <link rel="stylesheet" href="public/css/contact.css" />
   </head>
   <body>
           <header class="navbar">
@@ -26,11 +26,39 @@
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  
+    <div className="all">
+    <div className="section contact-section">
+      <h1>Contact</h1>
 
+      <div className="contact-content">
+
+        <div className="contact-info">
+          <p className="placeholder-line"></p>
+          <p className="placeholder-line"></p>
+          <p className="placeholder-line short"></p>
+          <p className="placeholder-line"></p>
+          <p className="placeholder-line"></p>
+        </div>
+
+        <div className="contact-image-placeholder"></div>
+      </div>
+
+
+      <form className="contact-form">
+        <input type="text" placeholder="Your Name" className="form-input" />
+        <input type="email" placeholder="Your Email" className="form-input" />
+        <textarea placeholder="Your Message" className="form-textarea"></textarea>
+
+        <button className="primary-btn">Submit</button>
+      </form>
+    </div>
+    </div>
       <section class="signup-section">
-              <button class="btn light">Sign Up</button>
+
           </section>
       </div>
   </body>
 </html>
+
+
+

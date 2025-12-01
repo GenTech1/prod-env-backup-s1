@@ -10,9 +10,9 @@
       content="Web site created using create-react-app"
     />
  
-          <title>Coffee Cups & Mugs</title>
+          <title>Omni Essentials</title>
     <link rel="stylesheet" href="public/css/App.css" />
-    <link rel="stylesheet" href="public/css/about.css" />
+    <link rel="stylesheet" href="public/css/index.css" />
   </head>
   <body>
           <header class="navbar">
@@ -25,35 +25,11 @@
         </nav>
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="all">
-    <section class="about-section">
 
-      <div class="about-wrapper">
+  
 
-        <div class="about-text">
-          <h1>About</h1>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p>Suspendisse potenti. Donec accumsan risus ut felis euismod.</p>
-          <p>Integer vel dui vitae lacus malesuada hendrerit.</p>
-          <p>Etiam quis nisl tincidunt, dignissim libero nec, varius arcu.</p>
-
-        </div>
-
-        <div class="about-image box"></div>
-
-      </div>
-
-      <div class="about-lower">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <p>Morbi pharetra lorem non turpis suscipit egestas.</p>
-        <p>Donec condimentum libero eget nisl gravida aliquet.</p>
-      </div>
-
-    </section>
-    </div>
       <section class="signup-section">
-              <button class="btn light">Sign Up</button>
+
           </section>
       </div>
   </body>

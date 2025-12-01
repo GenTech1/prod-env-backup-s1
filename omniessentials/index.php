@@ -10,7 +10,7 @@
       content="Web site created using create-react-app"
     />
  
-          <title>Coffee Cups & Mugs</title>
+          <title>Omni Essentials</title>
     <link rel="stylesheet" href="public/css/App.css" />
     <link rel="stylesheet" href="public/css/index.css" />
   </head>
@@ -29,8 +29,8 @@
                 <div class="all">
         <section class="home-section">
           <div class="hero-text">
-              <h1>Coffee Cups<br />& Mugs</h1>
-              <p>Shop our collection of coffee cups and mugs with unique designs.</p>
+              <h1>The Perfect<br />Gift</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla </p>
               <button class="btn"onclick="window.location.href='shop.php'">Shop Now</button>
           </div>
 
@@ -43,9 +43,28 @@
               <h2 class="featuredName">Featured Products</h2>
 
               <div class="product-grid">
-                  <div class="product box"></div>
-                  <div class="product box"></div>
-                  <div class="product box"></div>
+                <?php
+                $host = getenv('DATABASE_HOST');
+                $dbname = getenv('Products_DB');
+                $user = getenv('Site_USER');
+                $pass = getenv('Site_PASS');
+                try{
+                  $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
+                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                  $stmt = $conn->prepare("SELECT * FROM Products where tags like '%featured%'");
+                  $stmt->execute();
+                  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                  foreach($result as $row){
+                    echo '<div class="product box">';
+                    echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
+                    echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
+                    echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
+                    echo '</div>';
+                  }
+                }catch(PDOException $e){
+                  echo "Connection failed: " . $e->getMessage();
+                }
+                  ?>
               </div>
           </section>
           
@@ -60,7 +79,7 @@
           </section>
 
       <section class="signup-section">
-              <button class="btn light">Sign Up</button>
+
           </section>
       </div>
   </body>

@@ -1,0 +1,12 @@
+.shop-content {
+    display: flex;
+    justify-self: right;
+    flex-direction: row;
+    gap: 10vw;
+    margin-right: 10vw;;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
