@@ -89,10 +89,32 @@
 </div>
 <?php
 $host = getenv('DATABASE_HOST');
+$dbForCategories = getenv('Categories_DB');
 $dbname = getenv('Products_DB');
 $user = getenv('Site_USER');
 $pass = getenv('Site_PASS');
 
+//get categoties from database
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbForCategories;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+try {
+    $index = 0;
+    $stmt = $pdo->prepare("SELECT * FROM headers where page = 'index'");
+    $stmt->execute();
+    $titles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($titles as $row) {
+
+      ${"header_" . $index} = $row;
+      $index++;
+    }
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
@@ -103,14 +125,14 @@ try {
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
-    $stmt->execute(['%Truly Rareland Collection%']);
+    $stmt->execute(["%" . $header_0['Name'] . "%"]);
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
 try {
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
-    $stmt->execute(['%Event%']);
+    $stmt->execute(["%" . $header_1['Name'] . "%"]);
     $productsEvents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
@@ -123,7 +145,7 @@ try {
       </div>
       <!--Store Caroucels-->
 <div class="storeCaroucel">
-<h1>Truly Rareland Collection</h1>
+<?php echo "<h1>".$header_0['Name']."</h1>"; ?>
 <div class="product">
     <?php foreach ($products as $product): ?>
         <?php $images = array_values(json_decode($product['image'], true));
@@ -146,7 +168,7 @@ try {
 </svg>
 </div>
 <div class="storeCaroucel">
-<h1>Events</h1>
+<?php echo "<h1>".$header_1['Name']."</h1>"; ?>
 <div class="product">
     <?php foreach ($productsEvents as $product): ?>
         <?php $images = array_values(json_decode($product['image'], true));

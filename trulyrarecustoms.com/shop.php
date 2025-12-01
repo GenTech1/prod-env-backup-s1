@@ -38,23 +38,36 @@
   </head>
 
   <body>
-    <!--Caroucel-->
-    <main>
-<div id="servicesBanner">
-<svg id="bannerSVG">
-  <rect id="bannerRect"  fill="palevioletred"></rect>
-</svg>
-</div>
-<div class="storeCaroucel">
-<h1>Off the Rack Gear</h1>
+
 
 
 <?php
 $host = getenv('DATABASE_HOST');
+$dbForCategories = getenv('Categories_DB');
 $dbname = getenv('Products_DB');
 $user = getenv('Site_USER');
 $pass = getenv('Site_PASS');
 
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbForCategories;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+try {
+    $index = 0;
+    $stmt = $pdo->prepare("SELECT * FROM headers where page = 'shop'");
+    $stmt->execute();
+    $titles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($titles as $row) {
+
+      ${"header_" . $index} = $row;
+      $index++;
+    }
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
@@ -65,19 +78,24 @@ try {
 
 try {
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
-    $stmt->execute(['%Off The Rack%']);
+    $stmt->execute(["%" . $header_0['Name'] . "%"]);
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
 try {
     $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
-    $stmt->execute(['%Custom%']);
+    $stmt->execute(["%" . $header_1['Name'] . "%"]);
       $productCustom = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
+
 ?>
+    <!--Caroucel-->
+    <main>
+<div class="storeCaroucel">
+<?php echo "<h1>".$header_0['Name']."</h1>"; ?>
 <div class="productContainer">
 <div class="product">
     <?php foreach ($products as $product): ?>
@@ -98,7 +116,7 @@ try {
 </div>
 
 <div class="storeCaroucel">
-<h1>Custom Designs</h1>
+<?php echo "<h1>".$header_1['Name']."</h1>"; ?>
 <div class="product">
 
     <?php foreach ($productCustom as $product): ?>

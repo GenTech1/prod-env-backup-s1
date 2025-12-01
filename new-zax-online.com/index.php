@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/index.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Zax</title>
 </head>
 <body>
-            <nav>
-                <ul class="navbar">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="development.php">Development</a></li>
-                    <li><a href="gaming.php">Gaming</a></li>
-                    <li><a href="workstations.php">Workstations</a></li>
-                </ul>
+            <!-- <a href="#" class="fa fa-bars" id="HbMenu"></a>
+                      <nav class="navbar" id="nav">
+             
+                    <a href="index.php">Home</a>
+                    <a href="development.php">Development</a>
+                    <a href="gaming.php">Gaming</a>
+                    <a href="workstations.php">Workstations</a> -->
+                
             </nav>
-<svg height="100vh" width="100vw">
-    <rect height="100vh" width="100vw" fill="#002a49" opacity="60%" />
+<svg id="svg"height="100vh" width="100vw">
+    <rect id="overlay" height="100vh" width="100vw" fill="#002a49" opacity="0.6" />
+
 </svg>
+
 <div id="mainText">
 <h1 id="yellowH">Grow Your</h1>
 <h1 id="whiteH">Business</h1>
-<button>Book Your Consultation</button>
+<button id="book" onclick="book()">Book Your Consultation</button>
 </div>
-
+<script src="js/script.js"></script>
 </body>
 </html>

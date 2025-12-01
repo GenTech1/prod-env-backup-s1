@@ -24,6 +24,7 @@ sendCategory("orders");
 });
 });
 
+
 function sendCategory(section){
 fetch('categories.php', {
 method: 'POST',
@@ -38,6 +39,68 @@ body: 'section=' + encodeURIComponent(section)
 document.getElementById('content').innerHTML = html;
 })
 }
+
+
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "add_products") {
+    const el = document.getElementById('content');  
+         el.insertAdjacentHTML("afterbegin", `
+<br/><br/>
+<div id="popupScrollWrapper">
+<div id="promptText">
+  <h1>Edit</h1>
+
+  <form class="popupContentWords" action="/adminProductAdd.php" method="POST" enctype="multipart/form-data">
+ <input type="hidden" name="id">
+ <label for="name">Name:</label><br/>
+    <input class="emb" type="text" name="name" placeholder="name" required><br/><br/>
+    <label for="description">Description:</label><br/>
+ <input class="emb" type="text" name="description" placeholder="description" required><br/><br/>
+ <input type="hidden" class="emb" type="tel" name="image" placeholder="image"><br/><br/>
+   <input type="file" name="file0">
+<input type="file" name="file1">
+<input type="file" name="file2">
+<input type="file" name="file3">
+<input type="file" name="file4">
+<input type="file" name="file5">
+<input type="file" name="file6">
+<input type="file" name="file7">
+<input type="file" name="file8">
+<input type="file" name="file9"><br/><br/>
+  <label for="price">Price:</label><br/>
+  <input class="emb" type="tel" name="price" placeholder="19.99" required><br/><br/>
+  <label for="currency">Currency:</label><br/>
+ <input class="emb" type="tel" name="currency" placeholder="USD" required><br/><br/>
+  <label for="sku">SKU:</label><br/>
+  <input class="emb" type="text" name="sku" placeholder="SHIRT-001-BLUE" required><br/><br/>
+  <label for="tags">Tags:</label><br/>
+ <input class="emb" type="text" name="tags" placeholder="tags" required><br/><br/>
+  <label for="stock">Stock (JSON format):</label><br/>
+<input class="emb" type="text" name="stock" value='{ "XS": 0, "S": 0, "M": 0, "L": 0, "XL": 0, "2XL": 0, "3XL": 0 }' placeholder="{ "XS": 0, "S": 0, "M": 0, "L": 0, "XL": 0, "2XL": 0, "3XL": 0 }" required><br/><br/>
+<p>visible?</p>
+ <select class="emb" type="tel" name="visible">
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select><br/><br/>
+
+    <button type="button" class="catEditCancel">Cancel</button>
+    <button class="emsb" class="catEditSubmit" type="submit">Submit</button>
+  </form>
+</div>
+</div>  
+`);
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
+  }
+});
 document.body.addEventListener("click", (event) => {
 if (event.target.classList.contains("edit-button")) {
   const itemId = event.target.id;
@@ -61,7 +124,7 @@ if (event.target.classList.contains("edit-button")) {
 <div id="promptText">
   <h1>Edit</h1>
 
-  <form class="popupContentWords" action="/adminChanges.php" method="POST">
+  <form class="popupContentWords" action="/productChanges.php" method="POST">
 <p>id: '${data.id}'</p>
  <input type="hidden" name="id" value='${data.id}'>
     <input class="emb" type="tel" name="name" placeholder="name" value='${data.name}'><br/><br/>
@@ -112,7 +175,7 @@ if (event.target.classList.contains("edit-button")) {
       <div id="promptText">
         <h1>Edit</h1>
 
-        <form class="popupContentWords" action="/subscribe_phone.php" method="POST">
+        <form class="popupContentWords" action="/user_page.php" method="POST">
 <p>id: '${data.id}'</p>
 <input class="emb" type="tel" name="first_name" placeholder="first_name" value='${data.first_name}'><br/><br/>
 <input class="emb" type="tel" name="last_name" placeholder="last_name" value='${data.last_name}'><br/><br/>
@@ -152,13 +215,89 @@ popupScrollWrapper.remove();
 }
 
 for(i=0;i<catEditDelete.length;i++){
-catEditDelete[i].addEventListener("click", ()=>{
-alert("Delete");
+ catEditDelete[i].addEventListener("click", ()=>{
+fetch('/adminProductDelete.php', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: 'id=' + encodeURIComponent(data.id)
+})
+.then(res => res.text())
+.then(result => {
+  console.log('Server response:', result);
+});
+window.location.reload();
 });
 }
 
 
 }
+
+if (event.target.classList.contains("edit-button")) {
+  const itemId = event.target.id;
+  const el = document.getElementById('content');  
+  const recordDiv = event.target.closest(".record");
+
+  let data = {
+    id: recordDiv.dataset.id,
+    name: recordDiv.dataset.name,
+    page: recordDiv.dataset.page
+
+}
+
+  if (itemId.startsWith("site_")) {
+    el.insertAdjacentHTML("afterbegin", `
+      <br/><br/>
+      <div id="popupScrollWrapper">
+      <div id="promptText">
+        <h1>Edit</h1>
+
+        <form class="popupContentWords" action="/siteChanges.php" method="POST">
+<p>id: '${data.id}'</p>
+<input type="hidden" name="id" value='${data.id}'>
+<input class="emb" type="tel" name="name" placeholder="name" value='${data.name}'><br/><br/>
+<p>page: '${data.page}'</p>
+<input type="hidden" class="emb" type="tel" name="page" placeholder="page" value='${data.page}'><br/><br/>
+
+<button  type="button" class="catEditCancel">Cancel</button>
+<button class="emsb"class="classEditSubmit" type="submit">Submit</button>
+        </form>
+</div>
+      </div>  
+    `);
+  }
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+let catEditDelete = document.getElementsByClassName("catEditDelete");
+//logic for buttons on pop up
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
+
+for(i=0;i<catEditDelete.length;i++){
+ catEditDelete[i].addEventListener("click", ()=>{
+fetch('/adminProductDelete.php', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: 'id=' + encodeURIComponent(data.id)
+})
+.then(res => res.text())
+.then(result => {
+  console.log('Server response:', result);
+});
+window.location.reload();
+});
+}
+
+
+}
+
+
+
 if (event.target.classList.contains("edit-button")) {
   const itemId = event.target.id;
   const el = document.getElementById('content');  
@@ -167,7 +306,6 @@ if (event.target.classList.contains("edit-button")) {
   let data = {
     id: recordDiv.dataset.id,
     username: recordDiv.dataset.username,
-    password_hash: recordDiv.dataset.password_hash,
     role: recordDiv.dataset.role,
     full_name: recordDiv.dataset.full_name,
     email: recordDiv.dataset.email,
@@ -184,10 +322,9 @@ if (event.target.classList.contains("edit-button")) {
 	<div id="promptText">
         <h1>Edit</h1>
 
-        <form class="popupContentWords" action="/subscribe_phone.php" method="POST">
+        <form class="popupContentWords" action="/userPage.php" method="POST">
 <p>id: '${data.id}'</p>
 <input class="emb" type="tel" name="username" placeholder="username" value='${data.username}'><br/><br/>
-<input class="emb" type="tel" name="password_hash" placeholder="password_hash" value='${data.password_hash}'><br/><br/>
 <input class="emb" type="tel" name="role" placeholder="role" value='${data.role}'><br/><br/>
 <input class="emb" type="tel" name="full_name" placeholder="full_name" value='${data.full_name}'><br/><br/>
 <input class="emb" type="tel" name="email" placeholder="email" value='${data.email}'><br/><br/>
@@ -201,9 +338,9 @@ if (event.target.classList.contains("edit-button")) {
   <option value="yes">Yes</option>
   <option value="no">No</option>
 </select><br/><br/>
-<button type="button" class="catEditDelete">Delete</button>
+
 <button type="button" class="catEditCancel">Cancel</button>
-<button class="emsb"class="catEditSubmit" type="submit">Submit</button>
+
         </form>
 	</div>
       </div>  
@@ -262,7 +399,7 @@ if (event.target.classList.contains("edit-button")) {
       <div id="promptText">
         <h1>Edit</h1>
 
-        <form class="popupContentWords" action="/subscribe_phone.php" method="POST">
+        <form class="popupContentWords" action="/userPage.php" method="POST">
 <p>order_id: '${data.order_id}'</p>
 <input class="emb" type="tel" name="customer_id" placeholder="customer_id" value='${data.customer_id}'><br/><br/>
 <input class="emb" type="tel" name="order_date" placeholder="order_date" value='${data.order_date}'><br/><br/>
@@ -316,5 +453,6 @@ popupScrollWrapper.remove();
 }
 }
 });
+
 
 

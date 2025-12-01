@@ -1,0 +1,141 @@
+@media (min-width: 830px) {
+}
+/* Global */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7e8e9;
+    color: #8b3f45;
+}
+.all{
+    display: flex;
+    flex-direction: column;
+    justify-self:center;
+}
+
+h1, h2 {
+    margin: 0 0 10px;
+}
+/* Home section styles */
+.home-section {
+    display: flex;
+    flex-direction: row;
+    gap: 15vw;
+}
+/*contact section styles */
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    border-bottom: 2px solid #d98b8f;
+}
+
+.logo {
+    padding: 10px 25px;
+    border: 2px solid #d98b8f;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #8b3f45;
+    font-weight: 600;
+}
+
+/* Hero section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px;
+    border-bottom: 2px solid #d98b8f;
+}
+
+.hero-text {
+    max-width: 45%;
+}
+
+.hero-text p {
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+.box {
+    width: 250px;
+    height: 250px;
+    border: 2px solid #d98b8f;
+    border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 28px;
+    background: #d98b8f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn.light {
+    background: white;
+    color: #8b3f45;
+    border: 2px solid #d98b8f;
+}
+button{
+    background: white;
+    color: #8b3f45;
+    border: 2px solid #d98b8f;
+    padding: .2vw;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover{
+    background: #d98b8f;
+    color: white;
+}
+nav{
+    display: flex;
+    gap:.5vw;
+}
+
+/* Featured Products */
+.featured {
+    padding: 60px;
+    border-bottom: 2px solid #d98b8f;
+}
+
+.product-grid {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* About */
+.about {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px;
+}
+
+.about-left {
+    width: 60%;
+}
+
+/* Signup */
+.signup-section {
+    background: #d98b8f;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}

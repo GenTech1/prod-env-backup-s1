@@ -39,7 +39,7 @@ $locId = getenv('SQUARE_LOCATION_ID');
     <!--Caroucel-->
     <main>
 
-<form action="/submit.php" method="POST" enctype="multipart/form-data">
+<form id="customform" class="customform" action="/submit.php" method="POST" enctype="multipart/form-data">
   <!-- Name -->
   <div id="namesdiv">
     <div class="nameSeparators">
@@ -68,8 +68,8 @@ $locId = getenv('SQUARE_LOCATION_ID');
 <input type="file" name="file2">
 <input type="file" name="file3">
 <input type="file" name="file4"><br><br>
-  <input class="input" type="button" placeholder="Submit" name="submit" value="Pay"/>
-<p style="font-size:1.5vw;">*$10 submission fee applies*</p>
+  <input class="input" type="button" placeholder="Submit" name="submitNoOne" value="Pay"/>
+<p style="font-size:1.5vw;">*$20 submission fee applies*</p>
 </form>
  <svg style="display:none" width="30%" height="50%" id="prompt" viewBox="0 0 60 50" style="border:1px solid black">
     <rect width="100%" height="100%" fill="white"></rect>
@@ -141,8 +141,11 @@ $locId = getenv('SQUARE_LOCATION_ID');
 
           const result = await response.json();
           document.getElementById('payment-status').textContent = result.success
-            ? 'Payment successful!'
+            ? 'Payment successful!' 
             : 'Payment failed: ' + result.message;
+            if(result.success){
+    document.querySelector('#customform').submit();
+}
         } catch (err) {
           document.getElementById('payment-status').textContent = 'Error: ' + err.message;
         }

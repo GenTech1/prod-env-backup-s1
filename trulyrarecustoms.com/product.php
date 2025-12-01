@@ -3,9 +3,11 @@
 // Get SKU from query parameter
 $sku = isset($_GET['sku']) ? $_GET['sku'] : null;
 if (!$sku) {
-    echo "No product SKU provided.";
+    echo "Product not found";
     exit;
 }
+$skuPre = explode('-', $sku)[0];
+$skuPre = $skuPre . '-' . explode('-', $sku)[1];
 
 // Load database credentials from environment
 $host = getenv('DATABASE_HOST');
@@ -30,7 +32,7 @@ try {
     }
 
     // Load color variants
-    $variantPrefix = $sku . '-%';
+    $variantPrefix = $skuPre . '-%';
     $variantStmt = $pdo->prepare("SELECT * FROM Products WHERE sku LIKE ?");
     $variantStmt->execute([$variantPrefix]);
     $variants = $variantStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -116,7 +118,7 @@ $colors = array_unique($colors);
       <?php foreach ($colors as $color): ?>
   <?php $cleanColor = strtoupper(str_replace(' ', '', trim($color))); ?>
   <svg width="30" height="30">
-    <a href="product.php?sku=<?php echo $product['sku'] . '-' . $cleanColor; ?>">
+    <a href="product.php?sku=<?php echo $skuPre . '-' . $cleanColor; ?>">
       <rect width="30" height="30" style="fill:<?php echo trim($color); ?>;stroke:#000;stroke-width:1;" />
     </a>
   </svg>
