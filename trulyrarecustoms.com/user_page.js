@@ -40,14 +40,15 @@ body: 'section=' + encodeURIComponent(section)
 })
 .then(res =>res.text())
 .then(html =>{
-document.getElementById('content').innerHTML = html;
+document.getElementById('content').innerHTML = DOMPurify.sanitize(html);
+
 })
 }
 
 document.addEventListener("click", (e) => {
   if (e.target && e.target.id === "add_discounts") {
     const el = document.getElementById('content');  
-         el.insertAdjacentHTML("afterbegin", `
+         el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
 <br/><br/>
 <div id="popupScrollWrapper">
 <div id="promptText">
@@ -72,7 +73,7 @@ document.addEventListener("click", (e) => {
   </form>
 </div>
 </div>  
-`);
+`));
 let catEditCancel = document.getElementsByClassName("catEditCancel");
 let catEditSubmit = document.getElementsByClassName("catEditSubmit");
 let popupScrollWrapper = document.getElementById("popupScrollWrapper");
@@ -89,7 +90,7 @@ popupScrollWrapper.remove();
 document.addEventListener("click", (e) => {
   if (e.target && e.target.id === "add_products") {
     const el = document.getElementById('content');  
-         el.insertAdjacentHTML("afterbegin", `
+         el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
 <br/><br/>
 <div id="popupScrollWrapper">
 <div id="promptText">
@@ -133,7 +134,7 @@ document.addEventListener("click", (e) => {
   </form>
 </div>
 </div>  
-`);
+`));
 let catEditCancel = document.getElementsByClassName("catEditCancel");
 let catEditSubmit = document.getElementsByClassName("catEditSubmit");
 let popupScrollWrapper = document.getElementById("popupScrollWrapper");
@@ -163,7 +164,7 @@ if (event.target.classList.contains("edit-button")) {
 	sku: recordDiv.dataset.sku
   }
  if(itemId.startsWith("products_")){
-      el.insertAdjacentHTML("afterbegin", `
+      el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
 <br/><br/>
 <div id="popupScrollWrapper">
 <div id="promptText">
@@ -191,7 +192,7 @@ if (event.target.classList.contains("edit-button")) {
   </form>
 </div>
 </div>  
-`);
+`));
 }
 if (event.target.classList.contains("edit-button")) {
   const itemId = event.target.id;
@@ -214,7 +215,7 @@ if (event.target.classList.contains("edit-button")) {
 }
 
   if (itemId.startsWith("messages_")) {
-    el.insertAdjacentHTML("afterbegin", `
+    el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
       <br/><br/>
       <div id="popupScrollWrapper">
       <div id="promptText">
@@ -244,7 +245,7 @@ if (event.target.classList.contains("edit-button")) {
         </form>
 </div>
       </div>  
-    `);
+    `));
   }
 let catEditCancel = document.getElementsByClassName("catEditCancel");
 let catEditSubmit = document.getElementsByClassName("catEditSubmit");
@@ -290,7 +291,7 @@ if (event.target.classList.contains("edit-button")) {
 }
 
   if (itemId.startsWith("site_")) {
-    el.insertAdjacentHTML("afterbegin", `
+    el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
       <br/><br/>
       <div id="popupScrollWrapper">
       <div id="promptText">
@@ -309,7 +310,7 @@ if (event.target.classList.contains("edit-button")) {
 </div>
       </div> 
       <form class= 
-    `);
+    `));
   }
 let catEditCancel = document.getElementsByClassName("catEditCancel");
 let catEditSubmit = document.getElementsByClassName("catEditSubmit");
@@ -362,7 +363,7 @@ if (event.target.classList.contains("edit-button")) {
   }
 
   if (itemId.startsWith("users_")) {
-    el.insertAdjacentHTML("afterbegin", `
+    el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
       <br/><br/>
       <div id="popupScrollWrapper">
 	<div id="promptText">
@@ -390,7 +391,7 @@ if (event.target.classList.contains("edit-button")) {
         </form>
 	</div>
       </div>  
-    `);
+    `));
   }
 let catEditCancel = document.getElementsByClassName("catEditCancel");
 let catEditSubmit = document.getElementsByClassName("catEditSubmit");
@@ -439,7 +440,7 @@ if (event.target.classList.contains("edit-button")) {
   }
 
   if (itemId.startsWith("orders_")) {
-    el.insertAdjacentHTML("afterbegin", `
+    el.insertAdjacentHTML("afterbegin", DOMPurify.sanitize(`
       <br/><br/>
 	<div id="popupScrollWrapper">
       <div id="promptText">
@@ -484,7 +485,7 @@ if (event.target.classList.contains("edit-button")) {
         </form>
 	</div>
       </div>  
-    `);
+    `));
   }
 }
 let catEditCancel = document.getElementsByClassName("catEditCancel");
