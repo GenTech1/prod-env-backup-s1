@@ -3,12 +3,21 @@
     flex-direction: row;
     justify-content: center;
     gap: 2vw;
+    width: 1200px;
+    margin: auto;
+    padding: 0 -5vw;
+}
+
+.contactName{
+    display: flex;
+    /* justify-content: center; */
+    padding: 0 2vw;
 }
 
 /* img box */
 .contact-image-placeholder {
     display: flex;
-    justify-self: flex-end;
+    /* justify-self: flex-end; */
     width: 70vw;
     height: 30vw;
     border: 2px solid #d98b8f;

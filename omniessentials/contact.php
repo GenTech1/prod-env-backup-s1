@@ -28,7 +28,7 @@
 
     <div class="all">
     <div class="section contact-section">
-      <h1>Contact</h1>
+      <h1 class="contactName">Contact</h1>
 
       <div class="contact-content">
 
