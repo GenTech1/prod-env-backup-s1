@@ -18,8 +18,8 @@
 .contact-image-placeholder {
     display: flex;
     /* justify-self: flex-end; */
-    width: 70vw;
-    height: 30vw;
+    width: 80vw;
+    height: 20vw;
     border: 2px solid #d98b8f;
     border-radius: 4px;
 }
