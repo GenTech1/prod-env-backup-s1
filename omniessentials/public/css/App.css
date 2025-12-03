@@ -73,6 +73,12 @@ nav a {
     line-height: 1.5;
 }
 
+.product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .box {
     width: 250px;
     height: 250px;

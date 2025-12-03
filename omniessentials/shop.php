@@ -54,10 +54,15 @@
                   $stmt->execute();
                   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   foreach($result as $row){
+                    echo '<div class="product">';
                     echo '<div class="product box">';
                     echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
                     echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
                     echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
+                    echo '</div>';
+                    echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
+                    echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
+                    echo '<button class="btn">Add to Cart</button>';
                     echo '</div>';
                   }
                 }catch(PDOException $e){
