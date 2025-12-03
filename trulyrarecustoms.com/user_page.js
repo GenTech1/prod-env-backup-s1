@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded",() =>{
 let productsOp = document.getElementById("products");
 let messagesOp = document.getElementById("messages");
 let siteOp = document.getElementById("site");
+let discountsOp = document.getElementById("discounts");
 let usersOp = document.getElementById("users");
 let ordersOp = document.getElementById("orders");
 
@@ -15,6 +16,9 @@ sendCategory("messages");
 });
 siteOp.addEventListener("click",() =>{
 sendCategory("site");
+});
+discountsOp.addEventListener("click",() =>{
+sendCategory("discounts");
 });
 usersOp.addEventListener("click",() =>{
 sendCategory("users");
@@ -40,6 +44,47 @@ document.getElementById('content').innerHTML = html;
 })
 }
 
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "add_discounts") {
+    const el = document.getElementById('content');  
+         el.insertAdjacentHTML("afterbegin", `
+<br/><br/>
+<div id="popupScrollWrapper">
+<div id="promptText">
+  <h1>Edit</h1>
+
+  <form class="popupContentWords" action="/adminDiscountAdd.php" method="POST" enctype="multipart/form-data">
+ <input type="hidden" name="id">
+ <label for="name">Name:</label><br/>
+    <input class="emb" type="text" name="name" placeholder="name" required><br/><br/>
+ <label for="code">Code:</label><br/>
+    <input class="emb" type="text" name="code" placeholder="s5ff/4+" required><br/><br/>
+  <label for="exp">Exp:</label><br/>
+  <input class="emb" type="date" name="exp" placeholder="2099/01/02" required><br/><br/>
+  <label for="percent">Percent:</label><br/>
+ <input class="emb" type="tel" name="percent" placeholder="50"><br/><br/>
+  <label for="amount">Amount:</label><br/>
+  <input class="emb" type="text" name="amount" placeholder="20.00"><br/><br/>
+ 
+
+    <button type="button" class="catEditCancel">Cancel</button>
+    <button class="emsb" class="catEditSubmit" type="submit">Submit</button>
+  </form>
+</div>
+</div>  
+`);
+let catEditCancel = document.getElementsByClassName("catEditCancel");
+let catEditSubmit = document.getElementsByClassName("catEditSubmit");
+let popupScrollWrapper = document.getElementById("popupScrollWrapper");
+
+for(i=0;i<catEditCancel.length;i++){
+
+catEditCancel[i].addEventListener("click", ()=>{
+popupScrollWrapper.remove();
+});
+}
+  }
+});
 
 document.addEventListener("click", (e) => {
   if (e.target && e.target.id === "add_products") {
@@ -262,7 +307,8 @@ if (event.target.classList.contains("edit-button")) {
 <button class="emsb"class="classEditSubmit" type="submit">Submit</button>
         </form>
 </div>
-      </div>  
+      </div> 
+      <form class= 
     `);
   }
 let catEditCancel = document.getElementsByClassName("catEditCancel");

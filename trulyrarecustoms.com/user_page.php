@@ -108,6 +108,8 @@ foreach($permissions as $key => $value){
         echo '<h2 id="messages">Messages</h2>';
         }elseif($key == 'site' && $value == 1){
         echo '<h2 id="site">Site</h2>';
+        }elseif($key == 'discounts' && $value == 1){
+        echo '<h2 id="discounts">Discounts</h2>';
         }elseif($key == 'users' && $value == 1){
         echo '<h2 id="users">Users</h2>';
         }elseif($key == 'orders' && $value == 1){

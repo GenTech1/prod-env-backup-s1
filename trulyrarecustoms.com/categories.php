@@ -48,6 +48,13 @@ switch ($section) {
 	}
    $sql = "SELECT * FROM headers";
 	break;
+    case 'discounts':
+	$conn = new mysqli($host, $user, $pass, $sitedb);
+	if ($conn->connect_error) {
+    		die("Connection failed: " . $conn->connect_error);
+	}
+   $sql = "SELECT * FROM discounts";
+	break;
   default:
     echo "Invalid section.";
     exit;
