@@ -1,0 +1,8 @@
+email signup form on all pages   front: Done back: on hold injection:pdo
+customize.php                    front: Done back: Done injection:pdo
+contact.php                      front: Done back: Done injection:pdo
+search button on all pages       front: Done back: Done injection:pdo
+sign in page                     front: Done back: Done injection:pdo
+phone subscribe pop up           front: Done back: on hold injection:pdo
+customize payment
+product payment
