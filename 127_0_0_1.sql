@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2025 at 03:00 AM
+-- Generation Time: Dec 03, 2025 at 08:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dion_products`
+-- Database: `oe_products`
 --
-CREATE DATABASE IF NOT EXISTS `dion_products` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dion_products`;
+CREATE DATABASE IF NOT EXISTS `oe_products` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `oe_products`;
 
 -- --------------------------------------------------------
 
@@ -30,25 +30,35 @@ USE `dion_products`;
 --
 
 CREATE TABLE `products` (
-  `Name` varchar(11) NOT NULL,
-  `Image` varchar(11) NOT NULL,
-  `Price` varchar(11) NOT NULL,
-  `Description` varchar(50) NOT NULL,
-  `level` int(1) NOT NULL,
-  `id` int(255) NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `currency` varchar(3) NOT NULL,
+  `tags` text NOT NULL,
+  `stock` varchar(255) NOT NULL,
+  `sku` varchar(100) NOT NULL,
+  `time created` datetime NOT NULL,
+  `time updated` datetime NOT NULL,
+  `visible` char(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`Name`, `Image`, `Price`, `Description`, `level`, `id`) VALUES
-('Mug', '', '12.99', 'This is a mug', 1, 1),
-('Book', '', '20.00', 'This is a book', 1, 2),
-('Mug 2', '', '12.99', 'This is a second mug', 2, 3),
-('Book 2', '', '20.00', 'This is a second book', 2, 4),
-('Mug 3', '', '12.99', 'This is a third mug', 1, 5),
-('Book 3', '', '20.00', 'This is a third book', 2, 6);
+INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `currency`, `tags`, `stock`, `sku`, `time created`, `time updated`, `visible`) VALUES
+(1, 'Classic White Mug', 'Simple ceramic white coffee mug.', 'images/mug1.jpg', 9.99, 'USD', 'mug,coffee,featured', '25', 'SKU001', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(2, 'Black Steel Mug', 'Durable black stainless steel mug.', 'images/mug2.jpg', 14.99, 'USD', 'mug,steel,travel', '30', 'SKU002', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(3, 'Sunset Art Cup', 'Cup with a relaxing sunset print.', 'images/mug3.jpg', 12.49, 'USD', 'cup,art,print', '18', 'SKU003', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(4, 'Marble Pattern Mug', 'Elegant marble-style ceramic mug.', 'images/mug4.jpg', 16.00, 'USD', 'mug,marble,luxury', '10', 'SKU004', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(5, 'Galaxy Swirl Cup', 'Beautiful galaxy swirl design cup.', 'images/mug5.jpg', 13.75, 'USD', 'cup,galaxy,color', '22', 'SKU005', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(6, 'Large Latte Mug', 'Oversized mug perfect for lattes.', 'images/mug6.jpg', 11.50, 'USD', 'mug,latte,large', '40', 'SKU006', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(7, 'Minimalist Black Cup', 'Matte-black minimalist cup.', 'images/mug7.jpg', 10.99, 'USD', 'cup,minimalist,black,featured', '15', 'SKU007', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(8, 'Cute Cat Mug', 'Mug with a cute cat face print.', 'images/mug8.jpg', 12.99, 'USD', 'mug,cat,cute', '28', 'SKU008', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(9, 'Wooden Handle Cup', 'Ceramic cup with a wooden handle.', 'images/mug9.jpg', 17.49, 'USD', 'cup,wood,design', '12', 'SKU009', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes'),
+(10, 'Double Wall Glass Mug', 'Insulated clear glass coffee mug.', 'images/mug10.jpg', 19.99, 'USD', 'mug,glass,insulated,featured', '20', 'SKU010', '2025-12-01 13:19:15', '2025-12-01 13:19:15', 'yes');
 
 --
 -- Indexes for dumped tables
@@ -68,7 +78,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Database: `phpmyadmin`
 --
@@ -225,7 +235,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"trc_memberships\",\"table\":\"members\"},{\"db\":\"dion_products\",\"table\":\"products\"},{\"db\":\"trc_products\",\"table\":\"products\"},{\"db\":\"trc_messages\",\"table\":\"customs\"},{\"db\":\"trc_site\",\"table\":\"trc_memberships\"},{\"db\":\"trc_site\",\"table\":\"headers\"},{\"db\":\"trc_site\",\"table\":\"Headers\"},{\"db\":\"trc_users\",\"table\":\"internal_users\"},{\"db\":\"zax_messages\",\"table\":\"messages\"},{\"db\":\"zax_research_reports\",\"table\":\"reports\"}]');
+('root', '[{\"db\":\"trc_site\",\"table\":\"discounts\"},{\"db\":\"trc_users\",\"table\":\"internal_users\"},{\"db\":\"trc_messages\",\"table\":\"customs\"},{\"db\":\"trc_products\",\"table\":\"products\"},{\"db\":\"oe_products\",\"table\":\"products\"},{\"db\":\"trc_products\",\"table\":\"Products\"},{\"db\":\"trc_memberships\",\"table\":\"members\"},{\"db\":\"dion_products\",\"table\":\"products\"},{\"db\":\"trc_site\",\"table\":\"trc_memberships\"},{\"db\":\"trc_site\",\"table\":\"headers\"}]');
 
 -- --------------------------------------------------------
 
@@ -301,7 +311,7 @@ CREATE TABLE `pma__table_uiprefs` (
 --
 
 INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('root', 'trc_products', 'products', '{\"CREATE_TIME\":\"2025-09-08 10:14:27\"}', '2025-09-11 16:03:05');
+('root', 'trc_products', 'products', '{\"CREATE_TIME\":\"2025-09-11 11:02:47\",\"col_order\":[0,1,2,3,4,5,6,7,8,9,10,11],\"col_visib\":[1,1,1,1,1,1,1,1,1,1,1,1]}', '2025-12-01 18:51:08');
 
 -- --------------------------------------------------------
 
@@ -339,7 +349,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2025-11-30 01:58:45', '{\"Console\\/Mode\":\"collapse\"}');
+('root', '2025-12-03 19:12:13', '{\"Console\\/Mode\":\"collapse\"}');
 
 -- --------------------------------------------------------
 
@@ -859,7 +869,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `currency`, `tags`, `stock`, `sku`, `time created`, `time updated`, `visible/not visible`) VALUES
-(6, 'Blue Denim Jacket', 'Stylish denim jacket with button closure and front pockets.', '{ \"1\": \"assets\\\\denim.jpg\", \"2\": \"assets\\\\bwbanner.jpg\", \"3\": \"assets\\\\dlarge.jpg\", \"4\": \"assets\\\\logo1.png\", \"5\": \"assets\\\\logo2.png\", \"6\": \"assets\\\\paint.png\", \"7\": \"assets\\\\pinkGabs.png\" }', 59.99, 'USD', 'jacket, off the rack gear, denim, outerwear, blue, Off The Rack', '{ \"XS\": 3, \"S\": 8, \"M\": 12, \"L\": 10, \"XL\": 6, \"2XL\": 4, \"3XL\": 1 }', 'TSHIRT-001-blue', '2025-09-08 14:12:13', '2025-09-08 14:12:13', 'yes'),
+(6, 'Blue Denim Jacket', 'Stylish denim jacket with button closure and front pockets.', '{ \"1\": \"assets\\\\\\\\denim.jpg\", \"2\": \"assets\\\\\\\\bwbanner.jpg\", \"3\": \"assets\\\\\\\\dlarge.jpg\", \"4\": \"assets\\\\\\\\logo1.png\", \"5\": \"assets\\\\\\\\logo2.png\", \"6\": \"assets\\\\\\\\paint.png\", \"7\": \"assets\\\\\\\\pinkGabs.png\" }', 5.99, 'USD', 'jacket, off the rack gear, denim, outerwear, blue, Off The Rack', '{ \"XS\": 3, \"S\": 8, \"M\": 12, \"L\": 10, \"XL\": 6, \"2XL\": 4, \"3XL\": 1 }', 'TSHIRT-001-blue', '2025-09-08 14:12:13', '2025-09-08 14:12:13', 'yes'),
 (7, 'Black Hoodie', 'Fleece-lined hoodie with adjustable drawstrings and kangaroo pocket.', '{\r\n  \"1\": \"assets\\\\dlarge.jpg\",\r\n  \"2\": \"assets\\\\paint.png\",\r\n  \"3\": \"assets\\\\logo1.png\",\r\n  \"4\": \"assets\\\\denim.jpg\",\r\n  \"5\": \"assets\\\\bwbanner.jpg\",\r\n  \"6\": \"assets\\\\pinkGabs.png\",\r\n  \"7\": \"assets\\\\logo2.png\"\r\n}\r\n', 39.99, 'USD', 'hoodie, sweatshirt, casual, black', '{ \"XS\": 5, \"S\": 12, \"M\": 20, \"L\": 18, \"XL\": 10, \"2XL\": 6, \"3XL\": 2 }', 'HOODIE-003', '2025-09-08 14:12:13', '2025-09-08 14:12:13', 'Yes'),
 (8, 'upcoming event', 'have fun', '{\r\n  \"1\": \"assets\\\\paint.png\",\r\n  \"2\": \"assets\\\\logo2.png\",\r\n  \"3\": \"assets\\\\pinkGabs.png\",\r\n  \"4\": \"assets\\\\bwbanner.jpg\",\r\n  \"5\": \"assets\\\\dlarge.jpg\",\r\n  \"6\": \"assets\\\\denim.jpg\",\r\n  \"7\": \"assets\\\\logo1.png\"\r\n}\r\n', 49.99, 'USD', 'Event,', '{ \"XS\": 6, \"S\": 15, \"M\": 20, \"L\": 14, \"XL\": 8, \"2XL\": 3, \"3XL\": 1 }', 'DRESS-004', '2025-09-08 14:12:13', '2025-09-08 14:12:13', 'Yes'),
 (9, 'Sneakers White', 'Comfortable everyday sneakers with rubber sole and breathable mesh.', '{\r\n  \"1\": \"assets\\\\bwbanner.jpg\",\r\n  \"2\": \"assets\\\\dlarge.jpg\",\r\n  \"3\": \"assets\\\\paint.png\",\r\n  \"4\": \"assets\\\\logo1.png\",\r\n  \"5\": \"assets\\\\denim.jpg\",\r\n  \"6\": \"assets\\\\logo2.png\",\r\n  \"7\": \"assets\\\\pinkGabs.png\"\r\n}\r\n', 74.99, 'USD', 'shoes, sneakers, footwear, white,Custom designs', '{ \"XS\": 0, \"S\": 0, \"M\": 25, \"L\": 30, \"XL\": 18, \"2XL\": 10, \"3XL\": 5 }', 'SHOES-SNEAKERS-005', '2025-09-08 14:12:13', '2025-09-08 14:12:13', 'Yes'),
@@ -911,6 +921,30 @@ USE `trc_site`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `discounts`
+--
+
+CREATE TABLE `discounts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` varchar(7) NOT NULL,
+  `exp` date NOT NULL,
+  `percent` int(3) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `discounts`
+--
+
+INSERT INTO `discounts` (`id`, `name`, `code`, `exp`, `percent`, `amount`) VALUES
+(1, 'test', '5468', '2026-02-12', 50, NULL),
+(3, 'test 2', '65428', '2026-01-16', NULL, 20.00),
+(4, 'test3', 'sdf458', '2025-12-27', 50, 0.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `headers`
 --
 
@@ -935,6 +969,12 @@ INSERT INTO `headers` (`id`, `Name`, `Page`) VALUES
 --
 
 --
+-- Indexes for table `discounts`
+--
+ALTER TABLE `discounts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `headers`
 --
 ALTER TABLE `headers`
@@ -943,6 +983,12 @@ ALTER TABLE `headers`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `discounts`
+--
+ALTER TABLE `discounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `headers`
@@ -979,7 +1025,7 @@ CREATE TABLE `internal_users` (
 --
 
 INSERT INTO `internal_users` (`id`, `username`, `password_hash`, `role`, `full_name`, `email`, `status`, `created_at`, `department`, `permissions`) VALUES
-(2, 'Gwilliams', '$2y$10$DX44F3xABAoBqL7WLVrUr.M3QRjE2oh9Sl/6FXiqbMD996sCGVvz.', 'user', 'Gabrielle Williams', 'trulyrarecustoms@gmail.com', 'active', '2025-09-08 16:28:16', '', '{\"products\":1,\"messages\":1,\"site\":1,\"users\":1,\"orders\":1}');
+(2, 'Gwilliams', '$2a$12$6XT7S4kLTzoLJpZb9Wvw5eXll8V7fd4qJgdZJ3GOg3qrM9LTHKc3i', 'user', 'Gabrielle Williams', 'trulyrarecustoms@gmail.com', 'active', '2025-09-08 16:28:16', '', '{\"products\":1,\"messages\":1,\"site\":1,\"users\":1,\"orders\":1,\"discounts\":1}');
 
 -- --------------------------------------------------------
 
@@ -1127,7 +1173,22 @@ INSERT INTO `tokens` (`id`, `token`, `purpose`, `mode`, `user_email`, `created_a
 (372, 'fe41e7c6bcbaf78ec0973b56b45d54abde7f13559f7727584d1a58b13317d4b6', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-11-18 23:00:50', '2025-11-18 23:15:50', 0, NULL, '::1'),
 (373, 'd466b37e0f2a17cf5a814d330664482618067279a33e7d6daab7223e763ede55', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-11-18 23:08:03', '2025-11-18 23:23:03', 0, NULL, '::1'),
 (374, '061dac2146051d391691aada293ef12ff97b3ea450acb04d4458560398db36e8', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-11-18 23:10:54', '2025-11-18 23:25:54', 0, NULL, '::1'),
-(375, 'd3b98c6d2a133b3acbc0a465cbbeea152059d2f6b941b549956bdf06597a13c9', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-11-18 23:13:06', '2025-11-18 23:28:06', 0, NULL, '::1');
+(375, 'd3b98c6d2a133b3acbc0a465cbbeea152059d2f6b941b549956bdf06597a13c9', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-11-18 23:13:06', '2025-11-18 23:28:06', 0, NULL, '::1'),
+(376, '591445bb402b6b61dc5815d8ac1e7cf55deb49f48416709b77c61ae175206b9d', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:01:25', '2025-12-01 21:16:25', 0, NULL, '::1'),
+(377, '271a17a82782a19092ff3384d506acf31d70a86a31f44c6b1f1d20821724838c', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:14:04', '2025-12-01 21:29:04', 0, NULL, '::1'),
+(378, 'eb0a957fd76f6d403ef49eb4686644ee16e2c8f6628d22cd9fef16fb1efcc0d3', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:16:27', '2025-12-01 21:31:27', 0, NULL, '::1'),
+(379, '8690eb6b4e5ac378d81997ff68acc50342fbea5d96e4b277955e407abece86b8', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:24:40', '2025-12-01 21:39:40', 0, NULL, '::1'),
+(380, 'd212363e3f6d4f2ebc4e4c03ef56578e8afd64a943980bf5c32d91b6ce8cb750', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:27:11', '2025-12-01 21:42:11', 0, NULL, '::1'),
+(381, '7e8d857929eb6b1a9715c13eb6fa4d7fd00d9b661c6cfac9370c3b889605c12e', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:32:29', '2025-12-01 21:47:29', 0, NULL, '::1'),
+(382, 'c18560806ab432ea92f841ef494cd61b6de8e7d4fe970155a5b673fe924eb086', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:35:11', '2025-12-01 21:50:11', 0, NULL, '::1'),
+(383, '10c5ed01af6ca0799c3eddc39e000d59512436094e0b1a134bde33c80a20e389', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:39:37', '2025-12-01 21:54:37', 0, NULL, '::1'),
+(384, '0f437b6d3571300e304311f22745422be38857925caaed6b33e79c15f0f13d31', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:42:15', '2025-12-01 21:57:15', 0, NULL, '::1'),
+(385, 'a8fb992fec9a592c15ad7ee178602051ced5247b411c2758a1dc4ad00cb260db', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 21:54:14', '2025-12-01 22:09:14', 0, NULL, '::1'),
+(386, '52b36311155c9506e94989793504202216e67a832f77260b3274ba8e7be5cc08', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 22:00:34', '2025-12-01 22:15:34', 0, NULL, '::1'),
+(387, '070be3e7938b420a2efab06512ee141e95f44b60fa5a35455023b14bd9cc381a', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-01 22:02:15', '2025-12-01 22:17:15', 0, NULL, '::1'),
+(388, '88b64e848639cf6d1d0bdd2c136866055cb4641f9e791c16dfe4ac4527cc61d6', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-03 11:26:22', '2025-12-03 11:41:22', 0, NULL, '::1'),
+(389, 'e98c0640224dcc43613bf49c33b319cbba3cbbe23f5edbb142b6e00c0314d47e', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-03 11:27:12', '2025-12-03 11:42:12', 0, NULL, '::1'),
+(390, '4ef5ca3e15210d87fb2eeabece2f976867bb00d41ead4839e81aeb10b10b27b4', 'login', 'timed', 'trulyrarecustoms@gmail.com', '2025-12-03 12:05:29', '2025-12-03 12:20:29', 0, NULL, '::1');
 
 --
 -- Indexes for dumped tables
@@ -1164,7 +1225,7 @@ ALTER TABLE `internal_users`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=391;
 --
 -- Database: `zax_messages`
 --
