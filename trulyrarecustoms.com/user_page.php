@@ -87,6 +87,8 @@ exit;
   </head>
   <script src="script.js"></script>
   <body>
+    <script src="https://unpkg.com/dompurify@3.0.6/dist/purify.min.js"></script>
+
     <!--Caroucel-->
     <main>
 
