@@ -1,14 +1,7 @@
-/*contact section styles */
-.contact-form{
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
-}
-
 .contact-content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2vw;
 }
 
@@ -16,10 +9,26 @@
 .contact-image-placeholder {
     display: flex;
     justify-self: flex-end;
-    width: 170vw;
+    width: 70vw;
     height: 30vw;
     border: 2px solid #d98b8f;
     border-radius: 4px;
 }
 
-/* button layout */
+/* Form layout */
+.contact-form {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.form-input {
+    width: 75vw;
+}
+
+@media screen and (min-width: 500px) {
+    .form-input {
+        width: 45vw;
+    }
+}
