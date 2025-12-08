@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <script src="/public/js/script.js"></script>
     <header class="navbar">
       <div class="logo">LOGO</div>
       <nav>
@@ -62,7 +63,7 @@
                     echo '</div>';
                     echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
                     echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
-                    echo '<button class="btn">Add to Cart</button>';
+                    echo '<button class="atc" >Add to Cart</button>';
                     echo '</div>';
                   }
                 }catch(PDOException $e){

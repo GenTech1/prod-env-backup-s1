@@ -1,8 +1,3 @@
-SetEnv Products_DB oe_products
-SetEnv Site_USER oe_site
-SetEnv Site_PASS !zeX!EezLO-JEJ/J
-
-
 SetEnv Site_USER Trc_site
 SetEnv Site_PASS 4R6znTF3vwZ6xzDO
 SetEnv Messages_DB Trc_messages
