@@ -20,7 +20,9 @@ try {
 	for($i=0;$i<count($products);$i++){
 	$id = $_POST['id'];
 	if($products[$i]['id'] == $id){
-	$stmt = $pdo ->query("UPDATE Products SET name =".$_POST['name']." WHERE id =1");
+	$stmt = $pdo->prepare("UPDATE Products SET name = ? WHERE id = 1");
+    $stmt->execute([$_POST['name']]);
+
 }
 }
 

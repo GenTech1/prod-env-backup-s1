@@ -87,7 +87,7 @@ exit;
   </head>
   <script src="script.js"></script>
   <body>
-    <script src="https://unpkg.com/dompurify@3.0.6/dist/purify.min.js"></script>
+
 
     <!--Caroucel-->
     <main>
@@ -133,7 +133,9 @@ Welcome back!
 
 
     </main>
-<script src="user_page.js"></script>
+<script src="https://unpkg.com/dompurify@3.0.6/dist/purify.min.js"></script>
+<script src="user_page.js" defer></script>
+
   </body>
   <footer>
     <div class="blackback">

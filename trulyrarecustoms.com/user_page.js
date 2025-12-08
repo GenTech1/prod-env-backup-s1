@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+
 window.addEventListener("DOMContentLoaded",() =>{
 
 let productsOp = document.getElementById("products");
