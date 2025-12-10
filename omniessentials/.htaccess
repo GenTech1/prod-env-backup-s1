@@ -1,6 +1,7 @@
 SetEnv Site_USER Trc_site
 SetEnv Site_PASS 4R6znTF3vwZ6xzDO
-SetEnv Messages_DB Trc_messages
+SetEnv Products_DB oe_products
+SetEnv Messages_DB trc_messages
 SetEnv DATABASE_HOST localhost
 
 ErrorDocument 404 /404.php
