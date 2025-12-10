@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SetEnv Products_DB oe_products
 SetEnv Site_USER oe_site
 SetEnv Site_PASS !zeX!EezLO-JEJ/J
@@ -5,3 +6,9 @@ SetEnv Site_PASS !zeX!EezLO-JEJ/J
 SetEnv DATABASE_HOST localhost
 
 SetEnv Contact_DB oe_contact
+=======
+SetEnv Site_USER Trc_site
+SetEnv Site_PASS 4R6znTF3vwZ6xzDO
+SetEnv Messages_DB Trc_messages
+SetEnv DATABASE_HOST localhost
+>>>>>>> 6432974b678d4fb20ff7ccda919c1cab3a7b95ea
