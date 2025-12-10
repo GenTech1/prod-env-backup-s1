@@ -48,11 +48,12 @@
       </div>
 
 
-      <form class="contact-form">
-        <input type="hidden" name="table" value="481">
-        <input type="text" placeholder="Your Name" name="name" class="form-input" required/>
+      <form class="contact-form" action="/submit.php" method="POST">
+        <input type="text" placeholder="Your First Name" name="first_name" class="form-input" required/>
+        <input type="text" placeholder="Your Last Name" name="last_name" class="form-input" required/>
         <input type="email" placeholder="Your Email" name="email" class="form-input" required/>
-        <textarea placeholder="Your Message" class="form-textarea" required></textarea>
+        <input type="text" placeholder="Your Phone number" name="phone" class="form-input" required/>
+        <textarea placeholder="Your Message" name="message" class="form-textarea" required></textarea>
 
         <button class="primary-btn">Submit</button>
       </form>

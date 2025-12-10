@@ -14,24 +14,20 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $table = $_POST['table'] ?? '';
 
-    if ($table === "481") {
-        $name = $_POST['name'] ?? '';
+        $firstName = $_POST['first_name'] ?? '';
+        $lastName = $_POST['last_name'] ?? '';
         $email = $_POST['email'] ?? '';
+        $phone = $_POST['phone'] ?? '';
         $message = $_POST['message'] ?? '';
 
-        if ($name === '' || $email === '' || $message === '') {
+        if ($firstName === '' || $lastName === '' || $email === '' || $phone === '' || $message === '') {
             die("Error: All required fields must be filled out.");
         }
-        $stmt = $pdo->prepare("Insert Info contact (name, email, message) Values(?, ?, ?)");
-        $stmt->execte([$name, $email, $message]);
+        $stmt = $pdo->prepare("Insert Into oe_contact (first_name, last_name, email, phone, message) Values(?, ?, ?, ?, ?)");
+        $stmt->execute([$firstName, $lastName, $email, $phone, $message]);
 
-        header("Location: /contact.php");
-    }
-    else {
-        header("Location: /index.php"); // Should be error page but we have to make one
-    }
+        header("Location: /shop.php");
 }
 
 ?>
