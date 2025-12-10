@@ -1,0 +1,38 @@
+/* 404 Page Only — Uses existing global styles */
+
+/* Layout */
+.error-container {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+/* Text */
+.error-code {
+  font-size: clamp(80px, 15vw, 160px);
+  font-weight: 800;
+  color: #8b3f45;
+  margin-bottom: 10px;
+}
+
+.error-title {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.error-text {
+  max-width: 420px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Button (inherits button hover styles automatically) */
+.home-btn {
+  padding: 12px 30px;
+  font-size: 16px;
+}
+
