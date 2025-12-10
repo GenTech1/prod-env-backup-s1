@@ -3,4 +3,4 @@ SetEnv Site_PASS 4R6znTF3vwZ6xzDO
 SetEnv Messages_DB Trc_messages
 SetEnv DATABASE_HOST localhost
 
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
