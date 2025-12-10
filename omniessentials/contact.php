@@ -50,8 +50,8 @@
 
       <form class="contact-form">
         <input type="hidden" name="table" value="481">
-        <input type="text" placeholder="Your Name" class="form-input" required/>
-        <input type="email" placeholder="Your Email" class="form-input" required/>
+        <input type="text" placeholder="Your Name" name="name" class="form-input" required/>
+        <input type="email" placeholder="Your Email" name="email" class="form-input" required/>
         <textarea placeholder="Your Message" class="form-textarea" required></textarea>
 
         <button class="primary-btn">Submit</button>
