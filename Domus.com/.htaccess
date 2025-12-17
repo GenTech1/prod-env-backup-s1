@@ -1,0 +1,6 @@
+SetEnv Site_USER Trc_site
+SetEnv Site_PASS 4R6znTF3vwZ6xzDO
+SetEnv Users_DB domus_users
+SetEnv DATABASE_HOST localhost
+
+ErrorDocument 404 /404.php
