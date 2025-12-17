@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="public/css/index.css" />
   </head>
   <body>
+    <script src="/public/js/script.js"></script>
           <header class="navbar">
         <div class="logo">LOGO</div>
         <nav>
@@ -59,7 +60,7 @@
                     echo '<div class="product box">';
                     echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
                     echo '</div>';
-                    echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
+                    echo '<p name="product-name" class="product-name">' . htmlspecialchars($row['name']) . '</p>';
                     echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
                     echo '<button class="atc">Add to Cart</button>';
                     echo '</div>';

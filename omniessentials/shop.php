@@ -17,6 +17,7 @@
 
   <body>
     <script src="/public/js/script.js"></script>
+    <script src="/public/js/shop.js"></script>
     <header class="navbar">
       <div class="logo">LOGO</div>
       <nav>
@@ -80,13 +81,30 @@
               <div class="cart-line short"></div>
             </div>
 
-            <h2 class="section-title">Total</h2>
 
+                <?php
+                $total = 0;
+                  foreach ($_COOKIE as $name => $value){
+                  $cleared_name = str_replace('Cart_', '', $name);
+                  $cleared_name = str_replace('_', ' ', $cleared_name);
+                  $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
+                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                  $stmt = $conn->prepare("SELECT * FROM Products where name = ?");
+                  $stmt->execute([$cleared_name]);
+                  $product = $stmt->fetch(PDO::FETCH_ASSOC);
+	                  if(strpos($name, 'Cart_')===0){
+                      echo $cleared_name .": ".$product['price'] ."  <button class='buy' data-item-name='$name'> Buy </button><button class='X' data-item-name='$name'> X </button> <br>";
+                      $total += $product['price'];
+                    }
+                  }
+                ?>
+                <h2 class="section-title">Total</h2>
+                <p>$<?php echo $total; ?></p>
             <div class="cart-lines">
               <div class="cart-line"></div>
               <div class="cart-line short"></div>
             </div>
-
+                  
             <button class="checkout-button">Checkout</button>
           </div>
         </div>
