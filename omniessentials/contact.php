@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="public/css/contact.css" />
     <!-- For confetti on the Submit button -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="contact.js"></script>
+    <script src="public/js/contact.js"></script>
   </head>
   <body>
           <header class="navbar">

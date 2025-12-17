@@ -23,10 +23,12 @@
       </nav>
     </header>
 
-    <main>
-        <h1>Thank you for Sharing</h1>
-        <h2></h2>
-        <p></p>
+    <main class="ty-container">
+        <h1 class="ty-header">Thank you for Sharing</h1>
+        <h2 class="ty-tittle">We will review your comment as soon as we can.</h2>
+        <p class="ty-text">
+            Please return back to the home screen.
+        </p>
 
         <button class="home-btn" id="goHome">Go Home</button>
     </main>
