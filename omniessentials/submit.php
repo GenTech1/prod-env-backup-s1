@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt = $pdo->prepare("Insert Into oe_contact (first_name, last_name, email, phone, message) Values(?, ?, ?, ?, ?)");
         $stmt->execute([$firstName, $lastName, $email, $phone, $message]);
 
-        header("Location: /shop.php");
+        header("Location: /submitTy.php");
 }
 
 ?>

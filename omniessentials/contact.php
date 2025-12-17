@@ -13,6 +13,9 @@
           <title>Coffee Cups & Mugs</title>
     <link rel="stylesheet" href="public/css/App.css" />
     <link rel="stylesheet" href="public/css/contact.css" />
+    <!-- For confetti on the Submit button -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="contact.js"></script>
   </head>
   <body>
           <header class="navbar">
@@ -36,10 +39,10 @@
           <p class="placeholder-line">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ullamcorper ante vestibulum erat bibendum tincidunt. Suspendisse condimentum urna magna, nec hendrerit risus maximus et. Duis sed tempor risus. Praesent non sapien elementum, mattis leo eu, feugiat arcu. Etiam eu leo commodo, suscipit felis convallis, porttitor risus. Vivamus auctor dui hendrerit neque tempor mattis. Sed tristique nibh id tincidunt facilisis. Phasellus et ultrices est. In blandit erat nec orci aliquet, ut feugiat sapien mollis. Nulla felis sem, efficitur a enim in, rhoncus efficitur massa.
           </p>
-          <p class="placeholder-line">hi</p>
-          <p class="placeholder-line short">Hello</p>
-          <p class="placeholder-line">Welcome</p>
-          <p class="placeholder-line">Hi World</p>
+          <p class="placeholder-line"></p>
+          <p class="placeholder-line short"></p>
+          <p class="placeholder-line"></p>
+          <p class="placeholder-line"></p>
         </div>
 
         <div class="contact-image-placeholder">
