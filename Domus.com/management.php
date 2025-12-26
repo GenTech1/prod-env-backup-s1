@@ -145,7 +145,7 @@ if (strtolower(trim($_SESSION['user_type'] ?? '')) !== 'management') {
                     <?php if (!empty($create_message)): ?>
                         <div class="success-message" style="margin-bottom: 20px;"><?php echo $create_message; ?></div>
                     <?php endif; ?>
-                    <form method="POST">
+                    <form method="POST" action="management.php">
                         <input type="hidden" name="action" value="create_user">
                         <div class="form-row">
                             <div class="form-group">
