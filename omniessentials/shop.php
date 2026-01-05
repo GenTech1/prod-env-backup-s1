@@ -93,7 +93,7 @@
                   $stmt->execute([$cleared_name]);
                   $product = $stmt->fetch(PDO::FETCH_ASSOC);
 	                  if(strpos($name, 'Cart_')===0){
-                      echo $cleared_name .": ".$product['price'] ."  <button class='buy' data-item-name='$name'> Buy </button><button class='X' data-item-name='$name'> X </button> <br>";
+                      echo $cleared_name .": ".$product['price'] ."  <button class='buy' data-item-name='{$name}_Buy'> Buy </button><button class='X' data-item-name='{$name}_X'> X </button> <br>";
                       $total += $product['price'];
                     }
                   }

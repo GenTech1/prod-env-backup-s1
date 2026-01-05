@@ -22,6 +22,13 @@ $time = $_POST['time'] ?? '';
 $dateTime = $date . ' ' . $time . ':00';
 $service = $_POST['service'] ?? '';
 $submitted_at = date('Y-m-d H:i:s');
+echo $name;
+echo $email;
+echo $phone;
+echo $date;
+echo $time;
+echo $service;
+echo $submitted_at;    
 
 //validate required fields
 if ($name === '' || $email === '' || $phone === '' || $date === '' || $time === '' || $service === '' || $submitted_at === '') {
