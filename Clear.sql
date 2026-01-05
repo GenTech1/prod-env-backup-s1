@@ -1,1 +1,11 @@
 Drop DATABASE IF EXISTS `domus_users`;
+Drop DATABASE IF EXISTS `oe_products`;
+Drop DATABASE IF EXISTS `tickets`;
+Drop DATABASE IF EXISTS `trc_memberships`;
+Drop DATABASE IF EXISTS `trc_messages`;
+Drop DATABASE IF EXISTS `trc_products`;
+Drop DATABASE IF EXISTS `trc_site`;
+Drop DATABASE IF EXISTS `trc_users`;
+Drop DATABASE IF EXISTS `zax_messages`;
+Drop DATABASE IF EXISTS `zax_products`;
+Drop DATABASE IF EXISTS `zax_research_reports`;
