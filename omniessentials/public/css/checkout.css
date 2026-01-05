@@ -1,0 +1,97 @@
+/* =========================================
+   Checkout Page - Wireframe Styled Theme
+   ========================================= */
+
+/* Colors based on wireframe */
+:root {
+  --bg-light: #f7e8e9;
+  --border: #d98b8f;
+  --text-main: #8b3f45;
+  --button-bg: #d98b8f;
+  --button-text: #ffffff;
+}
+
+/* Global */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title */
+h1 {
+  margin-top: 40px;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Form Container */
+#payment-form {
+  margin-top: 40px;
+  background: #ffffff80;
+  padding: 40px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Inputs */
+#payment-form input {
+  padding: 14px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 16px;
+  color: var(--text-main);
+}
+
+#payment-form input::placeholder {
+  color: #b37277;
+}
+
+/* Card container */
+#card-container {
+  padding: 20px;
+  border: 2px dashed var(--border);
+  border-radius: 6px;
+  background: #ffffffa0;
+}
+
+/* Pay button */
+#card-button {
+  margin-top: 10px;
+  padding: 14px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#card-button:hover {
+  background: var(--text-main);
+}
+
+/* Payment status */
+#payment-status {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Add light top spacing below the form */
+p {
+  height: 50px;
+}

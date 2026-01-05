@@ -70,7 +70,7 @@ input:not(:placeholder-shown) + label {
 input:focus::placeholder {
   color: transparent; /* hide when focused */
 }
-#submit{
+#card-button{
     width: 100px ;
     height: 40px ;
     border: none ;
@@ -79,6 +79,6 @@ input:focus::placeholder {
     font-size: 16px ;
     cursor: pointer ;
 }
-#submit:hover{
+#card-button:hover{
     background-color: darkblue ;
 }
