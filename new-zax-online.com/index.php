@@ -9,7 +9,7 @@
     <title>Zax</title>
 </head>
 <body>
-            <!-- <a href="#" class="fa fa-bars" id="HbMenu"></a>
+            <a href="#" class="fa fa-bars" id="HbMenu"></a>
                       <nav class="navbar" id="nav">
              
                     <a href="index.php">Home</a>
@@ -17,7 +17,7 @@
                     <a href="gaming.php">Gaming</a>
                     <a href="workstations.php">Workstations</a>
                 
-            </nav> -->
+            </nav>
 <svg id="svg"height="100vh" width="100vw">
     <rect id="overlay" height="100vh" width="100vw" fill="#002a49" opacity="0.6" />
 
