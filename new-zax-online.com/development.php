@@ -18,7 +18,6 @@
         </video>
 
         <div class="overlay-content">
-       <body>
             <a href="#" class="fa fa-bars" id="HbMenu"></a>
                       <nav class="navbar" id="nav">
              
