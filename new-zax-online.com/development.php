@@ -23,8 +23,8 @@
              
                     <a href="index.php">Home</a>
                     <a href="development.php">Development</a>
-                    <a href="gaming.php">Gaming</a>
-                    <a href="workstations.php">Workstations</a>
+                    <!-- <a href="gaming.php">Gaming</a>
+                    <a href="workstations.php">Workstations</a> -->
                 
             </nav>
 
@@ -70,8 +70,8 @@ try {
 
 foreach ($products as $product):
     echo '<div class="card text-bg-dark custom-card">';
-        // echo '<img src="../images/computerSet.jpg" class="card-img" alt="Computer set">';
-        echo '<img src=".$product["Image"]." class="card-img" alt="Computer set">';
+        //  echo '<img src="../images/computerSet.jpg" class="card-img" alt="Research Reports">';
+         echo '<img src="' . htmlspecialchars($product["Image"]) . '" class="card-img" alt="Research Reports">';
             echo '<div class="card-img-overlay">';
                 echo '<h5 class="card-title">Research Report</h5>';
                     echo '<div class="card-hover-text">';
