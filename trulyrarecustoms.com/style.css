@@ -144,9 +144,9 @@ height:20vw;
 .product{
  display:flex;
  flex-direction:row;
- gap:5vw;
+     flex-wrap: wrap;
+ gap:2vw;
 }
-
 #socials {
   display: flex;
   gap: 20px;
