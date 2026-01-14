@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="css/development.css">
     <title>Zax | Development</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <body> 
     
     <section class="top-section">
@@ -45,7 +46,11 @@
 
     <section class="bottom-section">
         
-        <div class="card-container d-flex justify-content-center gap-4 flex-wrap">
+    <!-- New { -->
+        <div id="cardCarousel" class="caousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+    <!-- } -->
+                <div class="card-container d-flex justify-content-center gap-4 flex-wrap">
         <?php
 
 $host = getenv('DATABASE_HOST');
@@ -68,9 +73,20 @@ try {
     die("Query failed: " . $e->getMessage());
 }
 
-foreach ($products as $product):
+// New {
+$chunks = array_chunk($products, 3);
+$isActive = true;
+
+foreach ($chunks as $group):
+?>
+
+    <div class="carousel-item <?= $isActive ? 'active' : '' ?>">
+        <div class="d-flex justify-content-center gap-4">
+<!-- } -->
+
+<!-- was foreach ($products as $product): -->
+<?php foreach ($group as $product):
     echo '<div class="card text-bg-dark custom-card">';
-        //  echo '<img src="../images/computerSet.jpg" class="card-img" alt="Research Reports">';
          echo '<img src="' . htmlspecialchars($product["Image"]) . '" class="card-img" alt="Research Reports">';
             echo '<div class="card-img-overlay">';
                 echo '<h5 class="card-title">Research Report</h5>';
@@ -80,8 +96,30 @@ foreach ($products as $product):
                     echo '</div>';
             echo '</div>';
     echo '</div>';
+endforeach; 
+?>
+
+<!-- New { -->
+</div>
+</div>
+
+<?php
+$isActive = false;
 endforeach;
 ?>
+
+</div>
+
+<!-- Controls for Carousel -->
+<button class="carousel-cantrol-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+    <span class="carousel-cantrol-prev-icon"></span>
+</button>
+
+<button class="carousel-cantrol-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+    <span class="carousel-cantrol-next-icon"></span>
+</button>
+<!-- } -->
+
 
 
 
