@@ -1,0 +1,37 @@
+<FilesMatch "\.(html|js|css|json|xml)$">
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires 0
+</FilesMatch>
+SetEnv KLAVIYO_API_KEY pk_fa6ec88980d6d041219e9fdea4078120b5
+
+SetEnv KLAVIYO_LIST_ID_CONTACT your_contact_list_id_here
+SetEnv KLAVIYO_LIST_ID_CUSTOMIZE your_customize_list_id_here
+
+SetEnv KLAVIYO_LIST_ID_EMAIL your_email_list_id_here
+SetEnv KLAVIYO_LIST_ID_SMS TwjcvE
+SetEnv KLAVIYO_MEMBER_LIST Rpz9qS
+	
+SetEnv CLIENT_NOTIFICATION_EMAIL trulyrarecustoms@gmail.com
+
+SetEnv Site_USER Trc_site
+SetEnv Site_PASS 4R6znTF3vwZ6xzDO
+SetEnv AD_USER Trc_pm
+SetEnv AD_PASS	8Yoz41kY1POxex8u
+SetEnv DATABASE_HOST localhost
+SetEnv Products_DB Trc_Products
+SetEnv Messages_DB Trc_messages
+SetEnv Memberships_DB Trc_memberships
+SetEnv Categories_DB Trc_site
+SetEnv Users_DB Trc_Users
+
+SetEnv SQUARE_APP_ID sandbox-sq0idb-zKy30zInLQNZYxAuWIIvSA
+SetEnv SQUARE_APP_ID_Live sq0idp-h2iK__Nxndpt985qjqDh-w 
+SetEnv SQUARE_LOCATION_ID_Live LJAZEKSDZ3XSS 
+SetEnv SQUARE_LOCATION_ID LZ5Q4SJYE3G10
+SetEnv SQUARE_ACCESS_ID_Live EAAAl0QZpF2lhmMscZYnumXDmCu1RrldlqCLXAIVj4tTIEaiyRe9tACIVx9DZopL
+SetEnv SQUARE_ACCESS_ID EAAAlzQ_SE7Td2kYtb4QtGWtA7tllAaOSa6CyDerQGVIAfywXJxUcAcxpWqjpVF6
+ErrorDocument 404 /404.php
+
+SetEnv WAFFLE pk_7f14caeb76220581590c55f4f52e84b05c
+SetEnv WAFFLE_KINGDOM V4fB4S

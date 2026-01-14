@@ -1,0 +1,95 @@
+.banner0{
+height:700%;
+width:100%;
+}
+.banner1{
+width:100%;
+height:700%;
+}
+#firstSet{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+
+}
+#secondSet{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center
+
+}
+#rightImage{
+height:50vw; 
+width:80vw;
+}
+#leftImage{
+height:50vw; 
+width:50vw;
+}
+p{
+
+    font-size: 1.3vw;
+}
+h1{
+    padding-bottom: 10%;
+}
+#monthlysip{
+    display: flex;
+    margin-top: -7vw; /* responsive spacing */
+    margin-bottom: 4vw;
+    gap:10vw;
+    padding-left:0vw;
+    justify-content: center;
+    flex-direction: row;
+    color:white;
+}
+#ombre0{
+    width:100%; 
+    height:40vw;
+}
+#ombre1{
+    width:100%;
+    height:100%;
+}
+@media (max-width: 767px) {
+.banner0{
+height:20vw;
+width:100%;
+}
+.banner1{
+width:100%;
+height:20vw;
+}
+#rightImage{
+height:50vw; 
+width:80vw;
+}
+#leftImage{
+height:50vw; 
+width:50vw;
+}
+h1{
+    padding-bottom: 5%;
+    margin:0%;
+}
+#ombre0{
+    width:100%; 
+    height:80vw;
+}
+#ombre1{
+    width:100%;
+    height:100%;
+}
+#monthlysip{
+    display: flex;
+    margin-top: -12vw; /* responsive spacing */
+    margin-bottom: 7vw;
+    gap:10vw;
+    padding-left:0vw;
+    justify-content: center;
+    flex-direction: row;
+    color:white;
+}
+}

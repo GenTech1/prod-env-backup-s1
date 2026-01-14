@@ -1,0 +1,28 @@
+#Cartcontents{
+display:flex;
+justify-content:center;
+gap:50vw;
+}
+#Cartbuttons{
+display:flex;
+gap:1vw;
+}
+#checkoutButton{
+display:flex;
+justify-content:center;
+}
+#totals{
+display:flex;
+flex-direction:column;
+align-items:flex-end;
+
+}
+#checkoutHeader{
+display:flex;
+flex-direction: row;
+justify-content: center;
+ align-items: flex-start;  /* prevents vertical stretching */
+margin-left: 8vw;
+gap: 2vw;
+
+}
