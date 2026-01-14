@@ -20,7 +20,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Load main product
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE sku = ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE sku = ?");
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,7 +33,7 @@ try {
 
     // Load color variants
     $variantPrefix = $skuPre . '-%';
-    $variantStmt = $pdo->prepare("SELECT * FROM Products WHERE sku LIKE ?");
+    $variantStmt = $pdo->prepare("SELECT * FROM products WHERE sku LIKE ?");
     $variantStmt->execute([$variantPrefix]);
     $variants = $variantStmt->fetchAll(PDO::FETCH_ASSOC);
 
