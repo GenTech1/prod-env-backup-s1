@@ -20,7 +20,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Load main product
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE sku = ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE sku = ?");
     $stmt->execute([$sku]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -33,7 +33,7 @@ try {
 
     // Load color variants
     $variantPrefix = $skuPre . '-%';
-    $variantStmt = $pdo->prepare("SELECT * FROM Products WHERE sku LIKE ?");
+    $variantStmt = $pdo->prepare("SELECT * FROM products WHERE sku LIKE ?");
     $variantStmt->execute([$variantPrefix]);
     $variants = $variantStmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -130,7 +130,12 @@ $colors = array_unique($colors);
 <div id="sizes">
   <?php
 
-$product['stock'] = '{"XS":0,"S":2,"M":5,"L":0,"XL":1,"2XL":0,"3XL":0}';
+  $host = getenv('DATABASE_HOST');
+  $dbname = getenv('stock');
+  $user = getenv('Site_USER');
+  $pass = getenv('Site_PASS');
+
+// $product['stock'] = '{"XS":0,"S":2,"M":5,"L":0,"XL":1,"2XL":0,"3XL":0}';
 	 
 	// Decode the JSON stock string into an associative array
 $sizes = json_decode($product['stock'], true);
