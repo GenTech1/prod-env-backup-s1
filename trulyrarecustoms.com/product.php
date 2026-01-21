@@ -134,8 +134,6 @@ $colors = array_unique($colors);
   $dbname = getenv('stock');
   $user = getenv('Site_USER');
   $pass = getenv('Site_PASS');
-
-// $product['stock'] = '{"XS":0,"S":2,"M":5,"L":0,"XL":1,"2XL":0,"3XL":0}';
 	 
 	// Decode the JSON stock string into an associative array
 $sizes = json_decode($product['stock'], true);
