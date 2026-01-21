@@ -99,7 +99,7 @@ try {
 <div class="productContainer">
 <div class="product">
     <?php foreach ($products as $product): 
-      $description=htmlspecialchars(substr($product['description'], 0, 100));?>
+      $description=htmlspecialchars(substr($product['description'], 0, 50));?>
         <?php $images = array_values(json_decode($product['image'], true));
 ?>
       <div class="productSetup">
@@ -122,7 +122,7 @@ try {
 <div class="product">
 
     <?php foreach ($productCustom as $product):
-       $description=htmlspecialchars(substr($product['description'], 0, 100));?>
+       $description=htmlspecialchars(substr($product['description'], 0, 50));?>
   <?php $images = array_values(json_decode($product['image'], true));
 ?>
       <div class="productSetup">
