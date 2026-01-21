@@ -147,7 +147,8 @@ try {
 <div class="storeCaroucel">
 <?php echo "<h1>".$header_0['Name']."</h1>"; ?>
 <div class="product">
-    <?php foreach ($products as $product): ?>
+    <?php foreach ($products as $product): 
+      $description=htmlspecialchars(substr($product['description'], 0, 100));?>
         <?php $images = array_values(json_decode($product['image'], true));
 ?>
       <div class="productSetup">
@@ -155,7 +156,7 @@ try {
           <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-        <p><?php echo htmlspecialchars($product['description']); ?></p>
+        <p><?php echo $description . "..." ?></p>
       </div>
     <?php endforeach; ?>
 </div>
@@ -170,7 +171,8 @@ try {
 <div class="storeCaroucel">
 <?php echo "<h1>".$header_1['Name']."</h1>"; ?>
 <div class="product">
-    <?php foreach ($productsEvents as $product): ?>
+    <?php foreach ($productsEvents as $product): 
+      $description=htmlspecialchars(substr($product['description'], 0, 50));?>
         <?php $images = array_values(json_decode($product['image'], true));
 ?>
       <div class="productSetup">
@@ -178,7 +180,7 @@ try {
           <img class="productImages" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </a>
         <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-        <p><?php echo htmlspecialchars($product['description']); ?></p>
+        <p><?php echo $description . "..." ?></p>
       </div>
     <?php endforeach; ?>
 </div>
