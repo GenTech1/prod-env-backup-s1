@@ -126,4 +126,10 @@ nav{
     display: flex;
     justify-content: center;
 }
+.product-image{
+    width: 250px;
+    height: 250px;
+    border: 2px solid #d98b8f;
+    border-radius: 4px;
+}
 

@@ -22,6 +22,7 @@
           <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
           <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
           <button class="nav-btn" onclick="window.location.href='contact.php'">Contact</button>
+          <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
         </nav>
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
