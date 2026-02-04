@@ -33,6 +33,9 @@
         <button class="nav-btn" onclick="window.location.href='contact.php'">
           Contact
         </button>
+        <button class="nav-btn" onclick="window.location.href='login.php'">
+          Login
+        </button>
       </nav>
     </header>
 
@@ -58,9 +61,8 @@
                   foreach($result as $row){
                     echo '<div class="product">';
                     echo '<div class="product box">';
-                    echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
-                    echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
-                    echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';
+                    echo '<img class="product-image" src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
+
                     echo '</div>';
                     echo '<p class="product-name">' . htmlspecialchars($row['name']) . '</p>';
                     echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';

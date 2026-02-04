@@ -23,6 +23,7 @@
           <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
           <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
           <button class="nav-btn" onclick="window.location.href='contact.php'">Contact</button>
+          <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
         </nav>
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -36,7 +37,7 @@
           </div>
 
           <div class="hero-image box">
-              <img src="" alt="Mug Icon" />
+              <img class="product-image" src="./public/assets/Gold.jpeg" alt="Mug Icon" />
           </div>
       </section>
       
@@ -58,7 +59,7 @@
                   foreach($result as $row){
                     echo '<div class="product">';
                     echo '<div class="product box">';
-                    echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
+                    echo '<img class="product-image" src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['name']) . ' Icon" />';
                     echo '</div>';
                     echo '<p name="product-name" class="product-name">' . htmlspecialchars($row['name']) . '</p>';
                     echo '<p class="product-price">$' . htmlspecialchars($row['price']) . '</p>';

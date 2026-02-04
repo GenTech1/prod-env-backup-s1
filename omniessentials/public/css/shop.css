@@ -10,3 +10,9 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
+.product-image{
+    width: 250px;
+    height: 250px;
+    border: 2px solid #d98b8f;
+    border-radius: 4px;
+}

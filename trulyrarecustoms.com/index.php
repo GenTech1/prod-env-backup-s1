@@ -148,7 +148,7 @@ try {
 <?php echo "<h1>".$header_0['Name']."</h1>"; ?>
 <div class="product">
     <?php foreach ($products as $product): 
-      $description=htmlspecialchars(substr($product['description'], 0, 100));?>
+      $description=htmlspecialchars(substr($product['description'], 0, 50));?>
         <?php $images = array_values(json_decode($product['image'], true));
 ?>
       <div class="productSetup">
