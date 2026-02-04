@@ -24,7 +24,7 @@ if (isset($_GET['items'])) {
             }
 }else if (isset($_GET['item'])) {
   $item = $_GET['item'];
-        echo $item . "<br>";
+        // echo $item . "<br>";
                 $host = getenv('DATABASE_HOST');
                 $dbname = getenv('Products_DB');
                 $user = getenv('Site_USER');
@@ -35,74 +35,8 @@ if (isset($_GET['items'])) {
                   $stmt = $conn->prepare("SELECT * FROM Products where name like ?");
                   $stmt->execute([$item]);
                 $product = $stmt->fetch(PDO::FETCH_ASSOC);
-                    echo $product['name'] . "<br>";
+                    // echo $product['name'] . "<br>";
 
-                    // Order product from printed mint
-$url = "https://api.madely.com/pm/v1/orders.json";
-$apiKey = "o3cxzababnTKhy72oK4YHcPHWZH2jPxg";
-
-/**
- * Generates a 24-character hex string similar to a MongoDB ObjectId
- */
-function generateMongoId() {
-    return bin2hex(random_bytes(12));
-}
-
-$orderId = generateMongoId(); // Create the top-level ID
-$itemId  = substr(bin2hex(random_bytes(4)), 0, 8); // Create an 8-char ID for the item
-
-$orderData = [
-    "id" => $orderId, 
-    "sample" => true,
-    "address_to" => [
-        "first_name" => "Test",
-        "last_name" => "User",
-        "address1" => "123 Test Lane",
-        "city" => "New York",
-        "region" => "NY",
-        "zip" => "10001",
-        "country" => "US",
-        "email" => "test@example.com",
-        "phone" => "5555555555"
-    ],
-    "shipping" => [
-        "carrier" => "FedEx",
-        "priority" => "Ground"
-    ],
-    "items" => [
-        [
-            "id" => $itemId, // The item needs its own ID too
-            "sku" => $product['sku'], 
-            "quantity" => 1,
-            "preview_files" => [
-                "front" => $product['image']
-            ],
-            "print_files" => [
-                "front" => $product['print']
-            ]
-        ]
-    ]
-];
-
-$payload = json_encode($orderData);
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "X-API-Key: $apiKey",
-    "Content-Type: application/json"
-]);
-
-$response = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-echo "Generated Order ID: $orderId\n";
-echo "Status Code: $httpCode\n";
-echo "Response: $response";
-
-curl_close($ch);
                 }catch(PDOException $e){
                   echo "Connection failed: " . $e->getMessage();
                 }
@@ -126,12 +60,13 @@ curl_close($ch);
   <body>
     <header class="navbar">
       <div class="logo">LOGO</div>
-      <nav>
-        <button class="nav-btn" onclick="window.location.href='index.php'">Home</button>
-        <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
-        <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
-        <button class="nav-btn" onclick="window.location.href='contact.php'">Contact</button>
-      </nav>
+        <nav>
+          <button class="nav-btn" onclick="window.location.href='index.php'">Home</button>
+          <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
+          <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
+          <button class="nav-btn" onclick="window.location.href='contact.php'">Contact</button>
+          <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
+        </nav>
     </header>
   <body>
     <h1>Buy Now</h1>
@@ -140,6 +75,7 @@ curl_close($ch);
   <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
   <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
   <input type="email" id="email" name="email" placeholder="Email" required>
+  <input type="text" id="address" name="address" placeholder="Address" required>
   <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
 
   <div id="card-container"></div>
@@ -190,6 +126,7 @@ curl_close($ch);
 
       const cardButton = document.getElementById('card-button');
       cardButton.addEventListener('click', async function () {
+      event.preventDefault()
         try {
           const email = document.getElementById('email').value;
           const phone = document.getElementById('phone').value;
@@ -205,16 +142,26 @@ curl_close($ch);
           let result = await response.json();
           if(result.success){
             document.getElementById('payment-status').textContent ='Payment successful!';
-            window.location.href = 'success.php';
-          }else{
-            document.getElementById('payment-status').textContent = 'Payment failed: ' + result.message;
-          }
 
-        } catch (err) {
-          document.getElementById('payment-status').textContent = 'Error: ' + err.message;
-        }
-      });
-    }
+             const response = await fetch('sendOrder.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nonce: token, email: email, phone: phone, fname: fname, lname: lname, image:<?php echo json_encode($product['image']); ?>, print: <?php echo json_encode($product['print']); ?>, sku: <?php echo json_encode($product['sku']); ?> })
+          });
+
+          let result2 = await response.json();
+          if(result2.success){
+                    window.location.href = 'success.php';
+}
+                              }else{
+                                document.getElementById('payment-status').textContent = 'Payment failed: ' + result.message;
+                              }
+                            } catch (err) {
+                              document.getElementById('payment-status').textContent = 'Error: ' + err.message;
+                            }
+                          });
+                        }
+              
 
     main();
   });

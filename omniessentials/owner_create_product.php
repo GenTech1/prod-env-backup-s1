@@ -22,7 +22,7 @@ try {
   }
 } catch (Exception $e) { echo $e->getMessage(); }
 
-  // If authenticated, load products for display
+  // If authenticated, load products and orders for display
   if (!empty($authenticated)) {
     try {
       $prodDb = getenv('Products_DB') ?? '';
@@ -30,6 +30,15 @@ try {
       $pstmt = $pdo->query('SELECT * FROM products');
       $products = $pstmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) { $products = []; }
+    
+    // Load orders if available
+    try {
+           $prodDb = getenv('Products_DB') ?? '';
+      $pdo = new PDO("mysql:host=$host;dbname=$prodDb;charset=utf8mb4", $user, $pass, [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
+      // Try to fetch from orders table
+      $ostmt = $pdo->query('SELECT * FROM orders ORDER BY id DESC LIMIT 100');
+      $orders = $ostmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) { $orders = []; }
   }
 ?> 
 <!DOCTYPE html>
@@ -47,6 +56,7 @@ try {
           <title>Omni Essentials</title>
     <link rel="stylesheet" href="public/css/App.css" />
     <link rel="stylesheet" href="public/css/index.css" />
+    <link rel="stylesheet" href="public/css/owner.css" />
   </head>
   <body>
           <header class="navbar">
@@ -61,9 +71,14 @@ try {
       </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  
+    <div class="tabs-container">
+      <div class="tabs-header">
+        <button class="tab-button active" onclick="switchTab(event, 'products-tab')">Products</button>
+        <button class="tab-button" onclick="switchTab(event, 'orders-tab')">Orders</button>
+      </div>
 
-    
+      <!-- Products Tab -->
+      <div id="products-tab" class="tab-content active">
         <?php if (!empty($products) && is_array($products)): ?>
           <table border="1">
             <thead>
@@ -96,9 +111,55 @@ try {
         <?php else: ?>
           <p>No products to show.</p>
         <?php endif; ?>
+      </div>
+
+      <!-- Orders Tab -->
+      <div id="orders-tab" class="tab-content">
+        <?php if (!empty($orders) && is_array($orders)): ?>
+          <table border="1">
+            <thead>
+              <tr>
+                <?php foreach (array_keys($orders[0]) as $h): ?>
+                  <th><?php echo htmlspecialchars($h); ?></th>
+                <?php endforeach; ?>
+              </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($orders as $o): ?>
+              <tr>
+                <?php foreach ($o as $c): ?>
+                  <td><?php echo htmlspecialchars((string)$c); ?></td>
+                <?php endforeach; ?>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+        <?php else: ?>
+          <p>No orders to show.</p>
+        <?php endif; ?>
+      </div>
+    </div>
         <br /><br /><br /><br />
   <section class="signup-section">
       </section>
       </div>
+      
+      <script>
+        function switchTab(event, tabName) {
+          // Hide all tab contents
+          const tabContents = document.querySelectorAll('.tab-content');
+          tabContents.forEach(tab => tab.classList.remove('active'));
+          
+          // Remove active class from all buttons
+          const tabButtons = document.querySelectorAll('.tab-button');
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Show the selected tab
+          document.getElementById(tabName).classList.add('active');
+          
+          // Add active class to clicked button
+          event.target.classList.add('active');
+        }
+      </script>
   </body>
 </html>
