@@ -17,7 +17,6 @@
 /* img box */
 .contact-image-placeholder {
     display: flex;
-    /* justify-self: flex-end; */
     width: 80vw;
     height: 20vw;
     border: 2px solid #d98b8f;

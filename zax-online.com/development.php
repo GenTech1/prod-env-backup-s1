@@ -11,7 +11,7 @@
     <title>Zax | Development</title>
 </head>
 <body> 
-    
+    <script src="js/ResearchReport.js"></script>
     <section class="top-section">
         <video autoplay muted loop id="bg-video">
             <source src="../images/spaceEarth.mp4" type="video/mp4">
@@ -45,13 +45,8 @@
 
     <section class="bottom-section">
         
-    <!-- New { -->
      <div class="carousel-inner">
         <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
-    <!-- } -->
-
-    <!-- Not needed -->
-                <!-- <div class="card-container d-flex justify-content-center gap-4 flex-wrap"> -->
         <?php
 
 $host = getenv('DATABASE_HOST');
@@ -73,22 +68,21 @@ try {
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
-
-// New {
+// Putting cards in a gorup of 3
 $chunks = array_chunk($products, 3);
 $isActive = true;
 
 foreach ($chunks as $group):
 ?>
-
+    <!-- Where the carousel start -->
     <div class="carousel-item <?= $isActive ? 'active' : '' ?>">
         <div class="d-flex justify-content-center gap-4">
-<!-- } -->
 
-<!-- was foreach ($products as $product): -->
+<!-- Making card loop -->
 <?php foreach ($group as $product):
-    echo '<div class="card text-bg-dark custom-card">';
-         echo '<img src="' . htmlspecialchars($product["Image"]) . '" class="card-img" href="#" alt="Research Reports">';
+echo '<a href="ResearchReport.php?report='. urlencode($product["Slug"]) .'">';
+    echo '<div class="card text-bg-dark custom-card" id="'. htmlspecialchars($product["id"]) .'">';
+         echo '<img src="' . htmlspecialchars($product["Image"]) . '" class="card-img" alt="Research Reports">';
             echo '<div class="card-img-overlay">';
                 echo '<h5 class="card-title">Research Report</h5>';
                     echo '<div class="card-hover-text">';
@@ -97,10 +91,10 @@ foreach ($chunks as $group):
                     echo '</div>';
             echo '</div>';
     echo '</div>';
+echo '</a>';
 endforeach; 
 ?>
 
-<!-- New { -->
 </div>
 </div>
 
@@ -119,7 +113,6 @@ endforeach;
 <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
 </button>
-<!-- } -->
 
 
 
