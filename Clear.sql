@@ -9,3 +9,4 @@ Drop DATABASE IF EXISTS `trc_users`;
 Drop DATABASE IF EXISTS `zax_messages`;
 Drop DATABASE IF EXISTS `zax_products`;
 Drop DATABASE IF EXISTS `zax_research_reports`;
+Drop DATABASE IF EXISTS `oe_users`;

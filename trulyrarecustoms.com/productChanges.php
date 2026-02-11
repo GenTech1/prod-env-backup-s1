@@ -1,7 +1,6 @@
 <?php
 date_default_timezone_set('America/Chicago');
 
-
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Products_DB');
 $user = getenv('AD_USER');
@@ -19,7 +18,7 @@ $stmt = $pdo->query("SELECT * FROM Products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 for ($i = 0; $i < count($products); $i++) {
-    $id = $_POST['id'];
+    $id = $_GET['id'];
 
     if ($products[$i]['id'] == $id) {
 
