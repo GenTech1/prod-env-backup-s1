@@ -47,7 +47,7 @@ if (isset($_GET['word'])) {
 	try {
     		$pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$stmt = $pdo->prepare("SELECT * FROM Products WHERE name LIKE ? OR tags LIKE ?");  
+		$stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE ? OR tags LIKE ?");  
                 $stmt->execute(["%$word%","%$word%"]);
 		
 		

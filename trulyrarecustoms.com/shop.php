@@ -77,14 +77,14 @@ try {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE tags LIKE ?");
     $stmt->execute(["%" . $header_0['Name'] . "%"]);
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
 try {
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE tags LIKE ?");
     $stmt->execute(["%" . $header_1['Name'] . "%"]);
       $productCustom = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -165,8 +165,7 @@ try {
   </div>
   <div id="botLogo">
      <img id="logo2" src="assets/logo2.PNG" alt="logo2"/>
-    </div>
-    <nav id="footerNav">
+    </div>    <nav id="footerNav">
       <a href="pp.php">Privacy Policy</a>
       <a href="customize.php">Book</a>
       <a href="contact.php">Contact us</a>

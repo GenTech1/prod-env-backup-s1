@@ -25,7 +25,7 @@ try {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE tags LIKE ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE tags LIKE ?");
     $stmt->execute(['%gaming pc%']);
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

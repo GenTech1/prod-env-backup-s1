@@ -18,7 +18,7 @@ switch ($section) {
 	if ($conn->connect_error) {
     		die("Connection failed: " . $conn->connect_error);
 	}
-    $sql = "SELECT * FROM Products";
+    $sql = "SELECT * FROM products";
     break;
   case 'users':
 	$conn = new mysqli($host, $user, $pass, $usersdb);
@@ -32,7 +32,7 @@ switch ($section) {
 	if ($conn->connect_error) {
     		die("Connection failed: " . $conn->connect_error);
 	}
-    $sql = "SELECT * FROM Orders";
+    $sql = "SELECT * FROM orders";
     break;
   case 'messages':
 	$conn = new mysqli($host, $user, $pass, $messagesdb);
@@ -61,6 +61,7 @@ switch ($section) {
 }
 
 $result = $conn->query($sql);
+
 
 if ($result->num_rows > 0) {
   echo "<div class='record'>";
@@ -96,7 +97,7 @@ if ($result->num_rows > 0) {
     echo "</div><hr>"; // Close record + line break
   }
 } else {
-  echo "No data found.";
+  echo "No data found." ;
 }
 
 

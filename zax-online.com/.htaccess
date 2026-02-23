@@ -1,7 +1,7 @@
 SetEnv Site_USER Zax_site
-SetEnv Site_PASS .RKBvA]U[NF2jAjJ
+SetEnv Site_PASS pF*UPssD28FxQZRj
 SetEnv AD_USER Trc_pm
-SetEnv AD_PASS	8Yoz41kY1POxex8u
+SetEnv AD_PASS	PEirnLI*XQFE[p01
 SetEnv DATABASE_HOST localhost
 SetEnv Products_DB zax_products
 SetEnv research_reports_DB zax_research_reports

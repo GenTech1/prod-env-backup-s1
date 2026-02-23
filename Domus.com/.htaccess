@@ -1,5 +1,5 @@
 SetEnv Site_USER Trc_site
-SetEnv Site_PASS 4R6znTF3vwZ6xzDO
+SetEnv Site_PASS msR-QIfM_Ck1aQT7
 SetEnv Users_DB domus_users
 SetEnv DATABASE_HOST localhost
 SetEnv Square_App sandbox-sq0idb-HBMziuBgOVo4VjqbqN2teA

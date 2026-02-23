@@ -38,7 +38,7 @@ try {
 
     // Prepare insert query
     $stmt = $pdo->prepare("
-        INSERT INTO Products
+        INSERT INTO products
         (name, description, image, price, currency, tags, stock, sku, `visible/not visible`)
         VALUES
         (:name, :description, :image, :price, :currency, :tags, :stock, :sku, :visible)

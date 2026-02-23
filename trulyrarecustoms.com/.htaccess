@@ -15,15 +15,16 @@ SetEnv KLAVIYO_MEMBER_LIST Rpz9qS
 SetEnv CLIENT_NOTIFICATION_EMAIL trulyrarecustoms@gmail.com
 
 SetEnv Site_USER Trc_site
-SetEnv Site_PASS 4R6znTF3vwZ6xzDO
+SetEnv Site_PASS msR-QIfM_Ck1aQT7
 SetEnv AD_USER Trc_pm
-SetEnv AD_PASS	8Yoz41kY1POxex8u
+SetEnv AD_PASS	IJb]StXmzXr8xn(m
 SetEnv DATABASE_HOST localhost
-SetEnv Products_DB Trc_Products
-SetEnv Messages_DB Trc_messages
-SetEnv Memberships_DB Trc_memberships
-SetEnv Categories_DB Trc_site
-SetEnv Users_DB Trc_Users
+
+SetEnv Products_DB trc_products
+SetEnv Messages_DB trc_messages
+SetEnv Memberships_DB trc_memberships
+SetEnv Categories_DB trc_site
+SetEnv Users_DB trc_users
 
 SetEnv SQUARE_APP_ID sandbox-sq0idb-zKy30zInLQNZYxAuWIIvSA
 SetEnv SQUARE_APP_ID_Live sq0idp-h2iK__Nxndpt985qjqDh-w 
