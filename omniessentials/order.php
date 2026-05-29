@@ -12,7 +12,7 @@ if (isset($_POST['product'])) {
                 
                   $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
                   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  $stmt = $conn->prepare("SELECT * FROM Products where name like ?");
+                  $stmt = $conn->prepare("SELECT * FROM products where name like ?");
                   $stmt->execute([$productName]);
                 $product = $stmt->fetch(PDO::FETCH_ASSOC);
                     echo $product['name'] . "<br>";

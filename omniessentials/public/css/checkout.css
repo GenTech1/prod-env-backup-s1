@@ -4,10 +4,10 @@
 
 /* Colors based on wireframe */
 :root {
-  --bg-light: #f7e8e9;
-  --border: #d98b8f;
-  --text-main: #8b3f45;
-  --button-bg: #d98b8f;
+  --bg-light: #fffacd;
+  --border: #ffd700;
+  --text-main: #daa520;
+  --button-bg: #ffd700;
   --button-text: #ffffff;
 }
 
@@ -56,7 +56,7 @@ h1 {
 }
 
 #payment-form input::placeholder {
-  color: #b37277;
+  color: #daa520;
 }
 
 /* Card container */

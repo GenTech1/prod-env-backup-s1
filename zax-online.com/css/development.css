@@ -1,3 +1,29 @@
+/* 1. Push the navbar to the very front so it's above the invisible carousel pillars */
+#nav, #HbMenu {
+    z-index: 1050 !important; /* Bootstrap carousels usually use 1000-1020 */
+}
+
+/* 2. Fix the carousel controls so they don't cover the whole screen height */
+.carousel-control-prev,
+.carousel-control-next {
+    height: 300px;      /* Match this to the approximate height of your cards */
+    top: 50%;           /* Center it vertically within the reports section */
+    transform: translateY(-50%);
+    width: 5%;          /* Make them thinner so they stay out of the way */
+}
+
+/* 3. Ensure the top section doesn't let things bleed over */
+.top-section {
+    position: relative;
+    z-index: 1;
+}
+[data-tab-content] {
+    display: none;
+}
+.active[data-tab-content] {
+    display: flex;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -6,6 +32,30 @@ html, body {
     background: black;
 }
 
+#breadcrumb {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8vw;
+}
+#breadcrumb li {
+    color: white;
+    list-style: none;
+}
+#breadcrumb li:hover{
+    text-decoration: underline;
+
+}
+.bottom-section2 {
+    gap: 8vw;
+    color: white;
+    justify-content: center;
+}
+.content2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* Top part of the page */
 
 .top-section {
@@ -86,7 +136,8 @@ html, body {
 .bottom-section {
     height: 50vh;
     background-color: black;
-    display: flex;
+    /* display: flex; */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -99,7 +150,7 @@ html, body {
 .carousel-control-prev,
 .carousel-control-next {
     position: absolute;
-    z-index: 9999;
+    /* z-index: 100; */
 }
 
 .card-container {

@@ -8,17 +8,45 @@ $apiKey = "o3cxzababnTKhy72oK4YHcPHWZH2jPxg";
 
     // Variables from JS
     $sku     = $data['sku'] ?? 'K34-LIDANDSTRAW';
-    $price   = $data['price'] ?? 1999; // Default price in cents
-    $fname   = $data['fname'] ?? "Quinton";
-    $lname   = $data['lname'] ?? "Taylor";
-    $email   = $data['email'] ?? "example@example.com";
-    $phone   = $data['phone'] ?? "555555555";
-    $address = $data['address'] ?? "3725 Iowa Ave";
-    $city    = $data['city'] ?? "St.louis";
-    $state   = $data['state'] ?? "Mo";
-    $zip     = $data['zip'] ?? "63118";
-    $image   = $data['image'] ?? "./public/assets/GlassCan1.jpeg";
-    $print   = $data['print'] ?? "./public/assets/GlassCan1.jpeg";
+    $price   = $data['price'] ?? ""; // Default price in cents
+    $fname   = $data['fname'] ?? "";
+    $lname   = $data['lname'] ?? "";
+    $email   = $data['email'] ?? "";
+    $phone   = $data['phone'] ?? "";
+    $address = $data['address'] ?? "";
+    $city    = $data['city'] ?? "";
+    $state   = $data['state'] ?? "";
+    $zip     = $data['zip'] ?? "";
+    $image   = $data['image'] ?? "";
+    $print   = $data['print'] ?? "";
+if (
+    !$sku ||
+    !$price ||
+    strlen($fname) < 3 ||
+    strlen($lname) < 3 ||
+    !$email ||
+    strlen($phone) < 10 ||
+    !$address ||
+    !$city ||
+    !$state ||
+    strlen($zip) < 5
+) {
+    echo json_encode([
+        'success' => false,
+        'message' =>
+            (!$sku ? "SKU is required. " : "") .
+            (!$price ? "Price is required. " : "") .
+            (strlen($fname) < 3 ? "First name must be at least 3 characters. " : "") .
+            (strlen($lname) < 3 ? "Last name must be at least 3 characters. " : "") .
+            (!$email ? "Email is required. " : "") .
+            (strlen($phone) < 10 ? "Phone number must be at least 10 digits. " : "") .
+            (!$address ? "Address is required. " : "") .
+            (!$city ? "City is required. " : "") .
+            (!$state ? "State is required. " : "") .
+            (strlen($zip) < 5 ? "Zip code must be at least 5 digits." : "")
+    ]);
+    exit;
+}
 
     // Printed Mint Setup
     function generateMongoId() {
@@ -88,20 +116,20 @@ curl_close($ch);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $conn->prepare("INSERT INTO orders (
-        order_id, sku, order_date, status, payment_status, payment_method, 
+        customer_id, sku, order_date, status, payment_status, payment_method, 
         total_amount, subtotal_amount, tax_amount, shipping_amount, 
         discount_amount, coupon_code, shipping_name, shipping_phone, 
         shipping_email, shipping_address, shipping_city, shipping_state, 
         shipping_zip, shipping_country, updated_at
     ) VALUES (
-        :order_id, :sku, NOW(), 'Pending', 'Paid', 'Square', 
+        :customer_id, :sku, NOW(), 'Pending', 'Paid', 'Square', 
         :total, :subtotal, 0.00, 0.00, 0.00, '', 
         :shipping_name, :phone, :email, :address, :city, :state, :zip, 'US', NOW()
     )");
 
     // ONLY EXECUTE ONCE
     $stmt->execute([
-        ':order_id'      => $orderId,
+        ':customer_id'   => $orderId,
         ':sku'           => $sku,
         ':total'         => $price / 100, 
         ':subtotal'      => $price / 100, 
@@ -118,7 +146,7 @@ curl_close($ch);
 
 } catch (Exception $e) {
     echo json_encode([
-    'success' => true, 
+    'success' => false, 
     'order_id' => $orderId, 
     'api_response' => json_decode($response), // This puts the API result in the log
     'http_code' => $httpCode

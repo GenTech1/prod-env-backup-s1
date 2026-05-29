@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4MCVJ8B5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y4MCVJ8B5C');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/gaming.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    
-    <title>Zax | Development</title>
+    <title>Zax | Gaming</title>
 </head>
 <body> 
     <?php
@@ -34,11 +43,10 @@ try {
 ?>
     <section class="top-section">
         <video autoplay muted loop id="bg-video">
-            <source src="../images/playingGames.mp4" type="video/mp4">
+            <source src="images/playingGames.mp4" type="video/mp4">
         </video>
 
         <div class="overlay-content">
-       <body>
             <a href="#" class="fa fa-bars" id="HbMenu"></a>
                       <nav class="navbar" id="nav">
              
@@ -51,7 +59,7 @@ try {
 
     
             <div class="content"> <!-- content is hero-text -->
-                    <h1 class="page-title">Dreams Start Here</h1><br/>
+                    <h1 class="page-title">Where Battles Are Won</h1><br/>
                     <div id="buttons" ><button id="shopButton" onclick="shop()">Shop</button><button id="customizeButton" onclick="book()">Customize</button></div>
 
             </div>

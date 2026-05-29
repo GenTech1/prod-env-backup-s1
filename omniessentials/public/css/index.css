@@ -8,7 +8,7 @@
 /* Featured Products */
 .featured {
     padding: 60px;
-    border-bottom: 2px solid #d98b8f;
+    border-bottom: 2px solid #ffd700;
 
 }
 .product-grid {
@@ -16,8 +16,10 @@
     justify-content: center;
 }
 .featuredName {
+    display: flex;
+    justify-content: center;
     position: relative;
-    left:17vw;
+    /* left:17vw; */
 }
 
 .product-grid {
@@ -37,5 +39,25 @@
     width: 60%;
 }
 
+/* .product-image{
+    width: 250px;
+    height: 250px;
+    border-radius: 4px;
+} */
 
+.product-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    display: block; /*May get cut off*/
+    margin: 0 auto; /*May get cut off*/
+    aspect-ratio: 1 / 1; /*May get cut off*/
+    border: 2px solid #ffd700;
+    border-radius: 4px;
+}
 
+@media (max-width: 920px) { 
+    .about-left {
+        gap: 20px;
+    }
+}

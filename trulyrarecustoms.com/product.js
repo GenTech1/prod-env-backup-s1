@@ -48,5 +48,5 @@ cart.addEventListener("submit", (e) =>{
 e.preventDefault();
 date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
 let expires = "expires=" +date.toUTCString();
-document.cookie = ` CART_${encodedSKU}=${encodedSKU}${sizePicked}-1; ${expires}; path =/`;
+document.cookie = "CART_" + encodedSKU + "=" + encodedSKU + sizePicked + "-1; " + expires + "; path=/";
 });

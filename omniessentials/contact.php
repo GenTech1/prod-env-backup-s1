@@ -10,7 +10,7 @@
       content="Web site created using create-react-app"
     />
  
-          <title>Coffee Cups & Mugs</title>
+          <title>Omni Essentials</title>
     <link rel="stylesheet" href="public/css/App.css" />
     <link rel="stylesheet" href="public/css/contact.css" />
     <!-- For confetti on the Submit button -->
@@ -19,8 +19,11 @@
   </head>
   <body>
           <header class="navbar">
-        <div class="logo">LOGO</div>
-        <nav>
+        <div class="logo">Omni Essentials</div>
+
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <nav id="navMenu">
           <button class="nav-btn" onclick="window.location.href='index.php'">Home</button>
           <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
           <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
@@ -28,6 +31,13 @@
           <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
         </nav>
       </header>
+
+      <script>
+        function toggleMenu() {
+          document.getElementById('navMenu').classList.toggle('active');
+        }
+      </script>
+      
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <div class="all">
@@ -52,21 +62,39 @@
       </div>
 
 
-      <form class="contact-form" action="/submit.php" method="POST">
-        <input type="text" placeholder="Your First Name" name="first_name" class="form-input" required/>
-        <input type="text" placeholder="Your Last Name" name="last_name" class="form-input" required/>
-        <input type="email" placeholder="Your Email" name="email" class="form-input" required/>
-        <input type="text" placeholder="Your Phone number" name="phone" class="form-input" required/>
-        <textarea placeholder="Your Message" name="message" class="form-textarea" required></textarea>
+      <form class="contact-form" action="submit.php" method="POST">
+        <input type="text" id="first_name" placeholder="Your First Name" name="first_name" class="form-input" required/>
+        <input type="text" id="last_name" placeholder="Your Last Name" name="last_name" class="form-input" required/>
+        <input type="email" id="email" placeholder="Your Email" name="email" class="form-input" required/>
+        <input type="text" id="phone_number" placeholder="Your Phone number ex: 1231234567" name="phone_number" class="form-input" required/>
+        <textarea id="message" placeholder="Your Message" name="message" class="form-textarea" required></textarea>
 
         <button class="primary-btn">Submit</button>
       </form>
     </div>
     </div>
       <section class="signup-section">
-              <button class="btn light">Sign Up</button>
+              
           </section>
       </div>
+      <script>
+        document.querySelector('.contact-form').addEventListener('submit', function(event){
+          event.preventDefault(); 
+          const first_name = document.getElementById('first_name').value;
+          const last_name = document.getElementById('last_name').value;
+          const email = document.getElementById('email').value; 
+          const phone_number = document.getElementById('phone_number').value;
+          const message = document.getElementById('message').value;
+
+          if (first_name.length < 3 || last_name.length < 3 || !email.includes('@') || phone_number.length < 10 || message.length < 10) {
+            alert('Please fill out all fields correctly before submitting.');
+            return;
+          }else if (first_name.length >= 3 && last_name.length >= 3 && email.includes('@') && phone_number.length >= 7 && message.length >= 10) {
+            this.submit();
+            }
+          });
+
+      </script>
   </body>
 </html>
 

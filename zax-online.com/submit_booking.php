@@ -1,3 +1,14 @@
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4MCVJ8B5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y4MCVJ8B5C');
+</script>
+</head>
 <?php
 date_default_timezone_set('America/Chicago');
 
@@ -13,6 +24,7 @@ try {
 die("Connection failed " .$e->getMessage());
 }
 
+try{
 //set variables from form
 $name = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
@@ -53,5 +65,7 @@ if ($name === '' || $email === '' || $phone === '' || $date === '' || $time === 
     ]);
     header("Location: /ty.php");
 }
-
+}catch(PDOException $e){
+die("Error: Payment Failed");
+}
 ?>

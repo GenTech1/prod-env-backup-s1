@@ -23,31 +23,112 @@ height:20vw;
 width:20vw; 
 height:20vw;
 }
-#arrows{
+.full-banner-wrapper {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+#arrows {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   flex-direction: row;
-  opacity: 50%;
+  opacity: 0.8;
+  z-index: 10;
+}
+.full-banner-wrapper {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
 
-}
-#previousArrow{
-    border:none;
-}
-#nextArrow{
-    border:none;
-}
 .full-banner-track {
   display: flex;
   width: max-content;
   transition: transform 0.5s ease-in-out;
+  height: 100%;
 }
-#bannerTrack{
-display: flex;
-flex-direction: row;
+
+#bannerTrack {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 }
-.full-slide{
-  width:100vw;
-  height:40vw;
+
+.full-slide {
+  position: relative;
+  width: 100vw;
+  height: 40vw;
+  flex-shrink: 0; /* Prevent slides from shrinking */
+  overflow: hidden;
+}
+
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-text h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: 'Staatliches', cursive;
+}
+
+.banner-text p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  font-family: 'Raleway', sans-serif;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #ff69b4;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  font-family: 'Raleway', sans-serif;
+}
+
+.cta-button:hover {
+  background-color: #ff1493;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
 
 
@@ -104,5 +185,47 @@ height:40vw;
 .reviewsSVG{
 width:40vw; 
 height:40vw;
+}
+
+/* Mobile banner adjustments */
+.full-slide {
+  height: 60vh !important; /* Use viewport height instead of width for better mobile fit */
+  min-height: 300px; /* Minimum height to ensure readability */
+  max-height: 400px; /* Maximum height to prevent overly tall banners */
+}
+
+.banner-overlay {
+  padding: 10px !important; /* Reduce padding on mobile */
+}
+
+.banner-text h1 {
+  font-size: clamp(1.5rem, 8vw, 2.5rem) !important; /* Smaller text on mobile */
+  margin-bottom: 0.5rem !important;
+  line-height: 1.2 !important; /* Better line height for mobile */
+}
+
+.banner-text p {
+  font-size: clamp(0.9rem, 4vw, 1.1rem) !important; /* Smaller subtitle */
+  margin-bottom: 1rem !important;
+  line-height: 1.3 !important; /* Better line height for mobile */
+}
+
+.cta-button {
+  padding: 0.8rem 1.5rem !important; /* Smaller button padding */
+  font-size: clamp(0.9rem, 4vw, 1rem) !important; /* Smaller button text */
+  min-width: 120px; /* Ensure button is not too small */
+}
+
+#arrows {
+  position: absolute;
+  bottom: 10px; /* Position arrows closer to bottom on mobile */
+}
+
+#previousArrow, #nextArrow {
+  font-size: 1.2rem !important; /* Smaller arrow size */
+  padding: 8px !important;
+  background-color: rgba(255, 255, 255, 0.8) !important; /* Make arrows more visible */
+  border-radius: 50% !important;
+  margin: 0 5px !important;
 }
 }

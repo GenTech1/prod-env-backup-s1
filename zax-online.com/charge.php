@@ -1,8 +1,14 @@
 <?php
-$email = 'hi@example.com';
-$phone = '+1234567890';
-$price = 100; // Default price in cents
-$nonce = 'cnon:card-nonce-ok'; // Example nonce for testing
+// 1. MUST read the raw JSON input from the request body
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
+
+// 2. SAFELY extract the expected fields
+$email = $data['email'] ?? '';
+$phone = "+1".$data['phone'] ?? '';
+// 3. FORCE the price to be an integer (Square will reject "100" but accept 100)
+$price = isset($data['price']) ? (int)$data['price'] : 0;
+$nonce = $data['nonce'] ?? ''; // Example nonce for testing
 
 $access_ID = getenv('Square_Access_ID');
 $payload = [
@@ -13,14 +19,14 @@ $payload = [
       "amount" => $price,
       "currency" => "USD"
     ],
-    "autocomplete" => false,
+    "autocomplete" => true,
     "buyer_email_address" => $email,
     "buyer_phone_number"=> $phone,
     "customer_id" => ""
 ];
 try{
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://connect.squareupsandbox.com/v2/payments");
+curl_setopt($ch, CURLOPT_URL, "https://connect.squareup.com/v2/payments");
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Square-Version: 2025-09-24', 
     'Authorization: Bearer ' . $access_ID,

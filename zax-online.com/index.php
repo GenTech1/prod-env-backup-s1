@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4MCVJ8B5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y4MCVJ8B5C');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/index.css">
@@ -14,8 +23,8 @@
              
                     <a href="index.php">Home</a>
                     <a href="development.php">Development</a>
-                    <!-- <a href="gaming.php">Gaming</a> -->
-                    <!-- <a href="workstations.php">Workstations</a> -->
+                    <a href="gaming.php">Gaming</a> 
+                    <a href="workstations.php">Workstations</a>
                 
             </nav>
 <svg id="svg"height="100vh" width="100vw">

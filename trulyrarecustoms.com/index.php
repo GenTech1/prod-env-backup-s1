@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<?php include 'auth_check.php'; ?>
 <html>
   <!--header-->
   <head id="header">
+    <title>Truly Rare Customs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <div class="blackback">
@@ -62,31 +64,60 @@
 
 <div class="full-banner-wrapper">
   <div class="full-banner-track" id="bannerTrack">
-     <svg class="full-slide" width="100%" height="100%">
-      
-
-    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
-    <image href="assets/p.jpg" width="100%" height="100%" />
-  </svg>
-     <svg class="full-slide" width="100%" height="100%">
-      
-
-    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
-    <image href="assets/j.jpg" width="100%" height="100%" />
-  </svg>
-</svg>
-     <svg class="full-slide" width="100%" height="100%">
-      
-
-    <rect width="100%" height="100%" fill="palevioletred" fill-opacity="0.5"/>
-    <image href="assets/k.jpg" width="100%" height="100%" />
-  </svg>
+    <div class="full-slide">
+      <div class="slide-bg" style="background-image:url('assets/1.PNG')"></div>
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <h1>Create Your Custom Design</h1>
+          <p>Design something truly unique for you</p>
+          <a href="customize.php" class="cta-button">Start Customizing</a>
+        </div>
+      </div>
+    </div>
+    <div class="full-slide">
+      <div class="slide-bg" style="background-image:url('assets/2.JPEG')"></div>
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <h1>Check Out Our Events</h1>
+          <p>Join the community and see what's happening</p>
+          <a href="events.php" class="cta-button">View Events</a>
+        </div>
+      </div>
+    </div>
+    <div class="full-slide">
+      <div class="slide-bg" style="background-image:url('assets/3.jpg')"></div>
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <h1>Premium Quality Products</h1>
+          <p>Handcrafted with care and attention to detail</p>
+        </div>
+      </div>
+    </div>
+    <div class="full-slide">
+      <div class="slide-bg" style="background-image:url('assets/4.JPEG')"></div>
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <h1>Unique Designs</h1>
+          <p>Stand out with our exclusive collection</p>
+        </div>
+      </div>
+    </div>
+    <div class="full-slide">
+      <div class="slide-bg" style="background-image:url('assets/5.jpg')"></div>
+      <div class="banner-overlay">
+        <div class="banner-text">
+          <h1>Express Yourself</h1>
+          <p>Your style, your story, your way</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="arrows">
+    <button href="#" id="previousArrow" class="fa fa-chevron-left"></button>
+    <button href="#" id="nextArrow" class="fa fa-chevron-right"></button>
   </div>
 </div>
 
-<div id="arrows">
-<button href="#" id="previousArrow" class="fa fa-chevron-left"></button> <button href="#" id="nextArrow" class="fa fa-chevron-right"></button>
-</div>
 <?php
 $host = getenv('DATABASE_HOST');
 $dbForCategories = getenv('Categories_DB');

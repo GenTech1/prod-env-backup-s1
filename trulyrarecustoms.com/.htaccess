@@ -5,6 +5,8 @@
 </FilesMatch>
 SetEnv KLAVIYO_API_KEY pk_fa6ec88980d6d041219e9fdea4078120b5
 
+SetEnv SITE_ACCESS_PASSWORD "trulyrare2024"
+
 SetEnv KLAVIYO_LIST_ID_CONTACT your_contact_list_id_here
 SetEnv KLAVIYO_LIST_ID_CUSTOMIZE your_customize_list_id_here
 
@@ -36,3 +38,4 @@ ErrorDocument 404 /404.php
 
 SetEnv WAFFLE pk_7f14caeb76220581590c55f4f52e84b05c
 SetEnv WAFFLE_KINGDOM V4fB4S
+SetEnv SITE_ACCESS_PASSWORD rareaccess5

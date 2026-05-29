@@ -1,3 +1,14 @@
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4MCVJ8B5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y4MCVJ8B5C');
+</script>
+</head>
 <?php
 $appId = getenv('Square_App');
 $locId = getenv('Square_Location_ID');
@@ -53,7 +64,7 @@ $price = 2000; // Price in cents for consultation
 
 
 
-    <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
+    <script type="text/javascript" src="https://web.squarecdn.com/v1/square.js"></script>
 <script>
 
   const payment_form = document.getElementById("bookingForm");
@@ -132,6 +143,7 @@ $price = 2000; // Price in cents for consultation
         }
         } catch (err) {
           document.getElementById('payment-status').textContent = 'Error: ' + err.message;
+          // console.error(err);
         }
       });
     }

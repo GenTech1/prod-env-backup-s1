@@ -18,8 +18,8 @@ code {
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f7e8e9;
-    color: #8b3f45;
+    background: #fffacd;
+    color: #daa520;
 }
 header{
     display: flex;
@@ -39,12 +39,12 @@ h1, h2 {
     justify-content: space-between;
     align-items: center;
     padding: 20px 60px;
-    border-bottom: 2px solid #d98b8f;
+    border-bottom: 2px solid #ffd700;
 }
 
 .logo {
     padding: 10px 25px;
-    border: 2px solid #d98b8f;
+    border: 2px solid #ffd700;
     border-radius: 4px;
     font-weight: bold;
 }
@@ -52,7 +52,7 @@ h1, h2 {
 nav a {
     margin-left: 30px;
     text-decoration: none;
-    color: #8b3f45;
+    color: #daa520;
     font-weight: 600;
 }
 
@@ -61,7 +61,7 @@ nav a {
     display: flex;
     justify-content: space-between;
     padding: 60px;
-    border-bottom: 2px solid #d98b8f;
+    border-bottom: 2px solid #ffd700;
 }
 
 .hero-text {
@@ -80,16 +80,18 @@ nav a {
     flex-direction: column;
 }
 .box {
-    width: 250px;
-    height: 250px;
-    border: 2px solid #d98b8f;
+    /* width: 250px; */
+    width: 100%;
+    /* height: 250px; */
+    max-width: 250px;
+    aspect-ratio: 1 / 1; /* Keep for now */
     border-radius: 4px;
 }
 
 /* Buttons */
 .btn {
     padding: 12px 28px;
-    background: #d98b8f;
+    background: #ffd700;
     color: white;
     border: none;
     border-radius: 6px;
@@ -99,20 +101,20 @@ nav a {
 
 .btn.light {
     background: white;
-    color: #8b3f45;
-    border: 2px solid #d98b8f;
+    color: #daa520;
+    border: 2px solid #ffd700;
 }
 button{
     background: white;
-    color: #8b3f45;
-    border: 2px solid #d98b8f;
+    color: #daa520;
+    border: 2px solid #ffd700;
     padding: .2vw;
     border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
 }
 button:hover{
-    background: #d98b8f;
+    background: #ffd700;
     color: white;
 }
 nav{
@@ -121,15 +123,69 @@ nav{
 }
 /* Signup */
 .signup-section {
-    background: #d98b8f;
+    background: #ffd700;
     padding: 40px;
     display: flex;
     justify-content: center;
 }
-.product-image{
+/* .product-image{ old text
     width: 250px;
     height: 250px;
-    border: 2px solid #d98b8f;
+    border: 2px solid #ffd700;
     border-radius: 4px;
+} */
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
 }
 
+@media (max-width: 920px) {    
+    body {
+        font-size: 14px;
+    }
+
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #fffacd;
+        margin-top: 10px;
+    }
+
+    nav a {
+        padding: 10px 0;
+        border-bottom: 1px solid #ffd700;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

@@ -2,6 +2,7 @@
 <html>
   <!--header-->
   <head>
+    <title>Truly Rare Customs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <div class="blackback">
@@ -59,6 +60,7 @@ foreach ($_COOKIE as $name => $value){
 	}
 
 foreach ($cartSkus as $sku){
+try {
 // Load database credentials from environment
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Products_DB');
@@ -70,14 +72,21 @@ $pass = getenv('Site_PASS');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Load main product
-    $stmt = $pdo->prepare("SELECT * FROM Products WHERE sku = ?");
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE sku = ?");
     $stmt->execute([$sku[0]]); // Old code
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
- echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $sku[1] . ' ' . $product['price'] . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku[0]) . '">-</button><span class="num">' . str_pad($sku[2], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku[0]) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($sku[1]).'><p><p class="globalCount" data-name='.htmlspecialchars($sku[2]).'><p></div></div>';
+    if (!$product) {
+        continue; // Skip if product not found
+    }
+
+ echo '<div id="Cartcontents">' . $product['name'] .' Size:'  . $sku[1] . ' ' . ($take * $product['price']) . '<div id="Cartbuttons"><button class="minus" data-name="' . htmlspecialchars($sku[0]) . '">-</button><span class="num">' . str_pad($sku[2], 2, "0", STR_PAD_LEFT) . '</span><button class="plus" data-name="' . htmlspecialchars($sku[0]) . '">+</button><button onclick="buySingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Buy</button><button onclick="removeSingleFromCart(\'' . htmlspecialchars($sku[0]) . '\')">Remove</button><p class="globalSize" data-name='.htmlspecialchars($sku[1]).'><p><p class="globalCount" data-name='.htmlspecialchars($sku[2]).'><p></div></div>';
     $total = $total + $take * $product['price'];
 
     echo '<hr>';
+} catch (Exception $e) {
+    echo "Error loading product: " . $e->getMessage();
+}
 }
 $shipping= 5.99; // Flat rate shipping
 $tax= $total * 100 * 0.07; // 7% tax
@@ -86,7 +95,7 @@ $tax= number_format((float)$tax, 2, '.', '');
 $total= $total + $tax;
 $total= number_format((float)$total, 2, '.', '');
 $total= $total + $shipping;
-if($_COOKIE){
+if(count($cartSkus) > 0){
 echo "<div id='checkoutHeader'>";
 echo "<div id='checkoutButton'><button id='checkoutBtn'data-cart='". json_encode($cartSkus) . "'>Checkout</button></div>";
 echo "<div id='totals'>

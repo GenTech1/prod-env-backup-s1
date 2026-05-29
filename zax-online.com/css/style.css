@@ -9,7 +9,7 @@
     top: 0;
     right: 0;
     padding: 20px;
-    z-index: 100;
+    z-index: 9999;
 }
 
 .navbar {
@@ -47,10 +47,14 @@ position: absolute;
  justify-content: center;
 align-items: center;
 right: 38vw;
-background-color: black;
+background-color: #002a49;
 
 }
 svg{
     z-index:1;
+
+}
+#submitRequest{
+ color:orange 
 }
 }

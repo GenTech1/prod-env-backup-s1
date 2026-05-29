@@ -1,7 +1,6 @@
 <?php
 date_default_timezone_set('America/Chicago');
 
-
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Products_DB');
 $user = getenv('AD_USER');
@@ -14,46 +13,90 @@ try {
 die("Connection failed " .$e->getMessage());
 }
 
+$id = $_GET['id'] ?? $_POST['id'];
+
 try {
-$stmt = $pdo->query("SELECT * FROM products");
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch current product
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->execute([$id]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-for ($i = 0; $i < count($products); $i++) {
-    $id = $_POST['id'];
-
-    if ($products[$i]['id'] == $id) {
-
-        $stmt = $pdo->prepare("UPDATE products SET name = ? WHERE id = ?");
-        $stmt->execute([$_POST['name'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET description = ? WHERE id = ?");
-        $stmt->execute([$_POST['description'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET image = ? WHERE id = ?");
-        $stmt->execute([$_POST['image'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET price = ? WHERE id = ?");
-        $stmt->execute([$_POST['price'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET currency = ? WHERE id = ?");
-        $stmt->execute([$_POST['currency'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET image = ? WHERE id = ?");
-        $stmt->execute([str_replace('\\', '\\\\', $_POST['image']), $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET tags = ? WHERE id = ?");
-        $stmt->execute([$_POST['tags'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET stock = ? WHERE id = ?");
-        $stmt->execute([$_POST['stock'], $_POST['id']]);
-
-        $stmt = $pdo->prepare("UPDATE products SET `visible/not visible` = ? WHERE id = ?");
-        $stmt->execute([$_POST['visible'], $_POST['id']]);
-
-        header("Location: user_page.php");
+    if (!$product) {
+        die("Product not found");
     }
-}
 
+    $uploadedFiles = [];
+
+    // Check if any files uploaded
+    $filesUploaded = false;
+    for ($i = 0; $i <= 9; $i++) {
+        if (!empty($_FILES["file$i"]["name"])) {
+            $filesUploaded = true;
+            break;
+        }
+    }
+
+    if ($filesUploaded) {
+        for ($i = 0; $i <= 9; $i++) {
+            $fileKey = "file$i";
+            
+            if (!empty($_FILES[$fileKey]["name"])) {
+                $tmpName = $_FILES[$fileKey]["tmp_name"];
+
+                // 1. Create a unique filename
+                $randomPrefix = bin2hex(random_bytes(4)); 
+                $originalName = basename($_FILES[$fileKey]["name"]);
+                $fileName = $randomPrefix . "_" . $originalName;
+
+                // 2. Define the absolute path for the SERVER to move the file
+                $serverDestination = __DIR__ . "/assets/" . $fileName;
+
+                // 3. Define the relative path for the DATABASE/URL
+                $webRelativePath = "assets/" . $fileName;
+
+                // Collision check
+                while (file_exists($serverDestination)) {
+                    $randomPrefix = bin2hex(random_bytes(4));
+                    $fileName = $randomPrefix . "_" . $originalName;
+                    $serverDestination = __DIR__ . "/assets/" . $fileName;
+                    $webRelativePath = "assets/" . $fileName;
+                }
+
+                // 4. Move the file using the SERVER path, store the WEB path
+                if (move_uploaded_file($tmpName, $serverDestination)) {
+                    $uploadedFiles[] = $webRelativePath; 
+                }
+            }
+        }
+        $image = json_encode($uploadedFiles, JSON_UNESCAPED_SLASHES);
+    } else {
+        $image = $product['image'];
+    }
+
+    // Update product
+    $stmt = $pdo->prepare("UPDATE products SET 
+        name = ?, 
+        description = ?, 
+        image = ?, 
+        price = ?, 
+        currency = ?, 
+        tags = ?, 
+        stock = ?, 
+        `visible/not visible` = ? 
+        WHERE id = ?");
+    $stmt->execute([
+        $_POST['name'],
+        $_POST['description'],
+        $image,
+        $_POST['price'],
+        $_POST['currency'],
+        $_POST['tags'],
+        $_POST['stock'],
+        $_POST['visible'],
+        $id
+    ]);
+
+    header("Location: user_page.php");
 
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());

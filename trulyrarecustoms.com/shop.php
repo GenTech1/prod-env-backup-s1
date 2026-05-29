@@ -2,6 +2,7 @@
 <html>
   <!--header-->
   <head>
+    <title>Truly Rare Customs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <div class="blackback">
@@ -113,12 +114,11 @@ try {
   
 </div>
 </div>
-
-</div>
 </div>
 
 <div class="storeCaroucel">
 <?php echo "<h1>".$header_1['Name']."</h1>"; ?>
+<div class="productContainer">
 <div class="product">
 
     <?php foreach ($productCustom as $product):
@@ -133,7 +133,6 @@ try {
         <p><?php echo $description . "..." ?></p>
       </div>
     <?php endforeach; ?>
-</div>
 </div>
 </div>
 </div>

@@ -1,18 +1,143 @@
 .shop-content {
     display: flex;
-    justify-self: right;
     flex-direction: row;
-    gap: 10vw;
-    margin-right: 10vw;;
+    gap: 5vw;
+    padding: 0 5vw;
+    box-sizing: border-box;
+}
+/* 1. Limit the width of the select box */
+.variant-select {
+    width: 100%;             /* Fills the container but doesn't exceed it */
+    max-width: 180px;        /* Prevents it from getting too wide */
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    display: block;          /* Ensures it stays on its own line */
+    margin-left: auto;       /* Centers the dropdown if the container is wider */
+    margin-right: auto;
+    text-overflow: ellipsis; /* Cuts off long text with "..." */
+}
+
+/* 2. Ensure the product card has enough breathing room */
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Keeps everything centered */
+    padding: 15px;
+    box-sizing: border-box; /* Includes padding in width calculations */
+    overflow: hidden;       /* Prevents children from sticking out */
+}
+
+/* 3. Handle long text inside the dropdown options */
+.variant-select option {
+    font-size: 13px;
 }
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
 }
-.product-image{
-    width: 250px;
-    height: 250px;
-    border: 2px solid #d98b8f;
+
+/* New text */
+.product {
+    text-align: center;
+    min-width: 0;
+    position: relative; /* New */
+    cursor: pointer; /* New */
+}
+
+.box {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.product:hover .overlay {
+    opacity: 1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+/* New text end here */
+
+.product-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    border: 2px solid #ffd700;
     border-radius: 4px;
+}
+
+/* New text */
+.cart-box {
+    flex: 1;
+    min-width: 250px;
+}
+/* New text end here */
+
+body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 920px) {
+    .shop-content {
+        flex-direction: column;
+        margin-right: 0;
+        gap: 40px;
+        padding: 0 20px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .cart-box {
+        width: 100%;
+    }
 }

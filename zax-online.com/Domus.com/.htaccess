@@ -1,0 +1,10 @@
+SetEnv Site_USER domus_app
+SetEnv Site_PASS 9vT$7qL!2xR@8mZ#
+SetEnv Users_DB domus_users
+SetEnv DATABASE_HOST localhost
+SetEnv Square_App sandbox-sq0idb-HBMziuBgOVo4VjqbqN2teA
+SetEnv Square_Access_ID EAAAl-jsGbL0Hqe2TuObz8Zhx_ZXNntBDlbXkoh0zqOJMOWF2oIMO4HNha0iO0_X
+SetEnv Square_Location_ID L3CKJHBS4F0XN
+
+
+ErrorDocument 404 /404.php

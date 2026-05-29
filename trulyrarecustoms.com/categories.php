@@ -77,9 +77,16 @@ if ($result->num_rows > 0) {
     foreach ($row as $key => $value) {
       $escapedValue = htmlspecialchars($value, ENT_QUOTES);
       echo " data-$key=\"$escapedValue\"";
+      
     }
 
     echo ">";
+// Handle image field if it exists
+$images = json_decode($row['image'], true);
+
+$firstImage = reset($images); // safely get first value
+
+            echo "<div><img src='$firstImage' alt='$row[name]' height='300' width='300'></div>";
 
     // Visible output
     foreach ($row as $key => $value) {
@@ -88,6 +95,7 @@ if ($result->num_rows > 0) {
         echo "<div><strong>$key:</strong> ********</div>";
      
       }else {
+
          echo "<div><strong>$key:</strong> $value</div>";
       }
     }

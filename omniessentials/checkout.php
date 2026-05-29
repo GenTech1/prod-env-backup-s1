@@ -2,50 +2,38 @@
 $appId = getenv('Square_App');
 $locId = getenv('Square_Location_ID');
 $price = 100; // Default price in cents
-if (isset($_GET['items'])) {
-    $items = explode(',', $_GET['items']);
 
-     $host = getenv('DATABASE_HOST');
-                $dbname = getenv('Products_DB');
-                $user = getenv('Site_USER');
-                $pass = getenv('Site_PASS');
-        for ($i = 0; $i < count($items); $i++) {
-                        
-                try{
-                  $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
-                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  $stmt = $conn->prepare("SELECT * FROM Products where name like ?");
-                  $stmt->execute([$items[$i]]);
+$cartItems = [];
+$host = getenv('DATABASE_HOST');
+$dbname = getenv('Products_DB');
+$user = getenv('Site_USER');
+$pass = getenv('Site_PASS');
+try {
+    $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    foreach ($_COOKIE as $key => $value) {
+        if (strpos($key, 'Cart_') === 0) {
+            $parts = explode('|', $value);
+            if (count($parts) >= 3) {
+                $id = intval($parts[0]);
+                $price = floatval($parts[1]);
+                $qty = intval($parts[2]);
+                $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+                $stmt->execute([$id]);
                 $product = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($product){
-                  $fullProducts[] = $product;
-                }
-                    
-                }catch(PDOException $e){
-                  echo "Connection failed: " . $e->getMessage();
+                if ($product) {
+                    for ($i = 0; $i < $qty; $i++) {
+                        $fullProducts[] = $product;
+                    }
                 }
             }
-}else if (isset($_GET['item'])) {
-  $item = $_GET['item'];
-        // echo $item . "<br>";
-                $host = getenv('DATABASE_HOST');
-                $dbname = getenv('Products_DB');
-                $user = getenv('Site_USER');
-                $pass = getenv('Site_PASS');
-                try{
-                  $conn = new PDO("mysql:host=localhost;dbname=$dbname", $user, $pass);
-                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  $stmt = $conn->prepare("SELECT * FROM Products where name like ?");
-                  $stmt->execute([$item]);
-                $product = $stmt->fetch(PDO::FETCH_ASSOC);
-                    // echo $product['name'] . "<br>";
-
-                }catch(PDOException $e){
-                  echo "Connection failed: " . $e->getMessage();
-                }
+        }
+    }
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
 
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,15 +50,25 @@ if (isset($_GET['items'])) {
 
   <body>
     <header class="navbar">
-      <div class="logo">LOGO</div>
-        <nav>
+        <div class="logo">Omni Essentials</div>
+
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <nav id="navMenu">
           <button class="nav-btn" onclick="window.location.href='index.php'">Home</button>
           <button class="nav-btn" onclick="window.location.href='about.php'">About</button>
           <button class="nav-btn" onclick="window.location.href='shop.php'">Shop</button>
           <button class="nav-btn" onclick="window.location.href='contact.php'">Contact</button>
           <button class="nav-btn" onclick="window.location.href='login.php'">Login</button>
         </nav>
-    </header>
+      </header>
+
+      <script>
+        function toggleMenu() {
+          document.getElementById('navMenu').classList.toggle('active');
+        }
+      </script>
+      
     <h1>Buy Now</h1>
 
 <form id="payment-form">
@@ -128,37 +126,31 @@ if (isset($_GET['items'])) {
   </body></html>
 <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", async () => {
 
-  const payment_form = document.getElementById("payment-form");
-  document.addEventListener("DOMContentLoaded", async () => {
-    // alert("started Square JS SDK");
-    const applicationId = "<?php echo htmlspecialchars($appId);?>";
-    const locationId = "<?php echo htmlspecialchars($locId);?>";
-    //  alert("App ID: " + applicationId + " Location ID: " + locationId);
-    async function initializeCard(payments) {
-      // alert("initializing card");
-      const card = await payments.card();
-      await card.attach('#card-container');
-      return card;
-    }
-    async function tokenize(paymentMethod) {
-      // alert("tokenizing payment method");
-      const result = await paymentMethod.tokenize();
-      if (result.status === 'OK') {
-        return result.token;
-      } else {
-        throw new Error(result.errors ? result.errors[0].message : 'Tokenization failed');
-      }
-    }
-    async function main() {
-      // alert("starting main payment function");
-      const payments = Square.payments(applicationId, locationId);
-      const card = await initializeCard(payments);
+  const applicationId = "<?php echo htmlspecialchars($appId);?>";
+  const locationId = "<?php echo htmlspecialchars($locId);?>";
 
-      const cardButton = document.getElementById('card-button');
-      cardButton.addEventListener('click', async function (e) {
-      e.preventDefault();
-        try {
+  if (!window.Square) {
+    console.error("❌ Square JS SDK not loaded.");
+    document.getElementById("payment-status").textContent = "Error: Square SDK not loaded.";
+    return;
+  }
+
+  // Initialize card **immediately**
+  const payments = Square.payments(applicationId, locationId);
+  const card = await payments.card();
+  await card.attach('#card-container');
+
+  async function tokenize(paymentMethod) {
+    const result = await paymentMethod.tokenize();
+    if (result.status === 'OK') return result.token;
+    throw new Error(result.errors ? result.errors[0].message : 'Tokenization failed');
+  }
+
+  document.getElementById('card-button').addEventListener('click', async (e) => {
+    e.preventDefault();
+
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const fname = document.getElementById('first-name').value;
@@ -167,63 +159,41 @@ if (isset($_GET['items'])) {
     const city = document.getElementById('city').value;
     const state = document.getElementById('state').value;
     const zip = document.getElementById('zip').value;
-          const token = await tokenize(card);
-          const response = await fetch('charge.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, email: email, phone: phone, price: <?php echo json_encode($price); ?> })
-          });
 
-          let result = await response.json();
-          if(result.success){
-            document.getElementById('payment-status').textContent ='Payment successful!';
-
-            if (<?php echo json_encode(!empty($item)); ?>) {
-              var items = <?php echo json_encode($items ?? []); ?>;
-             const response2 = await fetch('sendOrder.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, email: email, phone: phone, fname: fname, lname: lname, address: address, city: city, state: state, zip: zip, image:<?php echo json_encode($product['image']); ?>, print: <?php echo json_encode($product['print']); ?>, sku: <?php echo json_encode($product['sku']); ?>, price: <?php echo json_encode($price); ?> })
-          });
-
-          let result2 = await response2.json();
-          // console.log("single" + JSON.stringify(result2));
-          if(result2.success){
-                    window.location.href = 'success.php';
-          }
-            }
-            else if (<?php echo json_encode(!empty($items)); ?>) {
-              var items = <?php echo json_encode($items ?? []); ?>;
-              for(let i = 0; i < items.length; i++){
-                const response3 = await fetch('sendOrder.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nonce: token, email: email, phone: phone, fname: fname, lname: lname, address: address, city: city, state: state, zip: zip, image: items[i].image, print: items[i].print, sku: items[i].sku, price: <?php echo json_encode($price); ?> })
-          });
-          let result3 = await response3.json();
-          // console.log("multiple" + JSON.stringify(result3));
-          if(result3.success){
-                    window.location.href = 'success.php';
-}
-                              }
-          }
-            } else {
-              document.getElementById('payment-status').textContent = 'Payment failed: ' + result.message;
-            }
-        } catch (err) {
-          document.getElementById('payment-status').textContent = 'Error: ' + err.message;
-        }
+    try {
+      // ✅ First create order in your DB
+      const orderResponse = await fetch('sendOrder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({email, phone, fname, lname, address, city, state, zip,price: <?php echo json_encode($price); ?> })
       });
+      const orderResult = await orderResponse.json();
+      if (!orderResult.success) {
+        document.getElementById('payment-status').textContent = "Order creation failed.";
+        console.error("Order API error:", orderResult);
+        return;
+      }
+
+      // ✅ Then tokenize and charge
+      const token = await tokenize(card);
+      const chargeResponse = await fetch('charge.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nonce: token, email, phone, price: <?php echo json_encode($price); ?> })
+      });
+      const chargeResult = await chargeResponse.json();
+      if (chargeResult.success) {
+        document.getElementById('payment-status').textContent = 'Payment successful!';
+        window.location.href = 'success.php';
+      } else {
+        document.getElementById('payment-status').textContent = 'Payment failed: ' + (chargeResult.error || 'Unknown error');
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById('payment-status').textContent = 'Error: ' + err.message;
     }
-    
-    main();
   });
-
-  if (!window.Square) {
-    console.error("❌ Square JS SDK not loaded.");
-    document.getElementById("payment-status").textContent = "Error: Square SDK not loaded.";
-
-  }
+});
 </script>
 </body>
 </html>

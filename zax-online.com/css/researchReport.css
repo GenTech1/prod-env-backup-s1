@@ -1,0 +1,21 @@
+body {
+    background-color: cadetblue;
+}
+
+.reportContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 -5vw;
+}
+
+.report-img {
+    width: 30vw;
+    height: 20vw;
+}
+
+@media(max-width: 767px){
+}
