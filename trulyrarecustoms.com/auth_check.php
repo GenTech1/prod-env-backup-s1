@@ -20,6 +20,7 @@ try {
         return; // Allow access without authentication
     }
 } catch (PDOException $e) {
+    error_log('Password protection auth check failed: ' . $e->getMessage());
     // If database error, default to requiring authentication for security
 }
 

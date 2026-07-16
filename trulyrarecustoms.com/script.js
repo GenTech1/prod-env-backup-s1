@@ -47,3 +47,7 @@ if(word.length < 1 || word.length > 50 || !/^[a-zA-Z]+$/.test(word)){
 window.location.href = "results.php?word=" + encodeURIComponent(word);
 }
 })
+
+console.log("It's right here:", searchButton);
+
+

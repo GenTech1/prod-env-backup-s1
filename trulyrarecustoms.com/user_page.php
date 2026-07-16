@@ -4,15 +4,33 @@ date_default_timezone_set('America/Chicago');
 
 $host = getenv('DATABASE_HOST');
 $dbname = getenv('Users_DB');
-$user = getenv('Site_USER');
-$pass = getenv('Site_PASS');
+$dbUser = getenv('Site_USER');
+$dbPass = getenv('Site_PASS');
+$siteDb = getenv('Site_DB') ?: 'trc_site';
 
 try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user,$pass);
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $dbUser,$dbPass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch(PDOException $e){
 die("Connection failed " .$e->getMessage());
 }
+
+$siteProtectionEnabled = 0;
+try {
+    $sitePdo = new PDO("mysql:host=$host;dbname=$siteDb;charset=utf8mb4", $dbUser, $dbPass);
+    $sitePdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sitePdo->exec("CREATE TABLE IF NOT EXISTS site_settings (id INT AUTO_INCREMENT PRIMARY KEY, setting_key VARCHAR(255) NOT NULL UNIQUE, setting_value VARCHAR(255) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+    $siteStmt = $sitePdo->prepare("SELECT setting_value FROM site_settings WHERE setting_key = 'password_protection_enabled' LIMIT 1");
+    $siteStmt->execute();
+    $siteRow = $siteStmt->fetch(PDO::FETCH_ASSOC);
+    if ($siteRow) {
+        $siteProtectionEnabled = ($siteRow['setting_value'] === '1' || $siteRow['setting_value'] === 1) ? 1 : 0;
+    }
+} catch (PDOException $e) {
+    error_log('Site protection toggle setup failed: ' . $e->getMessage());
+}
+
 if (isset($_COOKIE['token'])) {
 	$token = $_COOKIE['token'];
 	
@@ -126,6 +144,8 @@ echo '</div>';
        
 Welcome back!
 </div> 
+
+
 
 
 

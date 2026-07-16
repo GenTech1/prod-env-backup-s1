@@ -11,6 +11,8 @@ sections.forEach(section=>{
 
 });
 
+
+
 function sendCategory(section){
 
 fetch('categories.php',{
@@ -137,6 +139,7 @@ const data = {...record.dataset};
 /* ---------- PRODUCTS ---------- */
 
 if(id.startsWith("products_")){
+let images = JSON.parse(data.image);
 
 popup(`
 
@@ -152,7 +155,10 @@ popup(`
 
 <input class="emb" name="description" value="${data.description || ""}" placeholder="description"><br><br>
 
-<input class="emb" name="image" value="${data.image || ""}" placeholder="image"><br><br>
+<php? if($data['image']): ?>
+<div class="popupImageRow">${Object.values(images).map((img, i) => '<div class="popupImage"><img src="' + img + '" alt="product"><button type="button" class="deleteImage deleteImage-' + i + '">X</button></div>').join('')}</div>
+
+<?php endif; ?><input id="addImageAfter" type="file" name="image"></br><button id="addImage">+</button><br><br>
 
 <input class="emb" name="price" value="${data.price || ""}" placeholder="price"><br><br>
 
@@ -181,6 +187,58 @@ popup(`
 `);
 
 }
+
+/*----------Delete images----------*/
+let deleteImageButtons = document.querySelectorAll(".deleteImage");
+deleteImageButtons.forEach(btn => {
+btn.addEventListener("click", () => {
+for(let i = 0; i < deleteImageButtons.length; i++){
+if(btn.classList.contains("deleteImage-" + i)){
+fetch('./adminImageDelete.php',{
+method:'POST',
+headers:{'Content-Type':'application/x-www-form-urlencoded'},
+body:'id='+encodeURIComponent(data.id)+'&index='+i
+})
+.then(res => res.text())
+.then(responseText => {
+  console.log('Upload response:', responseText);
+  if (responseText.trim() === 'success') {
+    location.reload();
+  } else {
+    alert('Upload failed: ' + responseText);
+  }
+});
+}
+}
+});
+});
+
+/*----------add images----------*/
+document.getElementById("addImage").addEventListener("click", (event) => {
+  event.preventDefault();
+const fileInput = document.getElementById("addImageAfter");
+if(fileInput.files.length === 0){
+  alert("Please select an image to upload.");
+  return;
+}else{
+const formData = new FormData();
+formData.append('id', data.id);
+formData.append('image', fileInput.files[0]);
+fetch('./adminImageAdd.php',{
+method:'POST',
+body:formData
+})
+.then(res => res.text())
+.then(responseText => {
+  console.log('Upload response:', responseText);
+  if (responseText.trim() === 'success') {
+    location.reload();
+  } else {
+    alert('Upload failed: ' + responseText);
+  }
+});
+}
+});
 
 
 /* ---------- DELETE PRODUCT ---------- */
@@ -232,3 +290,21 @@ btn.onclick=()=> document.getElementById("popupScrollWrapper")?.remove();
 });
 
 }
+
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'siteLock') {
+    fetch('sitelock.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        lock: e.target.checked ? '1' : '0'
+      })
+    })
+    .then(res => res.text())
+    .then(responseText => {
+      console.log('Site lock response:', responseText);
+    });
+  }
+});

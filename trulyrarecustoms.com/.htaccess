@@ -18,6 +18,7 @@ SetEnv CLIENT_NOTIFICATION_EMAIL trulyrarecustoms@gmail.com
 
 SetEnv Site_USER Trc_site
 SetEnv Site_PASS msR-QIfM_Ck1aQT7
+SetEnv Site_DB trc_site
 SetEnv AD_USER Trc_pm
 SetEnv AD_PASS	IJb]StXmzXr8xn(m
 SetEnv DATABASE_HOST localhost

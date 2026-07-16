@@ -42,10 +42,22 @@ switch ($section) {
    $sql = "Select * FROM customs UNION Select * FROM contact";
 	break;
     case 'site':
-	$conn = new mysqli($host, $user, $pass, $sitedb);
+  $conn = new mysqli($host, $user, $pass, $sitedb);
 	if ($conn->connect_error) {
     		die("Connection failed: " . $conn->connect_error);
 	}
+  $lockSQL ="SELECT setting_value FROM site_settings";
+  $lockResult = $conn->query($lockSQL);
+  $finalLockResult = $lockResult->fetch_assoc();
+  $lockResult = $finalLockResult['setting_value'];
+
+      echo "Site Lock";
+      if($lockResult == 0){
+      echo "<input type='checkbox' id='siteLock' onclick='siteLocker()'>";
+}elseif($lockResult == 1){
+      echo "<input type='checkbox' id='siteLock' onclick='siteLocker()' checked>";
+}
+
    $sql = "SELECT * FROM headers";
 	break;
     case 'discounts':
@@ -71,7 +83,7 @@ if ($result->num_rows > 0) {
 
 
     // Start record div with data attributes
-    echo "<div class='record' id='product_{$row['id']}'";
+    echo "<div class='record' id='" . $section . "_{$row['id']}'";
 
     // Add each database field as a data-* attribute
     foreach ($row as $key => $value) {
@@ -82,11 +94,16 @@ if ($result->num_rows > 0) {
 
     echo ">";
 // Handle image field if it exists
-$images = json_decode($row['image'], true);
-
-$firstImage = reset($images); // safely get first value
-
-            echo "<div><img src='$firstImage' alt='$row[name]' height='300' width='300'></div>";
+if (isset($row['image']) && !empty($row['image'])) {
+  $images = json_decode($row['image'], true);
+  
+  if (is_array($images)) {
+    $firstImage = reset($images); // safely get first value
+    if ($firstImage) {
+      echo "<div><img src='$firstImage' alt='$row[name]' height='300' width='300'></div>";
+    }
+  }
+}
 
     // Visible output
     foreach ($row as $key => $value) {

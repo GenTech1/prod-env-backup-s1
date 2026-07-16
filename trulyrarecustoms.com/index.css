@@ -5,8 +5,11 @@ html{
 #reviews {
   display: flex;
   justify-content: center;
-  gap: 3vw;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
 }
+
 #bannerSVG{
 width:100vw;
 height:25vw;
@@ -15,13 +18,35 @@ height:25vw;
 width:100vw;
 height:25vw;
 }
-.reviewsRect{
-width:20vw; 
-height:20vw;
+
+.review-card {
+  background: white;
+  color: #111;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: clamp(220px, 28vw, 320px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
 }
-.reviewsSVG{
-width:20vw; 
-height:20vw;
+
+.review-stars {
+  color: #ffb400;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.review-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.review-author {
+  display: block;
+  font-weight: 700;
+  color: #555;
+  font-family: 'Raleway', sans-serif;
 }
 .full-banner-wrapper {
   position: relative;
@@ -177,14 +202,11 @@ height:20vw;
 display: flex;
 justify-content: center;
 gap: 1vw;
+flex-direction: column;
 }
-.reviewsRect{
-width:40vw; 
-height:40vw;
-}
-.reviewsSVG{
-width:40vw; 
-height:40vw;
+.review-card {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Mobile banner adjustments */

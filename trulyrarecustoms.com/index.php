@@ -223,15 +223,21 @@ try {
 </div>
   <h1>Customer Reviews</h1>
 <div id="reviews">
-<svg class="reviewsSVG">
-  <rect class="reviewsRect" reviewsRect fill="palevioletred"></rect>
-</svg>
-<svg class="reviewsSVG">
-  <rect class="reviewsRect" reviewsRect fill="palevioletred"></rect>
-</svg>
-<svg class="reviewsSVG">
-  <rect class="reviewsRect" reviewsRect fill="palevioletred"></rect>
-</svg>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">“Absolutely love my custom design — the quality is amazing and the service was fast.”</p>
+    <span class="review-author">— Jamie R.</span>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">“The product looked even better in person. Truly Rare Customs nailed every detail.”</p>
+    <span class="review-author">— Maya S.</span>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">“Great service, beautiful work, and exactly what I pictured. Highly recommend!”</p>
+    <span class="review-author">— Alex T.</span>
+  </div>
 </div>
 <br />
 <br />
